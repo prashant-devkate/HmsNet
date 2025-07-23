@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\HmsNet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\rooms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\rooms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\models\\serviceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\models\\serviceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "HmsNet.UI\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAA4AAACgLjMzMzMrwBgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T13:39:53.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Rooms\\Create.cshtml",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Views\\Rooms\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Rooms\\Create.cshtml",
+              "RelativeToolTip": "HmsNet.UI\\Views\\Rooms\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T13:39:12.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RoomsController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\RoomsController.cs",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Controllers\\RoomsController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\RoomsController.cs",
+              "RelativeToolTip": "HmsNet.UI\\Controllers\\RoomsController.cs",
+              "ViewState": "AgIAAAsAAABAxMzMzMwuwBcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T13:33:03.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Program.cs",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Program.cs",
+              "RelativeToolTip": "HmsNet.UI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T13:32:04.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServiceResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Models\\ServiceResponse.cs",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Models\\ServiceResponse.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Models\\ServiceResponse.cs",
+              "RelativeToolTip": "HmsNet.UI\\Models\\ServiceResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T13:27:37.006Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

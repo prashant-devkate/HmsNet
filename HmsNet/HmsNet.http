@@ -1,0 +1,6 @@
+@HmsNet_HostAddress = http://localhost:5236
+
+GET {{HmsNet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

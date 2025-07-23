@@ -1,0 +1,145 @@
+﻿<!-- Views/Rooms/Create.cshtml -->
+@model HmsNet.UI.Models.RoomDto
+
+@{
+    ViewData["Title"] = "Create Room";
+}
+
+<h2>Create Room</h2>
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info">@ViewBag.Message</div>
+}
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="RoomName">Room Name</label>
+        <input asp-for="RoomName" class="form-control" />
+        <span asp-validation-for="RoomName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoomType">Room Type</label>
+        <input asp-for="RoomType" class="form-control" />
+        <span asp-validation-for="RoomType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Capacity">Capacity</label>
+        <input asp-for="Capacity" class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Status">Status</label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <h3>Orders (Optional)</h3>
+    @if (Model.Orders != null)
+    {
+        for (int i = 0; i < Model.Orders.Count; i++)
+        {
+            <div class="order-section">
+                <h4>Order #@i</h4>
+                <div class="form-group">
+                    <label asp-for="Orders[i].Status">Order Status</label>
+                    <input asp-for="Orders[i].Status" class="form-control" />
+                    <span asp-validation-for="Orders[i].Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Orders[i].TotalAmount">Total Amount</label>
+                    <input asp-for="Orders[i].TotalAmount" class="form-control" readonly />
+                </div>
+
+                <h5>Order Details (Optional)</h5>
+                @if (Model.Orders[i].OrderDetails != null)
+                {
+                    for (int j = 0; j < Model.Orders[i].OrderDetails.Count; j++)
+                    {
+                        <div class="order-detail-section">
+                            <div class="form-group">
+                                <label asp-for="Orders[i].OrderDetails[j].ItemId">Item Id</label>
+                                <input asp-for="Orders[i].OrderDetails[j].ItemId" class="form-control" />
+                                <span asp-validation-for="Orders[i].OrderDetails[j].ItemId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Orders[i].OrderDetails[j].Quantity">Quantity</label>
+                                <input asp-for="Orders[i].OrderDetails[j].Quantity" class="form-control" />
+                                <span asp-validation-for="Orders[i].OrderDetails[j].Quantity" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Orders[i].OrderDetails[j].Rate">Rate</label>
+                                <input asp-for="Orders[i].OrderDetails[j].Rate" class="form-control" />
+                                <span asp-validation-for="Orders[i].OrderDetails[j].Rate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Orders[i].OrderDetails[j].Amount">Amount</label>
+                                <input asp-for="Orders[i].OrderDetails[j].Amount" class="form-control" readonly />
+                            </div>
+                        </div>
+                    }
+                }
+
+                <h5>Bill (Optional)</h5>
+                @if (Model.Orders[i].Bill != null)
+                {
+                    <div class="bill-section">
+                        <div class="form-group">
+                            <label asp-for="Orders[i].Bill.PaymentStatus">Payment Status</label>
+                            <input asp-for="Orders[i].Bill.PaymentStatus" class="form-control" />
+                            <span asp-validation-for="Orders[i].Bill.PaymentStatus" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Orders[i].Bill.TotalAmount">Total Amount</label>
+                            <input asp-for="Orders[i].Bill.TotalAmount" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Orders[i].Bill.DiscountAmount">Discount Amount</label>
+                            <input asp-for="Orders[i].Bill.DiscountAmount" class="form-control" />
+                            <span asp-validation-for="Orders[i].Bill.DiscountAmount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Orders[i].Bill.TaxAmount">Tax Amount</label>
+                            <input asp-for="Orders[i].Bill.TaxAmount" class="form-control" />
+                            <span asp-validation-for="Orders[i].Bill.TaxAmount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Orders[i].Bill.FinalAmount">Final Amount</label>
+                            <input asp-for="Orders[i].Bill.FinalAmount" class="form-control" readonly />
+                        </div>
+
+                        <h6>Transactions (Optional)</h6>
+                        @if (Model.Orders[i].Bill.Transactions != null)
+                        {
+                            for (int k = 0; k < Model.Orders[i].Bill.Transactions.Count; k++)
+                            {
+                                <div class="transaction-section">
+                                    <div class="form-group">
+                                        <label asp-for="Orders[i].Bill.Transactions[k].PaymentMethod">Payment Method</label>
+                                        <input asp-for="Orders[i].Bill.Transactions[k].PaymentMethod" class="form-control" />
+                                        <span asp-validation-for="Orders[i].Bill.Transactions[k].PaymentMethod" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Orders[i].Bill.Transactions[k].TransactionStatus">Transaction Status</label>
+                                        <input asp-for="Orders[i].Bill.Transactions[k].TransactionStatus" class="form-control" />
+                                        <span asp-validation-for="Orders[i].Bill.Transactions[k].TransactionStatus" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Orders[i].Bill.Transactions[k].Amount">Amount</label>
+                                        <input asp-for="Orders[i].Bill.Transactions[k].Amount" class="form-control" />
+                                        <span asp-validation-for="Orders[i].Bill.Transactions[k].Amount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        }
+    }
+
+    <button type="submit" class="btn btn-primary">Create Room</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
