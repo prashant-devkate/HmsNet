@@ -31,3 +31,4 @@ C:\Users\Admin\source\repos\HmsNet\HmsNet.UI\obj\Debug\net8.0\refint\HmsNet.UI.d
 C:\Users\Admin\source\repos\HmsNet\HmsNet.UI\obj\Debug\net8.0\HmsNet.UI.pdb
 C:\Users\Admin\source\repos\HmsNet\HmsNet.UI\obj\Debug\net8.0\HmsNet.UI.genruntimeconfig.cache
 C:\Users\Admin\source\repos\HmsNet\HmsNet.UI\obj\Debug\net8.0\ref\HmsNet.UI.dll
+C:\Users\Admin\source\repos\HmsNet\HmsNet.UI\obj\Debug\net8.0\HmsNet.UI.sourcelink.json
