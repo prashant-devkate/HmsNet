@@ -1,0 +1,158 @@
+﻿@model HmsNet.UI.Models.ItemListViewModel
+
+@{
+    ViewBag.Title = "Hotel Billing Software";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Rooms (Left Side) -->
+        <div class="col-md-3">
+            <div class="main-content">
+                <h4 style="background-color: #e0e0e0; padding: 5px;">Running Tables: 4</h4>
+                <div style="background-color: #ffffe0; padding: 10px;">
+                    <h5 style="color: #ff4500;">HALL</h5>
+                    <button style="background-color: #ff4500; color: white; margin: 2px; width: 40px;">1</button>
+                    <button style="background-color: #ff4500; color: white; margin: 2px; width: 40px;">2</button><br />
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">3</button>
+                    <button style="background-color: #ff4500; color: white; margin: 2px; width: 40px;">4</button>
+                </div>
+                <div style="background-color: #ffffe0; padding: 10px; margin-top: 5px;">
+                    <h5 style="color: #32cd32;">GROUND FLOOR</h5>
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">1</button>
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">2</button>
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">3</button><br />
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">10</button>
+                </div>
+                <div style="background-color: #ffffe0; padding: 10px; margin-top: 5px;">
+                    <h5 style="color: #32cd32;">GARDEN</h5>
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">1</button>
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">2</button><br />
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">3</button>
+                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">4</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart (Middle) -->
+        <div class="col-md-6">
+            <div class="billing-section" style="background-color: #f0f0f0; padding: 10px;">
+                <table id="cartTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #ffa500; color: white;">
+                            <th style="padding: 5px; border: 1px solid #ddd;">CODE</th>
+                            <th style="padding: 5px; border: 1px solid #ddd;">ITEM NAME</th>
+                            <th style="padding: 5px; border: 1px solid #ddd;">QTY</th>
+                            <th style="padding: 5px; border: 1px solid #ddd;">RATE</th>
+                            <th style="padding: 5px; border: 1px solid #ddd;">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" /></td>
+                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="No Item Name" /></td>
+                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" placeholder="Qty" /></td>
+                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" placeholder="Rate" /></td>
+                            <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this)">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 10px;">
+                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">KOT</button>
+                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">CL</button>
+                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">Print BILL</button>
+                    <button style="background-color: #ff4500; color: white; padding: 5px 10px;">Cancel</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <label style="margin-right: 10px;">Dis. Amt:</label>
+                    <input type="text" style="width: 100px; padding: 5px; display: inline;" />
+                    <label style="margin-left: 10px; margin-right: 10px;">Amount</label>
+                    <input type="text" style="width: 100px; padding: 5px; display: inline;" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Item List (Right Side) -->
+        <div class="col-md-3">
+            <div class="item-list" style="background-color: #e0e0e0; padding: 10px;">
+                <select id="itemSelect" style="width: 100%; height: 300px;" multiple>
+                    @if (Model != null && Model.Items.Any())
+                    {
+                        @foreach (var item in Model.Items)
+                        {
+                            <option value="@item.ItemId" data-rate="@item.Rate">@item.ItemName</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('itemSelect').addEventListener('change', function () {
+        const selectedOptions = Array.from(this.selectedOptions);
+        const tbody = document.querySelector('#cartTable tbody');
+
+        selectedOptions.forEach(option => {
+            const itemName = option.textContent;
+            const itemId = option.value;
+            const rate = option.getAttribute('data-rate');
+
+            // Check if item already exists in cart
+            let existingRow = Array.from(tbody.querySelectorAll('tr')).find(row =>
+                row.querySelector('td:nth-child(2) input').value === itemName
+            );
+
+            if (!existingRow) {
+                // Create new row
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemId}" readonly></td>
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemName}" readonly></td>
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="1" onchange="updateAmount(this)"></td>
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${rate}" readonly></td>
+                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this)">Remove</button></td>
+                `;
+                tbody.appendChild(newRow);
+            } else {
+                // Increase quantity if item exists
+                const qtyInput = existingRow.querySelector('td:nth-child(3) input');
+                let qty = parseInt(qtyInput.value) || 0;
+                qtyInput.value = qty + 1;
+                updateAmount(qtyInput);
+            }
+        });
+
+        // Clear selection after adding
+        this.selectedOptions.forEach(option => option.selected = false);
+        updateTotal();
+    });
+
+    function updateAmount(input) {
+        const row = input.parentElement.parentElement;
+        const qty = parseInt(input.value) || 0;
+        const rateInput = row.querySelector('td:nth-child(4) input');
+        const rate = parseFloat(rateInput.value) || 0;
+        const amount = qty * rate;
+        // You can add a hidden field or calculate total on the server side
+        updateTotal();
+    }
+
+    function removeRow(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+        updateTotal();
+    }
+
+    function updateTotal() {
+        const rows = document.querySelectorAll('#cartTable tbody tr');
+        let total = 0;
+        rows.forEach(row => {
+            const qty = parseInt(row.querySelector('td:nth-child(3) input').value) || 0;
+            const rate = parseFloat(row.querySelector('td:nth-child(4) input').value) || 0;
+            total += qty * rate;
+        });
+        document.querySelector('input[placeholder="Amount"]').value = total.toFixed(2);
+    }
+</script>

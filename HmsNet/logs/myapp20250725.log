@@ -4562,3 +4562,429 @@ OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
 2025-07-25 15:18:22.730 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 32.4315ms
 2025-07-25 15:18:22.730 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
 2025-07-25 15:18:22.736 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 39.5238ms
+2025-07-25 16:04:25.066 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-25 16:04:28.451 +05:30 [INF] Now listening on: http://localhost:5236
+2025-07-25 16:04:30.522 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:04:30.811 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-25 16:04:30.812 +05:30 [INF] Hosting environment: Development
+2025-07-25 16:04:30.812 +05:30 [INF] Content root path: C:\Users\Admin\source\repos\HmsNet\HmsNet
+2025-07-25 16:04:32.479 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 1970.9423ms
+2025-07-25 16:04:33.868 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:04:33.873 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 5.7293ms
+2025-07-25 16:04:33.918 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:04:34.505 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 587.0013ms
+2025-07-25 16:04:38.632 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:04:38.685 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 52.376ms
+2025-07-25 16:04:47.264 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:04:47.298 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 33.9628ms
+2025-07-25 16:04:47.448 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:04:47.450 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:04:47.451 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.6372ms
+2025-07-25 16:04:47.482 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 34.3581ms
+2025-07-25 16:04:47.589 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:04:47.645 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 56.4242ms
+2025-07-25 16:05:05.360 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:05:05.371 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 11.0338ms
+2025-07-25 16:05:05.485 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:05:05.497 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 11.9565ms
+2025-07-25 16:05:05.519 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:05:05.519 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.3385ms
+2025-07-25 16:05:05.761 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:05:05.776 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.498ms
+2025-07-25 16:06:16.576 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:06:16.594 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 17.7771ms
+2025-07-25 16:06:16.634 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:06:16.634 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.3799ms
+2025-07-25 16:06:16.635 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:06:16.716 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 80.7294ms
+2025-07-25 16:06:16.809 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:06:16.835 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 25.7154ms
+2025-07-25 16:06:30.813 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:06:30.828 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 14.9468ms
+2025-07-25 16:06:30.911 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:06:30.911 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.4515ms
+2025-07-25 16:06:30.915 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:06:30.933 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 18.0736ms
+2025-07-25 16:06:31.001 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:06:31.078 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 77.8303ms
+2025-07-25 16:06:45.309 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:06:45.317 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 7.5993ms
+2025-07-25 16:06:45.473 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:06:45.480 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 6.7933ms
+2025-07-25 16:06:45.483 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:06:45.483 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.2741ms
+2025-07-25 16:06:45.868 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:06:45.888 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.4977ms
+2025-07-25 16:09:01.705 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:09:01.715 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 9.2625ms
+2025-07-25 16:09:01.777 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:09:01.778 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.4894ms
+2025-07-25 16:09:01.792 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:09:01.860 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 67.4961ms
+2025-07-25 16:09:01.935 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:09:01.971 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 35.9634ms
+2025-07-25 16:09:32.053 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:09:32.059 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 5.8439ms
+2025-07-25 16:09:32.138 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:09:32.168 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 29.7733ms
+2025-07-25 16:09:32.344 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:09:32.344 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.8403ms
+2025-07-25 16:09:32.625 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:09:32.649 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 23.7062ms
+2025-07-25 16:12:14.983 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:12:14.998 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-25 16:12:15.160 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:12:15.200 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:12:17.357 +05:30 [WRN] No store type was specified for the decimal property 'DiscountAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'FinalAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'TaxAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'Item'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'OrderDetail'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'OrderDetail'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:17.358 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:12:18.169 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:12:18.170 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:12:19.732 +05:30 [INF] Executed DbCommand (164ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:12:19.931 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:12:19.980 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 4774.0588ms
+2025-07-25 16:12:19.981 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:12:20.000 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 5030.9689ms
+2025-07-25 16:12:23.752 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - null null
+2025-07-25 16:12:23.758 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:12:23.767 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-25 16:12:23.884 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:12:23.884 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:12:23.937 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[Capacity], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[Status] = N'Available'
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:12:23.963 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:12:23.968 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 201.1149ms
+2025-07-25 16:12:23.968 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:12:23.969 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - 200 null application/json; charset=utf-8 217.123ms
+2025-07-25 16:15:58.836 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:15:58.909 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 73.2262ms
+2025-07-25 16:15:59.271 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:15:59.273 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:15:59.273 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.2268ms
+2025-07-25 16:15:59.287 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 16.4714ms
+2025-07-25 16:16:00.173 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:16:00.194 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 20.277ms
+2025-07-25 16:37:18.217 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:37:18.245 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 27.7944ms
+2025-07-25 16:37:18.318 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:37:18.319 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.6202ms
+2025-07-25 16:37:18.325 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:37:18.333 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.8495ms
+2025-07-25 16:37:19.081 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:37:19.127 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 46.2607ms
+2025-07-25 16:37:57.416 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-25 16:37:58.093 +05:30 [INF] Now listening on: http://localhost:5236
+2025-07-25 16:37:58.444 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-25 16:37:58.444 +05:30 [INF] Hosting environment: Development
+2025-07-25 16:37:58.445 +05:30 [INF] Content root path: C:\Users\Admin\source\repos\HmsNet\HmsNet
+2025-07-25 16:38:00.805 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:38:01.731 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 944.9526ms
+2025-07-25 16:38:02.219 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:38:02.257 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:38:02.272 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 31.2872ms
+2025-07-25 16:38:02.325 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 108.7562ms
+2025-07-25 16:38:05.428 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:38:05.487 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 59.8035ms
+2025-07-25 16:38:05.992 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:38:06.005 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-25 16:38:06.194 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:38:06.274 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:38:07.658 +05:30 [WRN] No store type was specified for the decimal property 'DiscountAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'FinalAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'TaxAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'Item'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'OrderDetail'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'OrderDetail'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:07.659 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-25 16:38:08.109 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:38:08.110 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:38:09.014 +05:30 [INF] Executed DbCommand (102ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:38:09.140 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:38:09.161 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 2882.5061ms
+2025-07-25 16:38:09.162 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:38:09.178 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 3188.0731ms
+2025-07-25 16:40:21.395 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:40:21.417 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 22.2349ms
+2025-07-25 16:40:21.543 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:40:21.600 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.8028ms
+2025-07-25 16:40:21.615 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:40:21.615 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.7036ms
+2025-07-25 16:40:22.009 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:40:22.015 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:40:22.026 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:40:22.108 +05:30 [INF] Executed DbCommand (31ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:40:22.112 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:40:22.115 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 88.6067ms
+2025-07-25 16:40:22.115 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:40:22.116 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 107.4635ms
+2025-07-25 16:40:22.358 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:40:22.401 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 41.9159ms
+2025-07-25 16:41:17.716 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:41:17.737 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 21.5624ms
+2025-07-25 16:41:17.797 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:41:17.805 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.4628ms
+2025-07-25 16:41:17.824 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:41:17.826 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 1.9555ms
+2025-07-25 16:41:18.131 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:41:18.147 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 15.9212ms
+2025-07-25 16:41:18.221 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:41:18.231 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:41:18.246 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:41:18.394 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:41:18.395 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:41:18.400 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 153.5166ms
+2025-07-25 16:41:18.400 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:41:18.401 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 180.1721ms
+2025-07-25 16:43:10.579 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:43:10.598 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 18.7196ms
+2025-07-25 16:43:10.689 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:43:10.699 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 10.0742ms
+2025-07-25 16:43:10.711 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:43:10.712 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:43:10.712 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:43:10.712 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.279ms
+2025-07-25 16:43:10.718 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:43:10.737 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:43:10.739 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:43:10.743 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 24.2616ms
+2025-07-25 16:43:10.743 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:43:10.743 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 32.1949ms
+2025-07-25 16:43:11.261 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:43:11.273 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 12.1734ms
+2025-07-25 16:45:15.921 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:45:16.002 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 80.522ms
+2025-07-25 16:45:16.079 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:45:16.080 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:45:16.090 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:45:16.118 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:45:16.118 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:45:16.120 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:45:16.129 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 39.0518ms
+2025-07-25 16:45:16.129 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:45:16.129 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 11.515ms
+2025-07-25 16:45:16.130 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 50.1727ms
+2025-07-25 16:45:16.162 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:45:16.163 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 0.3002ms
+2025-07-25 16:45:16.759 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:45:16.773 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.0531ms
+2025-07-25 16:48:29.863 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - null null
+2025-07-25 16:48:29.871 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:48:29.878 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-25 16:48:29.896 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:48:29.896 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-25 16:48:29.928 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[Capacity], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[Status] = N'Available'
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:48:29.960 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:48:29.963 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 84.7948ms
+2025-07-25 16:48:29.963 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:48:29.963 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - 200 null application/json; charset=utf-8 100.0673ms
+2025-07-25 16:48:31.707 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:48:31.709 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:31.710 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:48:31.729 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:48:31.730 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:48:31.730 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 19.8208ms
+2025-07-25 16:48:31.730 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:31.730 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 23.5758ms
+2025-07-25 16:48:33.233 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - null null
+2025-07-25 16:48:33.235 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:48:33.235 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-25 16:48:33.249 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[Capacity], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[Status] = N'Available'
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:48:33.249 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:48:33.249 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 14.0058ms
+2025-07-25 16:48:33.249 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:48:33.250 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - 200 null application/json; charset=utf-8 16.7333ms
+2025-07-25 16:48:55.780 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:48:55.783 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:55.783 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:48:55.802 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:48:55.806 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:48:55.807 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 23.3571ms
+2025-07-25 16:48:55.807 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:55.808 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 28.7585ms
+2025-07-25 16:48:58.159 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:48:58.160 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:58.160 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:48:58.168 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:48:58.169 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:48:58.169 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 8.5902ms
+2025-07-25 16:48:58.169 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:58.169 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 10.1145ms
+2025-07-25 16:48:59.814 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:48:59.814 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:59.814 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:48:59.824 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:48:59.824 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:48:59.825 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 10.2229ms
+2025-07-25 16:48:59.825 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:48:59.825 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 11.662ms
+2025-07-25 16:49:00.800 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - null null
+2025-07-25 16:49:00.800 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:49:00.801 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-25 16:49:00.814 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[Capacity], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[Status] = N'Available'
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:49:00.814 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:49:00.815 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 14.1053ms
+2025-07-25 16:49:00.815 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-25 16:49:00.815 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=10 - 200 null application/json; charset=utf-8 15.4324ms
+2025-07-25 16:49:02.875 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:49:02.876 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:49:02.876 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:49:02.887 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:49:02.887 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:49:02.888 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 12.2281ms
+2025-07-25 16:49:02.888 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:49:02.889 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 13.746ms
+2025-07-25 16:49:03.933 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:49:03.933 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:49:03.933 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:49:03.946 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:49:03.947 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:49:03.947 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 13.7118ms
+2025-07-25 16:49:03.947 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:49:03.947 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 14.9775ms
+2025-07-25 16:49:06.960 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:49:06.962 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:49:06.962 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:49:06.972 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:49:06.973 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:49:06.974 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 11.6944ms
+2025-07-25 16:49:06.974 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:49:06.975 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 14.8803ms
+2025-07-25 16:50:33.240 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-25 16:50:33.256 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 16.0046ms
+2025-07-25 16:50:33.297 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-25 16:50:33.299 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-25 16:50:33.301 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 3.442ms
+2025-07-25 16:50:33.321 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.2089ms
+2025-07-25 16:50:33.552 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-25 16:50:33.570 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 18.4138ms
+2025-07-25 16:50:33.704 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:50:33.706 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:50:33.718 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:50:33.843 +05:30 [INF] Executed DbCommand (111ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:50:33.843 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:50:33.847 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 128.8512ms
+2025-07-25 16:50:33.847 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:50:33.848 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 143.7582ms
+2025-07-25 16:50:35.530 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:50:35.532 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:50:35.532 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:50:35.543 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:50:35.544 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:50:35.544 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 11.3622ms
+2025-07-25 16:50:35.544 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:50:35.544 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 14.7557ms
+2025-07-25 16:51:18.885 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - null null
+2025-07-25 16:51:18.887 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:51:18.891 +05:30 [INF] Route matched with {action = "GetItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-25 16:51:18.905 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-25 16:51:18.905 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-25 16:51:18.905 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetItems (HmsNet) in 14.2155ms
+2025-07-25 16:51:18.905 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetItems (HmsNet)'
+2025-07-25 16:51:18.906 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items?page=1&pageSize=10 - 200 null application/json; charset=utf-8 20.5967ms
