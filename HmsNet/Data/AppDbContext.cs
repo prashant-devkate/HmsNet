@@ -32,6 +32,7 @@ namespace HmsNet.Data
                 Email = "admin.helpdesk@gmail.com", 
                 PasswordHash = "hashed-password", 
                 Role = "Admin", 
+                Status = "Active",
                 CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc)
             }
             );

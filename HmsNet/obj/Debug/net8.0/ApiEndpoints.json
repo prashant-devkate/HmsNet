@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "AuthNet.Controllers.AuthController",
+    "ContainingType": "HmsNet.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -13,10 +13,20 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.LoginResponseDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
-    "ContainingType": "AuthNet.Controllers.AuthController",
+    "ContainingType": "HmsNet.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "api/Auth/register",
     "HttpMethod": "POST",
@@ -29,7 +39,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.User, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "HmsNet.Controllers.ItemsController",
@@ -38,10 +58,26 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "includeOrderDetails",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[HmsNet.Models.Domain.Item, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -60,14 +96,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "item",
-        "Type": "HmsNet.Models.Domain.Item",
+        "Name": "itemDto",
+        "Type": "HmsNet.Models.DTO.ItemDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.Item, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -89,11 +125,16 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "includeOrderDetails",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.Item, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -117,14 +158,14 @@
         "IsRequired": true
       },
       {
-        "Name": "item",
-        "Type": "HmsNet.Models.Domain.Item",
+        "Name": "itemDto",
+        "Type": "HmsNet.Models.DTO.ItemDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.Item, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -167,10 +208,26 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "includeOrders",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[HmsNet.Models.Domain.Room, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -189,14 +246,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "room",
-        "Type": "HmsNet.Models.Domain.Room",
+        "Name": "roomDto",
+        "Type": "HmsNet.Models.DTO.RoomDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.Room, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -218,11 +275,16 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "includeOrders",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.Room, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -246,14 +308,14 @@
         "IsRequired": true
       },
       {
-        "Name": "room",
-        "Type": "HmsNet.Models.Domain.Room",
+        "Name": "roomDto",
+        "Type": "HmsNet.Models.DTO.RoomDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.Domain.Room, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -290,17 +352,38 @@
     ]
   },
   {
-    "ContainingType": "AuthNet.Controllers.UsersController",
+    "ContainingType": "HmsNet.Controllers.UsersController",
     "Method": "GetAll",
     "RelativePath": "api/Users",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[HmsNet.Models.DTO.UserViewModel, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
-    "ContainingType": "AuthNet.Controllers.UsersController",
+    "ContainingType": "HmsNet.Controllers.UsersController",
     "Method": "ChangePassword",
     "RelativePath": "api/Users/ChangePassword",
     "HttpMethod": "POST",
@@ -313,10 +396,20 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
-    "ContainingType": "AuthNet.Controllers.UsersController",
+    "ContainingType": "HmsNet.Controllers.UsersController",
     "Method": "UpdateProfile",
     "RelativePath": "api/Users/UpdateProfile",
     "HttpMethod": "POST",
@@ -329,6 +422,16 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "HmsNet.Models.DTO.ServiceResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

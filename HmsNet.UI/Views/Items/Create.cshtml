@@ -1,0 +1,72 @@
+﻿@model HmsNet.UI.Models.ItemDto
+
+@{
+    ViewData["Title"] = "Add New Item";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4 text-primary">Add New Item</h2>
+
+            <!-- Form -->
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="ItemName" class="form-label fw-bold text-dark">Item Name</label>
+                    <input asp-for="ItemName" class="form-control border-primary" placeholder="Enter item name" required />
+                    <span asp-validation-for="ItemName" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label fw-bold text-dark">Category</label>
+                    <select asp-for="Category" class="form-select border-primary" required>
+                        <option value="">Select a category</option>
+                        <option value="Food">Food</option>
+                        <option value="Drink">Drink</option>
+                        <option value="Dessert">Dessert</option>
+                        <!-- Add more categories as needed -->
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Rate" class="form-label fw-bold text-dark">Rate (₹)</label>
+                    <input asp-for="Rate" type="number" min="1" class="form-control border-primary" placeholder="Enter rate" required />
+                    <span asp-validation-for="Rate" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-4 form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label text-dark">Active</label>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg fw-bold">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg fw-bold text-white text-decoration-none">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Enable Bootstrap validation styles
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}

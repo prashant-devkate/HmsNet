@@ -1,0 +1,71 @@
+﻿@model HmsNet.UI.Models.RoomDto
+
+@{
+    ViewData["Title"] = "Edit Room";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4 text-info">Edit Room</h2>
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="alert alert-info text-center mb-3">@ViewBag.Message</div>
+            }
+
+            <form asp-action="Edit" asp-route-id="@Model.RoomId" method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="RoomId" />
+                <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="RoomName" class="form-label fw-bold text-dark">Room Name</label>
+                    <input asp-for="RoomName" class="form-control border-info" placeholder="Enter room name" required />
+                    <span asp-validation-for="RoomName" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="RoomType" class="form-label fw-bold text-dark">Room Type</label>
+                    <input asp-for="RoomType" class="form-control border-info" placeholder="Enter room type" required />
+                    <span asp-validation-for="RoomType" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Capacity" class="form-label fw-bold text-dark">Capacity</label>
+                    <input asp-for="Capacity" type="number" min="1" class="form-control border-info" placeholder="Enter capacity" required />
+                    <span asp-validation-for="Capacity" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Status" class="form-label fw-bold text-dark">Status</label>
+                    <input asp-for="Status" class="form-control border-info" placeholder="Enter status" required />
+                    <span asp-validation-for="Status" class="text-danger small"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-info btn-lg fw-bold">Update</button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg fw-bold text-white text-decoration-none">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Enable Bootstrap validation styles
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}

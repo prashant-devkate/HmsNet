@@ -11,7 +11,6 @@ C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\AutoMapper.Extensions
 C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\BCrypt.Net-Next.dll
-C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\BouncyCastle.Crypto.dll
 C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Admin\source\repos\HmsNet\HmsNet\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll

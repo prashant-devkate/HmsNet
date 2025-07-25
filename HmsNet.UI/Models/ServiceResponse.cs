@@ -1,8 +1,10 @@
-﻿namespace HmsNet.UI.Models
+﻿using HmsNet.UI.Enums;
+
+namespace HmsNet.UI.Models
 {
     public class ServiceResponse<T>
     {
-        public string Status { get; set; }
+        public ResponseStatus Status { get; set; } 
         public string Message { get; set; }
         public T? Data { get; set; }
     }

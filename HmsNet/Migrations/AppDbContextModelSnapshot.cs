@@ -241,6 +241,10 @@ namespace HmsNet.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -260,6 +264,7 @@ namespace HmsNet.Migrations
                             Lastname = "Admin",
                             PasswordHash = "hashed-password",
                             Role = "Admin",
+                            Status = "Active",
                             Username = "admin"
                         });
                 });

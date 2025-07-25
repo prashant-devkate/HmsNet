@@ -1,0 +1,108 @@
+﻿@model HmsNet.UI.Models.ItemListViewModel
+@{
+    ViewData["Title"] = "Items";
+}
+
+<!-- Custom CSS for Product Code Badge -->
+<style>
+    .badge-product-code {
+        background-color: #ebedef; /* Light gray from SB Admin 2 */
+        color: #3a3b45; /* Dark gray from SB Admin 2 for contrast */
+        font-weight: 500; /* Slightly bolder for readability */
+    }
+</style>
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><i class="fas me-2"></i> Items</h1>
+    <a asp-controller="Items" asp-action="Create" class="d-none d-sm-inline-block btn btn-primary btn-icon-split btn-sm shadow-sm">
+        <span class="icon text-white-50">
+            <i class="fas fa-plus-circle"></i>
+        </span>
+        <span class="text">Add Item</span>
+    </a>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Item List</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Rate (₹)</th>
+                                <th>Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Items.Any())
+                            {
+                                @foreach (var p in Model.Items)
+                                {
+                                    <tr>
+                                        <td class="fw-semibold">@p.ItemName</td>
+                                        <td class="text-muted">@p.Category</td>
+                                        <td>₹@p.Rate</td>
+                                        <td>@p.IsActive</td>
+                                        <td class="text-center">
+                                            <a asp-action="Edit" asp-route-id="@p.ItemId" class="btn btn-warning btn-icon-split btn-sm me-1">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </span>
+                                                <span class="text">Edit</span>
+                                            </a>
+
+                                            <form asp-action="Delete" asp-route-id="@p.ItemId"
+                                                  method="post" class="d-inline"
+                                                  onsubmit="return confirm('Delete this item?');">
+                                                <button class="btn btn-danger btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-trash"></i>
+                                                    </span>
+                                                    <span class="text">Delete</span>
+                                                </button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        <i class="fas fa-info-circle me-2"></i>No items found.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "columnDefs": [
+                    { "orderable": false, "targets": 4 } // Disable sorting on Actions column
+                ]
+            });
+        });
+    </script>
+}

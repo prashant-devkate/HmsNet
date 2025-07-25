@@ -5,10 +5,10 @@ namespace HmsNet.Services.Interfaces
 {
     public interface IRoomService
     {
-        Task<ServiceResponse<IEnumerable<Room>>> GetAllAsync();
-        Task<ServiceResponse<Room>> GetByIdAsync(int id);
-        Task<ServiceResponse<Room>> CreateAsync(Room room);
-        Task<ServiceResponse<Room>> UpdateAsync(Room room);
+        Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllAsync(int page = 1, int pageSize = 10, bool includeOrders = false);
+        Task<ServiceResponse<RoomDto>> GetByIdAsync(int id, bool includeOrders = false);
+        Task<ServiceResponse<RoomDto>> CreateAsync(RoomDto room);
+        Task<ServiceResponse<RoomDto>> UpdateAsync(RoomDto room);
         Task<ServiceResponse<bool>> DeleteAsync(int id);
     }
 }

@@ -23,6 +23,7 @@ namespace HmsNet.Models.Domain
 
         [Required, StringLength(50)]
         public string Role { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

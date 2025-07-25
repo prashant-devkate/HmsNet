@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HmsNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5556a7359458b73d97508f0714fcb87cbe8915a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99fe853a6533360a8deeebf591ebd366bc8e965f")]
 [assembly: System.Reflection.AssemblyProductAttribute("HmsNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HmsNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

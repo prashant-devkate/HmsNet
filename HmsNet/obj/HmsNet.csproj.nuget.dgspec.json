@@ -58,10 +58,6 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
-            "BouncyCastle": {
-              "target": "Package",
-              "version": "[1.8.9, )"
-            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.7, )"

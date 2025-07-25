@@ -1,4 +1,4 @@
-﻿using HmsNet.Models.Domain;
+﻿using HmsNet.Enums;
 using HmsNet.Models.DTO;
 using HmsNet.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -19,49 +19,55 @@ namespace HmsNet.Controllers
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Item>>>> GetItems()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<ItemDto>>>> GetItems(int page = 1, int pageSize = 10, bool includeOrderDetails = false)
         {
-            var response = await _service.GetAllAsync();
-            return StatusCode(response.Status == "Success" ? 200 : 500, response);
+            var response = await _service.GetAllAsync(page, pageSize, includeOrderDetails);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : StatusCode(StatusCodes.Status500InternalServerError, response);
         }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<Item>>> GetItem(int id)
+        public async Task<ActionResult<ServiceResponse<ItemDto>>> GetItem(int id, bool includeOrderDetails = false)
         {
-            var response = await _service.GetByIdAsync(id);
-            return StatusCode(response.Status == "Success" ? 200 : 404, response);
+            var response = await _service.GetByIdAsync(id, includeOrderDetails);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : NotFound(response);
         }
 
         // POST: api/Items
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<Item>>> CreateItem(Item item)
+        public async Task<ActionResult<ServiceResponse<ItemDto>>> CreateItem(ItemDto itemDto)
         {
-            var response = await _service.CreateAsync(item);
-            if (response.Status == "Success")
-            {
-                return CreatedAtAction(nameof(GetItem), new { id = response.Data.ItemId }, response);
-            }
-            return StatusCode(response.Status == "Error" && response.Message.Contains("not found") ? 400 : 400, response);
+            var response = await _service.CreateAsync(itemDto);
+            return response.Status == ResponseStatus.Success
+                ? CreatedAtAction(nameof(GetItem), new { id = response.Data.ItemId }, response)
+                : BadRequest(response);
         }
 
         // PUT: api/Items/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<ServiceResponse<Item>>> UpdateItem(int id, Item item)
+        public async Task<ActionResult<ServiceResponse<ItemDto>>> UpdateItem(int id, ItemDto itemDto)
         {
-            if (id != item.ItemId)
+            if (id != itemDto.ItemId)
             {
-                var res = new ServiceResponse<Item>
+                var res = new ServiceResponse<ItemDto>
                 {
-                    Status = "Error",
+                    Status = ResponseStatus.Error,
                     Message = "Item ID mismatch",
                     Data = null
                 };
                 return BadRequest(res);
             }
 
-            var response = await _service.UpdateAsync(item);
-            return StatusCode(response.Status == "Success" ? 200 : response.Message.Contains("not found") ? 404 : 400, response);
+            var response = await _service.UpdateAsync(itemDto);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : response.Message.Contains("not found")
+                    ? NotFound(response)
+                    : BadRequest(response);
         }
 
         // DELETE: api/Items/5
@@ -69,7 +75,11 @@ namespace HmsNet.Controllers
         public async Task<ActionResult<ServiceResponse<bool>>> DeleteItem(int id)
         {
             var response = await _service.DeleteAsync(id);
-            return StatusCode(response.Status == "Success" ? 204 : response.Message.Contains("not found") ? 404 : 400, response);
+            return response.Status == ResponseStatus.Success
+                ? NoContent()
+                : response.Message.Contains("not found")
+                    ? NotFound(response)
+                    : BadRequest(response);
         }
     }
 }

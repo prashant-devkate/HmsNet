@@ -31,7 +31,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserServiceResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -62,7 +79,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDtoServiceResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -72,23 +106,51 @@
         "tags": [
           "Items"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "includeOrderDetails",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemIEnumerableServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoIEnumerableServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemIEnumerableServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoIEnumerableServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemIEnumerableServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoIEnumerableServiceResponse"
                 }
               }
             }
@@ -103,17 +165,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "$ref": "#/components/schemas/ItemDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "$ref": "#/components/schemas/ItemDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "$ref": "#/components/schemas/ItemDto"
               }
             }
           }
@@ -124,17 +186,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               }
             }
@@ -156,6 +218,14 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "includeOrderDetails",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -164,17 +234,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               }
             }
@@ -200,17 +270,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "$ref": "#/components/schemas/ItemDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "$ref": "#/components/schemas/ItemDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Item"
+                "$ref": "#/components/schemas/ItemDto"
               }
             }
           }
@@ -221,17 +291,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemServiceResponse"
+                  "$ref": "#/components/schemas/ItemDtoServiceResponse"
                 }
               }
             }
@@ -282,23 +352,51 @@
         "tags": [
           "Rooms"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "includeOrders",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomIEnumerableServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoIEnumerableServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomIEnumerableServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoIEnumerableServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomIEnumerableServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoIEnumerableServiceResponse"
                 }
               }
             }
@@ -313,17 +411,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomDto"
               }
             }
           }
@@ -334,17 +432,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               }
             }
@@ -366,6 +464,14 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "includeOrders",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -374,17 +480,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               }
             }
@@ -410,17 +516,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomDto"
               }
             }
           }
@@ -431,17 +537,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomServiceResponse"
+                  "$ref": "#/components/schemas/RoomDtoServiceResponse"
                 }
               }
             }
@@ -492,9 +598,46 @@
         "tags": [
           "Users"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserViewModelIEnumerableServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserViewModelIEnumerableServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserViewModelIEnumerableServiceResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -525,7 +668,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringServiceResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -556,7 +716,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringServiceResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -564,60 +741,11 @@
   },
   "components": {
     "schemas": {
-      "Bill": {
-        "type": "object",
-        "properties": {
-          "billId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "orderId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "billDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "totalAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "discountAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "taxAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "finalAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "paymentStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "order": {
-            "$ref": "#/components/schemas/Order"
-          },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Transaction"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "BooleanServiceResponse": {
         "type": "object",
         "properties": {
           "status": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ResponseStatus"
           },
           "message": {
             "type": "string",
@@ -647,7 +775,7 @@
         },
         "additionalProperties": false
       },
-      "Item": {
+      "ItemDto": {
         "type": "object",
         "properties": {
           "itemId": {
@@ -668,23 +796,15 @@
           },
           "isActive": {
             "type": "boolean"
-          },
-          "orderDetails": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrderDetail"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ItemIEnumerableServiceResponse": {
+      "ItemDtoIEnumerableServiceResponse": {
         "type": "object",
         "properties": {
           "status": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ResponseStatus"
           },
           "message": {
             "type": "string",
@@ -693,26 +813,25 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Item"
+              "$ref": "#/components/schemas/ItemDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ItemServiceResponse": {
+      "ItemDtoServiceResponse": {
         "type": "object",
         "properties": {
           "status": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ResponseStatus"
           },
           "message": {
             "type": "string",
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/Item"
+            "$ref": "#/components/schemas/ItemDto"
           }
         },
         "additionalProperties": false
@@ -731,77 +850,52 @@
         },
         "additionalProperties": false
       },
-      "Order": {
+      "LoginResponseDto": {
         "type": "object",
         "properties": {
-          "orderId": {
+          "userId": {
             "type": "integer",
             "format": "int32"
           },
-          "roomId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "orderDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
+          "username": {
             "type": "string",
             "nullable": true
           },
-          "totalAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "room": {
-            "$ref": "#/components/schemas/Room"
-          },
-          "orderDetails": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrderDetail"
-            },
+          "firstname": {
+            "type": "string",
             "nullable": true
           },
-          "bill": {
-            "$ref": "#/components/schemas/Bill"
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "OrderDetail": {
+      "LoginResponseDtoServiceResponse": {
         "type": "object",
         "properties": {
-          "orderDetailId": {
-            "type": "integer",
-            "format": "int32"
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
           },
-          "orderId": {
-            "type": "integer",
-            "format": "int32"
+          "message": {
+            "type": "string",
+            "nullable": true
           },
-          "itemId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rate": {
-            "type": "number",
-            "format": "double"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "order": {
-            "$ref": "#/components/schemas/Order"
-          },
-          "item": {
-            "$ref": "#/components/schemas/Item"
+          "data": {
+            "$ref": "#/components/schemas/LoginResponseDto"
           }
         },
         "additionalProperties": false
@@ -836,7 +930,15 @@
         },
         "additionalProperties": false
       },
-      "Room": {
+      "ResponseStatus": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RoomDto": {
         "type": "object",
         "properties": {
           "roomId": {
@@ -858,23 +960,15 @@
           "status": {
             "type": "string",
             "nullable": true
-          },
-          "orders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Order"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RoomIEnumerableServiceResponse": {
+      "RoomDtoIEnumerableServiceResponse": {
         "type": "object",
         "properties": {
           "status": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ResponseStatus"
           },
           "message": {
             "type": "string",
@@ -883,59 +977,42 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Room"
+              "$ref": "#/components/schemas/RoomDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RoomServiceResponse": {
+      "RoomDtoServiceResponse": {
         "type": "object",
         "properties": {
           "status": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ResponseStatus"
           },
           "message": {
             "type": "string",
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/Room"
+            "$ref": "#/components/schemas/RoomDto"
           }
         },
         "additionalProperties": false
       },
-      "Transaction": {
+      "StringServiceResponse": {
         "type": "object",
         "properties": {
-          "transactionId": {
-            "type": "integer",
-            "format": "int32"
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
           },
-          "billId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "transactionDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "paymentMethod": {
+          "message": {
             "type": "string",
             "nullable": true
           },
-          "transactionStatus": {
+          "data": {
             "type": "string",
             "nullable": true
-          },
-          "bill": {
-            "$ref": "#/components/schemas/Bill"
           }
         },
         "additionalProperties": false
@@ -961,6 +1038,134 @@
           },
           "email": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "required": [
+          "firstname",
+          "lastname",
+          "passwordHash",
+          "role",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "firstname": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "lastname": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "passwordHash": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "role": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserServiceResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserViewModel": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserViewModelIEnumerableServiceResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ResponseStatus"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserViewModel"
+            },
             "nullable": true
           }
         },
