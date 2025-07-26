@@ -27,6 +27,16 @@ namespace HmsNet.Controllers
                 : StatusCode(StatusCodes.Status500InternalServerError, response);
         }
 
+        // GET: api/Rooms/Available
+        [HttpGet("Available")]
+        public async Task<ActionResult<ServiceResponse<IEnumerable<RoomDto>>>> GetActiveRooms(int page = 1, int pageSize = 10, bool includeOrders = false)
+        {
+            var response = await _service.GetAllActiveAsync(page, pageSize, includeOrders);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : StatusCode(StatusCodes.Status500InternalServerError, response);
+        }
+
         // GET: api/Rooms/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<RoomDto>>> GetRoom(int id, bool includeOrders = false)

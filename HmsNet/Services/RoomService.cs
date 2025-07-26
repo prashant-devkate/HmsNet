@@ -19,7 +19,6 @@ namespace HmsNet.Services
         private readonly ILogger<RoomService> _logger;
         private const int MaxNameLength = 100;
         private const int MaxCategoryLength = 50;
-        private const bool UseSoftDelete = true; // Toggle for soft delete vs hard delete
 
         public RoomService(AppDbContext context, ILogger<RoomService> logger)
         {
@@ -82,7 +81,7 @@ namespace HmsNet.Services
             };
         }
 
-        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllAsync(int page = 1, int pageSize = 10, bool includeOrders = false)
+        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllActiveAsync(int page = 1, int pageSize = 10, bool includeOrders = false)
         {
             var response = new ServiceResponse<IEnumerable<RoomDto>>();
             try
@@ -120,6 +119,44 @@ namespace HmsNet.Services
             }
         }
 
+        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllAsync(int page = 1, int pageSize = 10, bool includeOrders = false)
+        {
+            var response = new ServiceResponse<IEnumerable<RoomDto>>();
+            try
+            {
+                if (page < 1 || pageSize < 1)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = "Invalid page or pageSize";
+                    return response;
+                }
+
+                var query = _context.Rooms.AsQueryable();
+                if (includeOrders)
+                {
+                    query = query.Include(i => i.Orders);
+                }
+
+                var rooms = await query
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                response.Data = rooms.Select(MapToRoomDto).ToList();
+                response.Status = ResponseStatus.Success;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving rooms: {Message}", ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Error retrieving rooms: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+        }
+
+
         public async Task<ServiceResponse<RoomDto>> GetByIdAsync(int id, bool includeOrders = false)
         {
             var response = new ServiceResponse<RoomDto>();
@@ -131,7 +168,7 @@ namespace HmsNet.Services
                     query = query.Include(i => i.Orders);
                 }
 
-                var room = await query.FirstOrDefaultAsync(i => i.RoomId == id && i.Status == "Available");
+                var room = await query.FirstOrDefaultAsync(i => i.RoomId == id);
                 if (room == null)
                 {
                     response.Status = ResponseStatus.Error;
@@ -165,10 +202,10 @@ namespace HmsNet.Services
                     return response;
                 }
 
-                if (await _context.Rooms.AnyAsync(r => r.RoomName.Trim().ToLower() == roomDto.RoomName.Trim().ToLower()))
+                if (await _context.Rooms.AnyAsync(r => r.RoomType == roomDto.RoomType && r.RoomName.Trim().ToLower() == roomDto.RoomName.Trim().ToLower()))
                 {
                     response.Status = ResponseStatus.Error;
-                    response.Message = "Room with this name already exists";
+                    response.Message = $"Room with this name already exists in the {roomDto.RoomType}";
                     return response;
                 }
 
@@ -207,17 +244,17 @@ namespace HmsNet.Services
                 }
 
                 var existingRoom = await _context.Rooms.FindAsync(roomDto.RoomId);
-                if (existingRoom == null || existingRoom.Status != "Available")
+                if (existingRoom == null)
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Room with ID {roomDto.RoomId} not found";
                     return response;
                 }
 
-                if (await _context.Rooms.AnyAsync(r => r.RoomName.Trim().ToLower() == roomDto.RoomName.Trim().ToLower() && r.RoomId != roomDto.RoomId))
+                if (await _context.Rooms.AnyAsync(r => r.RoomType == roomDto.RoomType && r.RoomName.Trim().ToLower() == roomDto.RoomName.Trim().ToLower() && r.RoomId != roomDto.RoomId))
                 {
                     response.Status = ResponseStatus.Error;
-                    response.Message = "Another rom with this name already exists";
+                    response.Message = $"Another room with this name already exists in {roomDto.RoomType}";
                     return response;
                 }
 
@@ -258,7 +295,7 @@ namespace HmsNet.Services
             try
             {
                 var room = await _context.Rooms.FindAsync(id);
-                if (room == null || (room.Status != "Available"))
+                if (room == null)
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Room with ID {id} not found";
@@ -275,14 +312,9 @@ namespace HmsNet.Services
                 }
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
-                if (UseSoftDelete)
-                {
-                    room.Status = "Pending";
-                }
-                else
-                {
-                    _context.Rooms.Remove(room);
-                }
+               
+                _context.Rooms.Remove(room);
+
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 

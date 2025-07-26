@@ -4,38 +4,28 @@
     ViewBag.Title = "Hotel Billing Software";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- Rooms (Left Side) -->
-        <div class="col-md-3">
-            <div class="main-content">
-                <h4 style="background-color: #e0e0e0; padding: 5px;">Running Tables: 4</h4>
-                <div style="background-color: #ffffe0; padding: 10px;">
-                    <h5 style="color: #ff4500;">HALL</h5>
-                    <button style="background-color: #ff4500; color: white; margin: 2px; width: 40px;">1</button>
-                    <button style="background-color: #ff4500; color: white; margin: 2px; width: 40px;">2</button><br />
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">3</button>
-                    <button style="background-color: #ff4500; color: white; margin: 2px; width: 40px;">4</button>
-                </div>
-                <div style="background-color: #ffffe0; padding: 10px; margin-top: 5px;">
-                    <h5 style="color: #32cd32;">GROUND FLOOR</h5>
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">1</button>
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">2</button>
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">3</button><br />
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">10</button>
-                </div>
-                <div style="background-color: #ffffe0; padding: 10px; margin-top: 5px;">
-                    <h5 style="color: #32cd32;">GARDEN</h5>
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">1</button>
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">2</button><br />
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">3</button>
-                    <button style="background-color: #32cd32; color: white; margin: 2px; width: 40px;">4</button>
-                </div>
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <!-- Rooms (Left Side - L-Shaped) -->
+        <div class="col-md-3" style="height: 100vh; overflow-y: auto;">
+            <div class="main-content" style="background-color: #f5f5f5; padding: 5px;">
+                <h4 style="background-color: #e0e0e0; padding: 5px;">Running Tables: @Model.RoomsByType.Values.Sum(rooms => rooms.Count)</h4>
+                @foreach (var roomType in Model.RoomsByType.Keys.OrderBy(k => k))
+                {
+                    <div style="background-color: #ffffe0; padding: 5px; margin-top: 5px; display: flex; flex-wrap: wrap; gap: 2px;">
+                        <h5 style="color: #32cd32; width: 100%; margin-bottom: 5px;">@roomType.ToUpper()</h5>
+                        @foreach (var room in Model.RoomsByType[roomType])
+                        {
+                            var buttonColor = room.Status == "Available" ? "#32cd32" : "#ff4500";
+                            <button style="background-color: @buttonColor; color: white; margin: 0; width: 60px; height: 40px; flex: 0 0 auto;" title="Room: @room.RoomName, Capacity: @room.Capacity">@room.RoomName</button>
+                        }
+                    </div>
+                }
             </div>
         </div>
 
         <!-- Cart (Middle) -->
-        <div class="col-md-6">
+        <div class="col-md-6" style="height: 50vh; overflow-y: auto;">
             <div class="billing-section" style="background-color: #f0f0f0; padding: 10px;">
                 <table id="cartTable" style="width: 100%; border-collapse: collapse;">
                     <thead>
@@ -99,13 +89,11 @@
             const itemId = option.value;
             const rate = option.getAttribute('data-rate');
 
-            // Check if item already exists in cart
             let existingRow = Array.from(tbody.querySelectorAll('tr')).find(row =>
                 row.querySelector('td:nth-child(2) input').value === itemName
             );
 
             if (!existingRow) {
-                // Create new row
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemId}" readonly></td>
@@ -116,7 +104,6 @@
                 `;
                 tbody.appendChild(newRow);
             } else {
-                // Increase quantity if item exists
                 const qtyInput = existingRow.querySelector('td:nth-child(3) input');
                 let qty = parseInt(qtyInput.value) || 0;
                 qtyInput.value = qty + 1;
@@ -124,7 +111,6 @@
             }
         });
 
-        // Clear selection after adding
         this.selectedOptions.forEach(option => option.selected = false);
         updateTotal();
     });
@@ -135,7 +121,6 @@
         const rateInput = row.querySelector('td:nth-child(4) input');
         const rate = parseFloat(rateInput.value) || 0;
         const amount = qty * rate;
-        // You can add a hidden field or calculate total on the server side
         updateTotal();
     }
 

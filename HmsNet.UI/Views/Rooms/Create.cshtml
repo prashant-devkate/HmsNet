@@ -24,7 +24,12 @@
 
                 <div class="mb-3">
                     <label asp-for="RoomType" class="form-label fw-bold text-dark">Room Type</label>
-                    <input asp-for="RoomType" class="form-control border-success" placeholder="Enter room type" required />
+                    <select asp-for="RoomType" class="form-select border-success" required>
+                        <option value="">Select a Type</option>
+                        <option value="Hall">Hall</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Room">Room</option>
+                    </select>
                     <span asp-validation-for="RoomType" class="text-danger small"></span>
                 </div>
 
@@ -36,7 +41,11 @@
 
                 <div class="mb-3">
                     <label asp-for="Status" class="form-label fw-bold text-dark">Status</label>
-                    <input asp-for="Status" class="form-control border-success" placeholder="Enter status" required />
+                    <select asp-for="Status" class="form-select border-success" required>
+                        <option value="">Select Status</option>
+                        <option value="Available">Available</option>
+                        <option value="Pending">Pending</option>
+                    </select>
                     <span asp-validation-for="Status" class="text-danger small"></span>
                 </div>
 

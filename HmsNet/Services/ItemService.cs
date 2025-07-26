@@ -19,7 +19,6 @@ namespace HmsNet.Services
         private readonly ILogger<ItemService> _logger;
         private const int MaxNameLength = 100;
         private const int MaxCategoryLength = 50;
-        private const bool UseSoftDelete = true; // Toggle for soft delete vs hard delete
 
         public ItemService(AppDbContext context, ILogger<ItemService> logger)
         {
@@ -104,7 +103,6 @@ namespace HmsNet.Services
                 {
                     query = query.Include(i => i.OrderDetails);
                 }
-                query = query.Where(i => i.IsActive || !UseSoftDelete); // Respect soft delete
 
                 var items = await query
                     .Skip((page - 1) * pageSize)
@@ -125,6 +123,45 @@ namespace HmsNet.Services
             }
         }
 
+        public async Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllActiveAsync(int page = 1, int pageSize = 10, bool includeOrderDetails = false)
+        {
+            var response = new ServiceResponse<IEnumerable<ItemDto>>();
+            try
+            {
+                if (page < 1 || pageSize < 1)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = "Invalid page or pageSize";
+                    return response;
+                }
+
+                var query = _context.Items.AsQueryable();
+                if (includeOrderDetails)
+                {
+                    query = query.Include(i => i.OrderDetails);
+                }
+                query = query.Where(i => i.IsActive);
+
+                var items = await query
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                response.Data = items.Select(MapToItemDto).ToList();
+                response.Status = ResponseStatus.Success;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving items: {Message}", ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Error retrieving items: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+        }
+
+
         public async Task<ServiceResponse<ItemDto>> GetByIdAsync(int id, bool includeOrderDetails = false)
         {
             var response = new ServiceResponse<ItemDto>();
@@ -136,7 +173,7 @@ namespace HmsNet.Services
                     query = query.Include(i => i.OrderDetails);
                 }
 
-                var item = await query.FirstOrDefaultAsync(i => i.ItemId == id && (i.IsActive || !UseSoftDelete));
+                var item = await query.FirstOrDefaultAsync(i => i.ItemId == id);
                 if (item == null)
                 {
                     response.Status = ResponseStatus.Error;
@@ -178,7 +215,7 @@ namespace HmsNet.Services
                 }
 
                 var item = MapToItem(itemDto);
-                item.IsActive = true; // Ensure new items are active
+                item.IsActive = true;
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
                 _context.Items.Add(item);
@@ -212,7 +249,7 @@ namespace HmsNet.Services
                 }
 
                 var existingItem = await _context.Items.FindAsync(itemDto.ItemId);
-                if (existingItem == null || (!existingItem.IsActive && UseSoftDelete))
+                if (existingItem == null)
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Item with ID {itemDto.ItemId} not found";
@@ -263,7 +300,7 @@ namespace HmsNet.Services
             try
             {
                 var item = await _context.Items.FindAsync(id);
-                if (item == null || (!item.IsActive && UseSoftDelete))
+                if (item == null || !item.IsActive)
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Item with ID {id} not found";
@@ -280,14 +317,9 @@ namespace HmsNet.Services
                 }
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
-                if (UseSoftDelete)
-                {
-                    item.IsActive = false;
-                }
-                else
-                {
-                    _context.Items.Remove(item);
-                }
+                
+                _context.Items.Remove(item);
+
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 

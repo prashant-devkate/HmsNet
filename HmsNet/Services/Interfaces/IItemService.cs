@@ -6,6 +6,7 @@ namespace HmsNet.Services.Interfaces
     public interface IItemService
     {
         Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllAsync(int page = 1, int pageSize = 10, bool includeOrderDetails = false);
+        Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllActiveAsync(int page = 1, int pageSize = 10, bool includeOrderDetails = false);
         Task<ServiceResponse<ItemDto>> GetByIdAsync(int id, bool includeOrderDetails = false);
         Task<ServiceResponse<ItemDto>> CreateAsync(ItemDto item);
         Task<ServiceResponse<ItemDto>> UpdateAsync(ItemDto item);
