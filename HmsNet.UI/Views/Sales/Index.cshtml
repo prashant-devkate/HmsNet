@@ -34,15 +34,13 @@
                     <thead>
                         <tr style="background-color: #ffa500; color: white;">
                             <th style="padding: 5px; border: 1px solid #ddd;">CODE</th>
-                            <th style="padding: 5px; border: 1px solid #ddd;">ITEM NAME</th>
+                            <th style="padding: 5px; border: 1px solid #ddd;">ITEM</th>
                             <th style="padding: 5px; border: 1px solid #ddd;">QTY</th>
                             <th style="padding: 5px; border: 1px solid #ddd;">RATE</th>
                             <th style="padding: 5px; border: 1px solid #ddd;">ACTION</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                    </tbody>
+                    <tbody></tbody>
                 </table>
                 <div style="margin-top: 10px;">
                     <div class="dropdown">
@@ -55,14 +53,14 @@
                         </div>
                     </div>
                     <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">CL</button>
-                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">PR</button>
-                    <button style="background-color: #ff4500; color: white; padding: 5px 10px;">Cancel</button>
+                    <button id="printBillBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">PR</button>
+                    <button id="cancelBtn" style="background-color: #ff4500; color: white; padding: 5px 10px;">Cancel</button>
                 </div>
                 <div style="margin-top: 10px;">
                     <label style="margin-right: 10px;">Dis. Amt:</label>
-                    <input type="text" style="width: 100px; padding: 5px; display: inline;" />
+                    <input type="text" id="discountAmount" style="width: 100px; padding: 5px; display: inline;" value="0" />
                     <label style="margin-left: 10px; margin-right: 10px;">Amount</label>
-                    <input type="text" style="width: 100px; padding: 5px; display: inline;" />
+                    <input type="text" id="totalAmount" style="width: 100px; padding: 5px; display: inline;" readonly />
                 </div>
             </div>
         </div>
@@ -84,19 +82,60 @@
     </div>
 </div>
 
+<!-- Bootstrap Modal for Error Messages -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="errorModalMessage"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     // Fallback to hardcoded URL if apiBaseUrl is undefined
     const apiBaseUrl = '@ViewBag.ApiBaseUrl' || 'http://localhost:5236/';
 
+    // Show error modal
+    function showError(message) {
+        console.error('Error:', message);
+        document.getElementById('errorModalMessage').textContent = message;
+        $('#errorModal').modal('show');
+    }
+
     // Item selection logic
     document.getElementById('itemSelect').addEventListener('change', function () {
+        console.log('Item select change event triggered');
         const selectedOptions = Array.from(this.selectedOptions);
+        console.log('Selected options:', selectedOptions);
         const tbody = document.querySelector('#cartTable tbody');
+        const selectedButton = document.querySelector('.room-btn.selected');
+        const orderId = selectedButton?.dataset.orderId;
+
+        if (!selectedButton) {
+            showError('Please select a room first.');
+            return;
+        }
+
+        if (!orderId) {
+            showError('No active order. Please set the room status to Pending.');
+            return;
+        }
 
         selectedOptions.forEach(option => {
             const itemName = option.textContent;
             const itemId = option.value;
-            const rate = option.getAttribute('data-rate');
+            const rate = parseFloat(option.getAttribute('data-rate'));
+
+            console.log(`Adding item: ${itemName}, ID: ${itemId}, Rate: ${rate}`);
 
             let existingRow = Array.from(tbody.querySelectorAll('tr')).find(row =>
                 row.querySelector('td:nth-child(2) input').value === itemName
@@ -107,16 +146,36 @@
                 newRow.innerHTML = `
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemId}" readonly></td>
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemName}" readonly></td>
-                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="1" onchange="updateAmount(this)"></td>
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="1" onchange="updateAmount(this, ${orderId})"></td>
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${rate}" readonly></td>
-                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this)">X</button></td>
+                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${orderId})">X</button></td>
                 `;
                 tbody.appendChild(newRow);
+                console.log('New row added to cart:', newRow);
+
+                // Send new OrderDetail to backend
+                fetch(`${apiBaseUrl}api/OrderDetails`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ OrderId: orderId, ItemId: itemId, Quantity: 1, Rate: rate, Amount: rate })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status !== 0 && data.status !== 'Success') {
+                        throw new Error(data.message || 'Failed to add order detail');
+                    }
+                    console.log('OrderDetail added:', data.data);
+                })
+                .catch(error => {
+                    console.error('Error adding order detail:', error);
+                    showError('Failed to add item to order: ' + error.message);
+                });
             } else {
                 const qtyInput = existingRow.querySelector('td:nth-child(3) input');
                 let qty = parseInt(qtyInput.value) || 0;
                 qtyInput.value = qty + 1;
-                updateAmount(qtyInput);
+                console.log(`Updated quantity for ${itemName} to ${qty + 1}`);
+                updateAmount(qtyInput, orderId);
             }
         });
 
@@ -124,22 +183,60 @@
         updateTotal();
     });
 
-    function updateAmount(input) {
+    function updateAmount(input, orderId) {
+        console.log('Updating amount for order:', orderId);
         const row = input.parentElement.parentElement;
         const qty = parseInt(input.value) || 0;
         const rateInput = row.querySelector('td:nth-child(4) input');
         const rate = parseFloat(rateInput.value) || 0;
+        const itemId = row.querySelector('td:nth-child(1) input').value;
         const amount = qty * rate;
+
+        if (qty > 0) {
+            fetch(`${apiBaseUrl}api/OrderDetails`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ OrderId: orderId, ItemId: itemId, Quantity: qty, Rate: rate, Amount: amount })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status !== 0 && data.status !== 'Success') {
+                    throw new Error(data.message || 'Failed to update order detail');
+                }
+                console.log('OrderDetail updated:', data.data);
+            })
+            .catch(error => {
+                console.error('Error updating order detail:', error);
+                showError('Failed to update item quantity: ' + error.message);
+            });
+        }
         updateTotal();
     }
 
-    function removeRow(button) {
+    function removeRow(button, orderId) {
+        console.log('Removing item from order:', orderId);
         const row = button.parentElement.parentElement;
+        const itemId = row.querySelector('td:nth-child(1) input').value;
+
+        fetch(`${apiBaseUrl}api/OrderDetails/${orderId}/${itemId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to remove order detail');
+            console.log('OrderDetail removed:', itemId);
+        })
+        .catch(error => {
+            console.error('Error removing order detail:', error);
+            showError('Failed to remove item: ' + error.message);
+        });
+
         row.remove();
         updateTotal();
     }
 
     function updateTotal() {
+        console.log('Updating total amount');
         const rows = document.querySelectorAll('#cartTable tbody tr');
         let total = 0;
         rows.forEach(row => {
@@ -147,23 +244,30 @@
             const rate = parseFloat(row.querySelector('td:nth-child(4) input').value) || 0;
             total += qty * rate;
         });
-        document.querySelector('input[placeholder="Amount"]').value = total.toFixed(2);
+        document.getElementById('totalAmount').value = total.toFixed(2);
+        console.log('Total updated:', total.toFixed(2));
     }
 
     // Room selection logic
     document.querySelectorAll('.room-btn').forEach(button => {
         button.addEventListener('click', function () {
+            console.log('Room button clicked:', this.getAttribute('data-room-name'));
             const selectedRoomDiv = document.getElementById('selectedRoom');
             const roomId = this.getAttribute('data-room-id');
             const roomName = this.getAttribute('data-room-name');
 
             if (this.classList.contains('selected')) {
+                console.log('Deselecting room:', roomName);
                 this.classList.remove('selected');
                 this.style.border = 'none';
                 selectedRoomDiv.style.display = 'none';
                 selectedRoomDiv.textContent = '';
                 document.getElementById('statusDropdown').disabled = true;
+                document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                document.getElementById('totalAmount').value = '';
+                document.getElementById('discountAmount').value = '0';
             } else {
+                console.log('Selecting room:', roomName);
                 document.querySelectorAll('.room-btn').forEach(btn => {
                     btn.classList.remove('selected');
                     btn.style.border = 'none';
@@ -173,6 +277,44 @@
                 selectedRoomDiv.style.display = 'block';
                 selectedRoomDiv.textContent = `Selected Table: ${roomName}`;
                 document.getElementById('statusDropdown').disabled = false;
+
+                // Load existing order details if any
+                const orderId = this.dataset.orderId;
+                if (orderId) {
+                    console.log('Loading order details for order:', orderId);
+                    fetch(`${apiBaseUrl}api/OrderDetails/Order/${orderId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 0 || data.status === 'Success') {
+                                const tbody = document.querySelector('#cartTable tbody');
+                                tbody.innerHTML = '';
+                                data.data.forEach(detail => {
+                                    const newRow = document.createElement('tr');
+                                    newRow.innerHTML = `
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemId}" readonly></td>
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.item?.itemName || 'Unknown'}" readonly></td>
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.quantity}" onchange="updateAmount(this, ${orderId})"></td>
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.rate}" readonly></td>
+                                        <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${orderId})">X</button></td>
+                                    `;
+                                    tbody.appendChild(newRow);
+                                    console.log('Loaded order detail:', detail.item?.itemName);
+                                });
+                                updateTotal();
+                            } else {
+                                console.error('Failed to load order details:', data);
+                                showError('Failed to load order details: ' + (data.message || 'Unknown error'));
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading order details:', error);
+                            showError('Failed to load order details: ' + error.message);
+                        });
+                } else {
+                    console.log('No existing order for room:', roomName);
+                    document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                    document.getElementById('totalAmount').value = '';
+                }
             }
         });
     });
@@ -180,6 +322,7 @@
     // Toggle dropdown menu on button click
     document.getElementById('statusDropdown').addEventListener('click', function (e) {
         e.preventDefault();
+        console.log('Status dropdown clicked');
         const dropdownMenu = this.nextElementSibling;
         dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     });
@@ -197,10 +340,11 @@
     document.querySelectorAll('.dropdown-item').forEach(item => {
         item.addEventListener('click', function (e) {
             e.preventDefault();
+            console.log('Status dropdown item clicked:', this.getAttribute('data-status'));
             const dropdownMenu = this.closest('.dropdown-menu');
             const selectedButton = document.querySelector('.room-btn.selected');
             if (!selectedButton) {
-                alert('Please select a room first.');
+                showError('Please select a room first.');
                 dropdownMenu.style.display = 'none';
                 return;
             }
@@ -209,63 +353,285 @@
             const newStatus = this.getAttribute('data-status');
             const statusChangeApiUrl = `${apiBaseUrl}api/Rooms/${roomId}/Status`;
 
-            console.log('API Base URL:', apiBaseUrl);
-            console.log('Request URL:', statusChangeApiUrl);
-            console.log('Request Body:', JSON.stringify(newStatus));
+            if (newStatus === 'Pending' && !selectedButton.dataset.orderId) {
+                console.log('Creating new order for room:', roomId);
+                fetch(`${apiBaseUrl}api/Orders`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ RoomId: roomId, OrderDateTime: new Date().toISOString(), Status: 'Pending', TotalAmount: 0 })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 0 || data.status === 'Success') {
+                        selectedButton.dataset.orderId = data.data.orderId;
+                        console.log('Order created with ID:', data.data.orderId);
+                        updateRoomStatus(roomId, newStatus, selectedButton, dropdownMenu);
+                    } else {
+                        throw new Error(data.message || 'Failed to create order');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error creating order:', error);
+                    showError('Failed to create order: ' + error.message);
+                    dropdownMenu.style.display = 'none';
+                });
+            } else {
+                updateRoomStatus(roomId, newStatus, selectedButton, dropdownMenu);
+            }
+        });
+    });
 
-            fetch(statusChangeApiUrl, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newStatus)
-            })
-            .then(response => {
-                console.log('Response Status:', response.status);
-                console.log('Response OK:', response.ok);
-                console.log('Response Headers:', Object.fromEntries(response.headers));
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+    function updateRoomStatus(roomId, newStatus, selectedButton, dropdownMenu) {
+        console.log('Updating room status:', roomId, newStatus);
+        const statusChangeApiUrl = `${apiBaseUrl}api/Rooms/${roomId}/Status`;
+        fetch(statusChangeApiUrl, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newStatus)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+            }
+            return response.json().then(data => ({ response, data }));
+        })
+        .then(({ response, data }) => {
+            if (response.ok && (data.status === 0 || data.status === 'Success')) {
+                selectedButton.style.backgroundColor = newStatus === 'Available' ? '#32cd32' : '#ff4500';
+                console.log('Room status updated:', newStatus);
+                if (newStatus === 'Available') {
+                    selectedButton.removeAttribute('data-order-id');
+                    document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                    document.getElementById('totalAmount').value = '';
+                    document.getElementById('discountAmount').value = '0';
                 }
-                return response.json().then(data => ({ response, data }));
+                fetch(`${apiBaseUrl}api/Rooms`)
+                    .then(response => response.json())
+                    .then(roomData => {
+                        if (roomData && (roomData.status === 0 || roomData.status === 'Success')) {
+                            const rooms = Array.isArray(roomData.data) ? roomData.data : [];
+                            const runningTables = rooms.filter(room => room.status === 'Pending').length;
+                            document.getElementById('runningTables').textContent = `Running Tables: ${runningTables}`;
+                            document.querySelectorAll('.room-btn').forEach(btn => {
+                                const btnRoomId = btn.getAttribute('data-room-id');
+                                const room = rooms.find(r => r.roomId == btnRoomId);
+                                if (room) {
+                                    btn.style.backgroundColor = room.status === 'Available' ? '#32cd32' : '#ff4500';
+                                }
+                            });
+                            console.log('Rooms refreshed:', rooms);
+                        } else {
+                            console.error('Invalid room data format or status:', roomData);
+                            showError('Invalid room data format or status');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error refreshing room data:', error);
+                        showError('Failed to refresh room data: ' + error.message);
+                    });
+            } else {
+                console.error('Error from server:', data ? data.message : 'No data or unexpected format');
+                showError('Failed to update room status: ' + (data ? data.message : 'Unexpected response format'));
+            }
+            dropdownMenu.style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error updating room status:', error);
+            showError('Failed to update room status: ' + error.message);
+            dropdownMenu.style.display = 'none';
+        });
+    }
+
+    @* Commented out Print Bill logic to resolve RZ1034 error
+    // Print Bill logic
+    document.getElementById('printBillBtn').addEventListener('click', function () {
+        console.log('Print Bill button clicked');
+        const selectedButton = document.querySelector('.room-btn.selected');
+        if (!selectedButton || !selectedButton.dataset.orderId) {
+            showError('No active order. Please select a room and set it to Pending.');
+            return;
+        }
+        const orderId = selectedButton.dataset.orderId;
+        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+        const discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
+        const taxAmount = totalAmount * 0.1; // 10% tax
+        const finalAmount = totalAmount - discountAmount + taxAmount;
+
+        console.log('Generating bill for order:', orderId, 'Total:', totalAmount, 'Discount:', discountAmount, 'Tax:', taxAmount);
+
+        fetch(`${apiBaseUrl}api/Bills`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                OrderId: orderId,
+                BillDateTime: new Date().toISOString(),
+                TotalAmount: totalAmount,
+                DiscountAmount: discountAmount,
+                TaxAmount: taxAmount,
+                FinalAmount: finalAmount,
+                PaymentStatus: 'Pending'
             })
-            .then(({ response, data }) => {
-                console.log('Response Data:', data);
-                if (response.ok && (data.status === 0 || data.status === 'Success')) {
-                    selectedButton.style.backgroundColor = newStatus === 'Available' ? '#32cd32' : '#ff4500';
-                    fetch(`${apiBaseUrl}api/Rooms`)
-                        .then(response => response.json())
-                        .then(roomData => {
-                            console.log('Rooms Data:', roomData);
-                            if (roomData && (roomData.status === 0 || roomData.status === 'Success')) {
-                                const rooms = Array.isArray(roomData.data) ? roomData.data : [];
-                                const runningTables = rooms.filter(room => room.status === 'Pending').length;
-                                document.getElementById('runningTables').textContent = `Running Tables: ${runningTables}`;
-                                document.querySelectorAll('.room-btn').forEach(btn => {
-                                    const btnRoomId = btn.getAttribute('data-room-id');
-                                    const room = rooms.find(r => r.roomId == btnRoomId);
-                                    if (room) {
-                                        btn.style.backgroundColor = room.status === 'Available' ? '#32cd32' : '#ff4500';
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 0 || data.status === 'Success') {
+                console.log('Bill generated:', data.data);
+                const billWindow = window.open('', '_blank');
+                // Use a well-formed HTML string with proper tag closure
+                const billHtml = `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Bill #${data.data.billId}</title>
+                        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+                        <style>
+                            body { padding: 20px; }
+                            .bill-details { max-width: 600px; margin: auto; }
+                            .btn { margin: 10px; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="bill-details">
+                            <h2>Bill #${data.data.billId}</h2>
+                            <p>Order ID: ${orderId}</p>
+                            <p>Table: ${selectedButton.getAttribute('data-room-name').replace(/'/g, "\\'")}</p>
+                            <p>Total Amount: ${totalAmount.toFixed(2)}</p>
+                            <p>Discount: ${discountAmount.toFixed(2)}</p>
+                            <p>Tax (10%): ${taxAmount.toFixed(2)}</p>
+                            <p><strong>Final Amount: ${finalAmount.toFixed(2)}</strong></p>
+                            <button class="btn btn-primary" onclick="window.print()">Print Bill</button>
+                            <button class="btn btn-success" onclick="recordPayment(${data.data.billId}, ${finalAmount}, ${selectedButton.getAttribute('data-room-id')})">Record Payment</button>
+                        </div>
+                        <script>
+                            function recordPayment(billId, amount, roomId) {
+                                const paymentMethod = prompt('Enter payment method (e.g., Cash, Card):');
+                                if (!paymentMethod) return;
+                                fetch('${apiBaseUrl}api/Transactions', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        BillId: billId,
+                                        TransactionDateTime: new Date().toISOString(),
+                                        Amount: amount,
+                                        PaymentMethod: paymentMethod,
+                                        TransactionStatus: 'Completed'
+                                    })
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Failed to record payment');
                                     }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data.status === 0 || data.status === 'Success') {
+                                        alert('Payment recorded successfully');
+                                        fetch('${apiBaseUrl}api/Rooms/' + roomId + '/Status', {
+                                            method: 'PUT',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify('Available')
+                                        })
+                                        .then(response => {
+                                            if (response.ok) {
+                                                window.close();
+                                            } else {
+                                                alert('Failed to update room status');
+                                            }
+                                        })
+                                        .catch(error => {
+                                            alert('Error updating room status: ' + error.message);
+                                        });
+                                    } else {
+                                        alert('Failed to record payment: ' + (data.message || 'Unknown error'));
+                                    }
+                                })
+                                .catch(error => {
+                                    alert('Error recording payment: ' + error.message);
                                 });
-                            } else {
-                                console.error('Invalid room data format or status:', roomData);
                             }
-                        })
-                        .catch(error => {
-                            console.error('Error refreshing room data:', error);
-                        });
-                } else {
-                    console.error('Error from server:', data ? data.message : 'No data or unexpected format');
-                    alert('Failed to update room status: ' + (data ? data.message : 'Unexpected response format'));
-                }
-                dropdownMenu.style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Error updating room status:', error);
-                alert('Failed to update room status. Please try again. Error: ' + error.message);
-                dropdownMenu.style.display = 'none';
+                        </script>
+                    </body>
+                    </html>
+                `;
+                billWindow.document.write(billHtml);
+                billWindow.document.close();
+            } else {
+                throw new Error(data.message || 'Failed to generate bill');
+            }
+        })
+        .catch(error => {
+            console.error('Error generating bill:', error);
+            showError('Failed to generate bill: ' + error.message);
+        });
+    });
+    *@
+
+    // Cancel order logic
+    document.getElementById('cancelBtn').addEventListener('click', function () {
+        console.log('Cancel button clicked');
+        const selectedButton = document.querySelector('.room-btn.selected');
+        if (!selectedButton || !selectedButton.dataset.orderId) {
+            showError('No active order to cancel.');
+            return;
+        }
+        const orderId = selectedButton.dataset.orderId;
+        const roomId = selectedButton.getAttribute('data-room-id');
+
+        fetch(`${apiBaseUrl}api/Orders/${orderId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to cancel order');
+            console.log('Order deleted:', orderId);
+            return fetch(`${apiBaseUrl}api/Rooms/${roomId}/Status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify('Available')
             });
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 0 || data.status === 'Success') {
+                selectedButton.style.backgroundColor = '#32cd32';
+                selectedButton.removeAttribute('data-order-id');
+                document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                document.getElementById('totalAmount').value = '';
+                document.getElementById('discountAmount').value = '0';
+                document.getElementById('selectedRoom').style.display = 'none';
+                document.getElementById('selectedRoom').textContent = '';
+                document.getElementById('statusDropdown').disabled = true;
+                selectedButton.classList.remove('selected');
+                selectedButton.style.border = 'none';
+                console.log('Room status set to Available:', roomId);
+                fetch(`${apiBaseUrl}api/Rooms`)
+                    .then(response => response.json())
+                    .then(roomData => {
+                        if (roomData && (roomData.status === 0 || roomData.status === 'Success')) {
+                            const rooms = Array.isArray(roomData.data) ? roomData.data : [];
+                            const runningTables = rooms.filter(room => room.status === 'Pending').length;
+                            document.getElementById('runningTables').textContent = `Running Tables: ${runningTables}`;
+                            document.querySelectorAll('.room-btn').forEach(btn => {
+                                const btnRoomId = btn.getAttribute('data-room-id');
+                                const room = rooms.find(r => r.roomId == btnRoomId);
+                                if (room) {
+                                    btn.style.backgroundColor = room.status === 'Available' ? '#32cd32' : '#ff4500';
+                                }
+                            });
+                            console.log('Rooms refreshed after cancel:', rooms);
+                        }
+                    });
+            }
+        })
+        .catch(error => {
+            console.error('Error cancelling order:', error);
+            showError('Failed to cancel order: ' + error.message);
         });
     });
 </script>
@@ -299,4 +665,8 @@
         .dropdown-item:hover {
             background-color: #f1f1f1;
         }
+
+    #selectedRoom {
+        min-height: 40px; /* Ensure visibility even when empty */
+    }
 </style>
