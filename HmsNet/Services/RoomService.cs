@@ -57,6 +57,22 @@ namespace HmsNet.Services
             return true;
         }
 
+        private bool ValidateStatus(string status, out string errorMessage)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                errorMessage = "Status is required";
+                return false;
+            }
+            if (status != "Available" && status != "Pending")
+            {
+                errorMessage = "Status must be either 'Available' or 'Pending'";
+                return false;
+            }
+            errorMessage = null;
+            return true;
+        }
+
         private Room MapToRoom(RoomDto dto)
         {
             return new Room
@@ -328,6 +344,67 @@ namespace HmsNet.Services
                 response.Status = ResponseStatus.Error;
                 response.Message = $"Error deleting room with ID {id}: {ex.Message}";
                 response.Data = false;
+                return response;
+            }
+        }
+
+        public async Task<ServiceResponse<RoomDto>> UpdateStatusAsync(int id, string status)
+        {
+            var response = new ServiceResponse<RoomDto>();
+            try
+            {
+                // Validate the status
+                if (!ValidateStatus(status, out var errorMessage))
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = errorMessage;
+                    return response;
+                }
+
+                // Find the room
+                var room = await _context.Rooms.FindAsync(id);
+                if (room == null)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = $"Room with ID {id} not found";
+                    return response;
+                }
+
+                // Update the status
+                room.Status = status.Trim();
+
+                // Save changes with transaction
+                await using var transaction = await _context.Database.BeginTransactionAsync();
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                // Return the updated room
+                response.Data = MapToRoomDto(room);
+                response.Status = ResponseStatus.Success;
+                return response;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                _logger.LogError(ex, "Concurrency error updating status for room with ID {Id}: {Message}", id, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Concurrency error updating status for room with ID {id}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error updating status for room with ID {Id}: {Message}", id, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Error updating status for room with ID {id}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error updating status for room with ID {Id}: {Message}", id, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Unexpected error updating status for room with ID {id}: {ex.Message}";
+                response.Data = null;
                 return response;
             }
         }

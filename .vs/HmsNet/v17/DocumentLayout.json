@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\HmsNet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|solutionrelative:hmsnet\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\sales\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\sales\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|solutionrelative:hmsnet\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\controllers\\salescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\controllers\\salescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Program.cs",
-              "RelativeDocumentMoniker": "HmsNet\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Program.cs",
-              "RelativeToolTip": "HmsNet\\Program.cs",
-              "ViewState": "AgIAAEgAAAAAYWZmZmYkwGUAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "RoomService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Services\\RoomService.cs",
+              "RelativeDocumentMoniker": "HmsNet\\Services\\RoomService.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Services\\RoomService.cs",
+              "RelativeToolTip": "HmsNet\\Services\\RoomService.cs",
+              "ViewState": "AgIAAIQBAAAAlZmZmVkswIwBAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-26T08:27:31.75Z",
+              "WhenOpened": "2025-07-28T07:33:58.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SalesController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\SalesController.cs",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Controllers\\SalesController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\SalesController.cs",
+              "RelativeToolTip": "HmsNet.UI\\Controllers\\SalesController.cs",
+              "ViewState": "AgIAABUAAAAAtszMzMz8vwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T06:59:59.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Sales\\Index.cshtml",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Views\\Sales\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Sales\\Index.cshtml",
+              "RelativeToolTip": "HmsNet.UI\\Views\\Sales\\Index.cshtml",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAnwG8AAACaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-28T06:57:38.132Z",
               "EditorCaption": ""
             }
           ]

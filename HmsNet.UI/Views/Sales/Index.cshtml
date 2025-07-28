@@ -1,7 +1,7 @@
 ﻿@model HmsNet.UI.Models.ItemListViewModel
 
 @{
-    ViewBag.Title = "Hotel Billing Software";
+    ViewBag.Title = "Sales";
 }
 
 <div class="container-fluid p-0">
@@ -9,7 +9,7 @@
         <!-- Rooms (Left Side - L-Shaped) -->
         <div class="col-md-3" style="height: 100vh; overflow-y: auto;">
             <div class="main-content" style="background-color: #f5f5f5; padding: 5px;">
-                <h4 style="background-color: #e0e0e0; padding: 5px;">Running Tables: @Model.RoomsByType.Values.Sum(rooms => rooms.Count)</h4>
+                <h4 id="runningTables" style="background-color: #e0e0e0; padding: 5px;">Running Tables: @Model.RoomsByType.Values.Sum(rooms => rooms.Count(room => room.Status == "Pending"))</h4>
                 @foreach (var roomType in Model.RoomsByType.Keys.OrderBy(k => k))
                 {
                     <div style="background-color: #ffffe0; padding: 5px; margin-top: 5px; display: flex; flex-wrap: wrap; gap: 2px;">
@@ -17,7 +17,7 @@
                         @foreach (var room in Model.RoomsByType[roomType])
                         {
                             var buttonColor = room.Status == "Available" ? "#32cd32" : "#ff4500";
-                            <button style="background-color: @buttonColor; color: white; margin: 0; width: 60px; height: 40px; flex: 0 0 auto;" title="Room: @room.RoomName, Capacity: @room.Capacity">@room.RoomName</button>
+                            <button class="room-btn" data-room-id="@room.RoomId" data-room-name="@room.RoomName" style="background-color: @buttonColor; color: white; margin: 0; width: 60px; height: 40px; flex: 0 0 auto;" title="Room: @room.RoomName, Capacity: @room.Capacity">@room.RoomName</button>
                         }
                     </div>
                 }
@@ -27,6 +27,9 @@
         <!-- Cart (Middle) -->
         <div class="col-md-6" style="height: 50vh; overflow-y: auto;">
             <div class="billing-section" style="background-color: #f0f0f0; padding: 10px;">
+                <!-- Selected Room Display -->
+                <div id="selectedRoom" style="background-color: #e0e0e0; padding: 10px; margin-bottom: 10px; font-weight: bold; display: none;">
+                </div>
                 <table id="cartTable" style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr style="background-color: #ffa500; color: white;">
@@ -38,19 +41,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" /></td>
-                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="No Item Name" /></td>
-                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" placeholder="Qty" /></td>
-                            <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" placeholder="Rate" /></td>
-                            <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this)">Remove</button></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
                 <div style="margin-top: 10px;">
-                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">KOT</button>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="statusDropdown" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;" disabled>
+                            ST
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="statusDropdown">
+                            <a class="dropdown-item" href="#" data-status="Available">Available</a>
+                            <a class="dropdown-item" href="#" data-status="Pending">Pending</a>
+                        </div>
+                    </div>
                     <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">CL</button>
-                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">Print BILL</button>
+                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">PR</button>
                     <button style="background-color: #ff4500; color: white; padding: 5px 10px;">Cancel</button>
                 </div>
                 <div style="margin-top: 10px;">
@@ -80,6 +85,10 @@
 </div>
 
 <script>
+    // Fallback to hardcoded URL if apiBaseUrl is undefined
+    const apiBaseUrl = '@ViewBag.ApiBaseUrl' || 'http://localhost:5236/';
+
+    // Item selection logic
     document.getElementById('itemSelect').addEventListener('change', function () {
         const selectedOptions = Array.from(this.selectedOptions);
         const tbody = document.querySelector('#cartTable tbody');
@@ -100,7 +109,7 @@
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemName}" readonly></td>
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="1" onchange="updateAmount(this)"></td>
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${rate}" readonly></td>
-                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this)">Remove</button></td>
+                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this)">X</button></td>
                 `;
                 tbody.appendChild(newRow);
             } else {
@@ -140,4 +149,154 @@
         });
         document.querySelector('input[placeholder="Amount"]').value = total.toFixed(2);
     }
+
+    // Room selection logic
+    document.querySelectorAll('.room-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const selectedRoomDiv = document.getElementById('selectedRoom');
+            const roomId = this.getAttribute('data-room-id');
+            const roomName = this.getAttribute('data-room-name');
+
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                this.style.border = 'none';
+                selectedRoomDiv.style.display = 'none';
+                selectedRoomDiv.textContent = '';
+                document.getElementById('statusDropdown').disabled = true;
+            } else {
+                document.querySelectorAll('.room-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                    btn.style.border = 'none';
+                });
+                this.classList.add('selected');
+                this.style.border = '2px solid #000';
+                selectedRoomDiv.style.display = 'block';
+                selectedRoomDiv.textContent = `Selected Table: ${roomName}`;
+                document.getElementById('statusDropdown').disabled = false;
+            }
+        });
+    });
+
+    // Toggle dropdown menu on button click
+    document.getElementById('statusDropdown').addEventListener('click', function (e) {
+        e.preventDefault();
+        const dropdownMenu = this.nextElementSibling;
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        if (!dropdown.contains(e.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+
+    // Status change logic for dropdown
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const dropdownMenu = this.closest('.dropdown-menu');
+            const selectedButton = document.querySelector('.room-btn.selected');
+            if (!selectedButton) {
+                alert('Please select a room first.');
+                dropdownMenu.style.display = 'none';
+                return;
+            }
+
+            const roomId = selectedButton.getAttribute('data-room-id');
+            const newStatus = this.getAttribute('data-status');
+            const statusChangeApiUrl = `${apiBaseUrl}api/Rooms/${roomId}/Status`;
+
+            console.log('API Base URL:', apiBaseUrl);
+            console.log('Request URL:', statusChangeApiUrl);
+            console.log('Request Body:', JSON.stringify(newStatus));
+
+            fetch(statusChangeApiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newStatus)
+            })
+            .then(response => {
+                console.log('Response Status:', response.status);
+                console.log('Response OK:', response.ok);
+                console.log('Response Headers:', Object.fromEntries(response.headers));
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+                }
+                return response.json().then(data => ({ response, data }));
+            })
+            .then(({ response, data }) => {
+                console.log('Response Data:', data);
+                if (response.ok && (data.status === 0 || data.status === 'Success')) {
+                    selectedButton.style.backgroundColor = newStatus === 'Available' ? '#32cd32' : '#ff4500';
+                    fetch(`${apiBaseUrl}api/Rooms`)
+                        .then(response => response.json())
+                        .then(roomData => {
+                            console.log('Rooms Data:', roomData);
+                            if (roomData && (roomData.status === 0 || roomData.status === 'Success')) {
+                                const rooms = Array.isArray(roomData.data) ? roomData.data : [];
+                                const runningTables = rooms.filter(room => room.status === 'Pending').length;
+                                document.getElementById('runningTables').textContent = `Running Tables: ${runningTables}`;
+                                document.querySelectorAll('.room-btn').forEach(btn => {
+                                    const btnRoomId = btn.getAttribute('data-room-id');
+                                    const room = rooms.find(r => r.roomId == btnRoomId);
+                                    if (room) {
+                                        btn.style.backgroundColor = room.status === 'Available' ? '#32cd32' : '#ff4500';
+                                    }
+                                });
+                            } else {
+                                console.error('Invalid room data format or status:', roomData);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error refreshing room data:', error);
+                        });
+                } else {
+                    console.error('Error from server:', data ? data.message : 'No data or unexpected format');
+                    alert('Failed to update room status: ' + (data ? data.message : 'Unexpected response format'));
+                }
+                dropdownMenu.style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error updating room status:', error);
+                alert('Failed to update room status. Please try again. Error: ' + error.message);
+                dropdownMenu.style.display = 'none';
+            });
+        });
+    });
 </script>
+
+<style>
+    .room-btn.selected {
+        border: 2px solid #000;
+    }
+
+    .dropdown {
+        display: inline-block;
+        position: relative;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-item {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+</style>

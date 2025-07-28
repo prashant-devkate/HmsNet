@@ -1,5 +1,6 @@
 ﻿using HmsNet.Enums;
 using HmsNet.Models.DTO;
+using HmsNet.Services;
 using HmsNet.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -87,6 +88,18 @@ namespace HmsNet.Controllers
             var response = await _service.DeleteAsync(id);
             return response.Status == ResponseStatus.Success
                 ? NoContent()
+                : response.Message.Contains("not found")
+                    ? NotFound(response)
+                    : BadRequest(response);
+        }
+
+        // PUT: api/Rooms/5/Status
+        [HttpPut("{id}/Status")]
+        public async Task<ActionResult<ServiceResponse<RoomDto>>> UpdateRoomStatus(int id, [FromBody] string status)
+        {
+            var response = await _service.UpdateStatusAsync(id, status);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
                 : response.Message.Contains("not found")
                     ? NotFound(response)
                     : BadRequest(response);
