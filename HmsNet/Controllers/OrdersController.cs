@@ -17,70 +17,90 @@ namespace HmsNet.Controllers
             _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
         }
 
-        // GET: api/orders
+        // GET: api/Orders
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool includeDetails = false)
+        public async Task<ActionResult<ServiceResponse<IEnumerable<OrderDto>>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool includeDetails = false)
         {
             var response = await _orderService.GetAllOrdersAsync(page, pageSize, includeDetails);
-            return response.Status == ResponseStatus.Success ? Ok(response.Data) : StatusCode(500, new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : StatusCode(StatusCodes.Status500InternalServerError, response);
         }
 
-        // GET: api/orders/5
+
+        // GET: api/Orders/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id, [FromQuery] bool includeDetails = false)
+        public async Task<ActionResult<ServiceResponse<OrderDto>>> GetById(int id, [FromQuery]bool includeDetails = false)
         {
             var response = await _orderService.GetOrderByIdAsync(id, includeDetails);
-            return response.Status == ResponseStatus.Success ? Ok(response.Data) : NotFound(new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : NotFound(response);
         }
 
-        // GET: api/orders/room/5
-        [HttpGet("room/{roomId}")]
-        public async Task<IActionResult> GetOrdersByRoomId(int roomId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool includeDetails = false)
+        // GET: api/Orders/room/5
+        [HttpGet("{roomId}")]
+        public async Task<ActionResult<ServiceResponse<OrderDto>>> GetOrdersByRoomId(int roomId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool includeDetails = false)
         {
             var response = await _orderService.GetOrdersByRoomIdAsync(roomId, page, pageSize, includeDetails);
-            return response.Status == ResponseStatus.Success ? Ok(response.Data) : StatusCode(500, new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : NotFound(response);
         }
 
-        // GET: api/orders/5/total
+        // GET: api/Orders/5/total
         [HttpGet("{id}/total")]
-        public async Task<IActionResult> GetTotalAmount(int id)
+        public async Task<ActionResult<ServiceResponse<OrderDto>>> GetTotalAmount(int id)
         {
             var response = await _orderService.CalculateTotalAmountAsync(id);
-            return response.Status == ResponseStatus.Success ? Ok(response.Data) : NotFound(new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : NotFound(response);
         }
 
-        // POST: api/orders
+        // POST: api/Orders
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] OrderDto orderDto)
+        public async Task<ActionResult<ServiceResponse<OrderDto>>> Create(OrderDto orderDto)
         {
-            if (orderDto == null)
-            {
-                return BadRequest(new { message = "Order data is required" });
-            }
-
             var response = await _orderService.CreateOrderAsync(orderDto);
-            return response.Status == ResponseStatus.Success ? CreatedAtAction(nameof(GetById), new { id = response.Data.OrderId }, response.Data) : BadRequest(new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? CreatedAtAction(nameof(GetById), new { id = response.Data.OrderId }, response)
+                : BadRequest(response);
         }
 
-        // PUT: api/orders/5
+        // PUT: api/Orders/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] OrderDto orderDto)
+        public async Task<ActionResult<ServiceResponse<OrderDto>>> UpdateItem(int id, OrderDto orderDto)
         {
-            if (orderDto == null || orderDto.OrderId != id)
+            if (id != orderDto.OrderId)
             {
-                return BadRequest(new { message = "Order data is invalid or ID mismatch" });
+                var res = new ServiceResponse<OrderDto>
+                {
+                    Status = ResponseStatus.Error,
+                    Message = "Order ID mismatch",
+                    Data = null
+                };
+                return BadRequest(res);
             }
 
             var response = await _orderService.UpdateOrderAsync(orderDto);
-            return response.Status == ResponseStatus.Success ? Ok(response.Data) : NotFound(new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : response.Message.Contains("not found")
+                    ? NotFound(response)
+                    : BadRequest(response);
         }
 
-        // DELETE: api/orders/5
+        // DELETE: api/Orders/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<ActionResult<ServiceResponse<bool>>> Delete(int id)
         {
             var response = await _orderService.DeleteOrderAsync(id);
-            return response.Status == ResponseStatus.Success ? (response.Data ? Ok() : NotFound(new { message = response.Message })) : StatusCode(500, new { message = response.Message });
+            return response.Status == ResponseStatus.Success
+                ? NoContent()
+                : response.Message.Contains("not found")
+                    ? NotFound(response)
+                    : BadRequest(response);
         }
     }
 }

@@ -89,6 +89,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 
 var jwtKey = builder.Configuration["JwtSettings:securityKey"];
 builder.Services.AddSingleton(new JwtHelper(jwtKey));

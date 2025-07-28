@@ -163,14 +163,25 @@ namespace HmsNet.Services
                 var order = MapToOrder(orderDto);
                 order.OrderDateTime = DateTime.Now;
                 order.Status = orderDto.Status ?? "Pending";
-                order.TotalAmount = 0; // To be updated later with OrderDetails
+                order.TotalAmount = 0;
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                response.Data = MapToOrderDto(order);
+                var createdOrder = await _context.Orders
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(o => o.OrderId == order.OrderId);
+
+                if (createdOrder == null)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = "Failed to retrieve the created order";
+                    return response;
+                }
+
+                response.Data = MapToOrderDto(createdOrder);
                 response.Status = ResponseStatus.Success;
                 return response;
             }
@@ -331,6 +342,12 @@ namespace HmsNet.Services
                 }
 
                 var total = order.OrderDetails?.Sum(od => od.Amount) ?? 0m;
+                if (order.OrderDetails == null || !order.OrderDetails.Any())
+                {
+                    _logger.LogWarning("No order details found for order ID {Id}", orderId);
+                    response.Message = $"No order details found for order ID {orderId}, total set to 0";
+                }
+
                 response.Data = total;
                 response.Status = ResponseStatus.Success;
                 return response;
@@ -340,7 +357,7 @@ namespace HmsNet.Services
                 _logger.LogError(ex, "Error calculating total amount for order ID {Id}: {Message}", orderId, ex.Message);
                 response.Status = ResponseStatus.Error;
                 response.Message = $"Error calculating total amount for order ID {orderId}: {ex.Message}";
-                response.Data = 0m;
+                response.Data = 0m; // Default to 0m
                 return response;
             }
         }

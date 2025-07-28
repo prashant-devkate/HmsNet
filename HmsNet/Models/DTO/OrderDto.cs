@@ -9,6 +9,5 @@ namespace HmsNet.Models.DTO
         public DateTime OrderDateTime { get; set; }
         public string Status { get; set; }
         public decimal TotalAmount { get; set; }
-        public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 }
