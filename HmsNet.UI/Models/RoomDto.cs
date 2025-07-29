@@ -21,5 +21,6 @@ namespace HmsNet.UI.Models
         [Required(ErrorMessage = "Status is required.")]
         [StringLength(20, ErrorMessage = "Status cannot exceed 20 characters.")]
         public string Status { get; set; }
+        public int?  OrderId { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace HmsNet.Services.Interfaces
         Task<ServiceResponse<OrderDetailDto>> CreateOrderDetailsAsync(OrderDetailDto orderDto);
         Task<ServiceResponse<OrderDetailDto>> UpdateOrderDetailsAsync(OrderDetailDto orderDto);
         Task<ServiceResponse<bool>> DeleteOrderDetailsAsync(int orderDetailId);
+        Task<ServiceResponse<List<OrderDetailDto>>> GetOrderDetailsByOrderIdAsync(int orderId, bool includeDetails = false);
     }
 }

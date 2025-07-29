@@ -8,6 +8,7 @@ namespace HmsNet.Models.Domain
         public string RoomType { get; set; }
         public int Capacity { get; set; }
         public string Status { get; set; }
+        public int? OrderId { get; set; }
         public ICollection<Order>? Orders { get; set; }
     }
 }

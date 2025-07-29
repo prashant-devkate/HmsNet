@@ -63,6 +63,7 @@ namespace HmsNet.Services
         {
             return new OrderDetail
             {
+                OrderDetailId = dto.OrderDetailId,
                 OrderId = dto.OrderId,
                 ItemId = dto.ItemId,
                 Quantity = dto.Quantity,
@@ -75,8 +76,10 @@ namespace HmsNet.Services
         {
             return new OrderDetailDto
             {
+                OrderDetailId = order.OrderDetailId,
                 OrderId = order.OrderId,
                 ItemId = order.ItemId,
+                ItemName = order.Item?.ItemName ?? "Unknown",
                 Quantity = order.Quantity,
                 Rate = order.Rate,
                 Amount = order.Amount
@@ -112,6 +115,41 @@ namespace HmsNet.Services
                 _logger.LogError(ex, "Error retrieving order details with ID {Id}: {Message}", orderDetailId, ex.Message);
                 response.Status = ResponseStatus.Error;
                 response.Message = $"Error retrieving order details with ID {orderDetailId}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+        }
+
+        public async Task<ServiceResponse<List<OrderDetailDto>>> GetOrderDetailsByOrderIdAsync(int orderId, bool includeDetails = false)
+        {
+            var response = new ServiceResponse<List<OrderDetailDto>>();
+            try
+            {
+                var query = _context.OrderDetails.AsQueryable();
+                if (includeDetails)
+                {
+                    query = query.Include(o => o.Order)
+                                 .Include(o => o.Item);
+                }
+
+                var orderDetails = await query.Where(o => o.OrderId == orderId).ToListAsync();
+
+                if (!orderDetails.Any())
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = $"No order details found for Order ID {orderId}";
+                    return response;
+                }
+
+                response.Data = orderDetails.Select(MapToOrderDetailDto).ToList();
+                response.Status = ResponseStatus.Success;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving order details for Order ID {Id}: {Message}", orderId, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Error retrieving order details for Order ID {orderId}: {ex.Message}";
                 response.Data = null;
                 return response;
             }
@@ -255,7 +293,7 @@ namespace HmsNet.Services
             var response = new ServiceResponse<bool>();
             try
             {
-                var order = await _context.OrderDetails.FindAsync(orderDetailId);
+                var order = await _context.OrderDetails.FirstOrDefaultAsync(od => od.OrderDetailId == orderDetailId);
                 if (order == null)
                 {
                     response.Status = ResponseStatus.Error;

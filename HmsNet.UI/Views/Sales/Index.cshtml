@@ -17,7 +17,8 @@
                         @foreach (var room in Model.RoomsByType[roomType])
                         {
                             var buttonColor = room.Status == "Available" ? "#32cd32" : "#ff4500";
-                            <button class="room-btn" data-room-id="@room.RoomId" data-room-name="@room.RoomName" style="background-color: @buttonColor; color: white; margin: 0; width: 60px; height: 40px; flex: 0 0 auto;" title="Room: @room.RoomName, Capacity: @room.Capacity">@room.RoomName</button>
+                            var orderId = room.OrderId != null ? room.OrderId.ToString() : "";
+                            <button class="room-btn" data-room-id="@room.RoomId" data-room-name="@room.RoomName" data-order-id="@orderId" style="background-color: @buttonColor; color: white; margin: 0; width: 60px; height: 40px; flex: 0 0 auto;" title="Room: @room.RoomName, Capacity: @room.Capacity">@room.RoomName</button>
                         }
                     </div>
                 }
@@ -140,11 +141,11 @@
             if (!existingRow) {
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
-                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemId}" readonly></td>
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemId}" readonly data-order-detail-id="0" data-order-id="${orderId}"></td>
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${itemName}" readonly></td>
-                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="1" onchange="updateAmount(this, ${orderId})"></td>
+                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="1" onchange="updateAmount(this, 0)"></td>
                     <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${rate}" readonly></td>
-                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${orderId})">X</button></td>
+                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, 0)">Remove</button></td>
                 `;
                 tbody.appendChild(newRow);
                 console.log('New row added to cart:', newRow);
@@ -161,6 +162,10 @@
                         throw new Error(data.message || 'Failed to add order detail');
                     }
                     console.log('OrderDetail added:', data.data);
+                    // Update row with orderDetailId from response
+                    newRow.querySelector('td:nth-child(1) input').dataset.orderDetailId = data.data.orderDetailId;
+                    newRow.querySelector('td:nth-child(3) input').setAttribute('onchange', `updateAmount(this, ${data.data.orderDetailId})`);
+                    newRow.querySelector('td:nth-child(5) button').setAttribute('onclick', `removeRow(this, ${data.data.orderDetailId})`);
                 })
                 .catch(error => {
                     console.error('Error adding order detail:', error);
@@ -168,67 +173,71 @@
                 });
             } else {
                 const qtyInput = existingRow.querySelector('td:nth-child(3) input');
+                const orderDetailId = existingRow.querySelector('td:nth-child(1) input').dataset.orderDetailId;
                 let qty = parseInt(qtyInput.value) || 0;
                 qtyInput.value = qty + 1;
                 console.log(`Updated quantity for ${itemName} to ${qty + 1}`);
-                updateAmount(qtyInput, orderId);
+                updateAmount(qtyInput, orderDetailId); // Pass orderDetailId
             }
         });
 
-        this.selectedOptions.forEach(option => option.selected = false);
+        Array.from(this.selectedOptions).forEach(option => option.selected = false);
         updateTotal();
     });
 
-    function updateAmount(input, orderId) {
-        console.log('Updating amount for order:', orderId);
-        const row = input.parentElement.parentElement;
-        const qty = parseInt(input.value) || 0;
-        const rateInput = row.querySelector('td:nth-child(4) input');
-        const rate = parseFloat(rateInput.value) || 0;
-        const itemId = row.querySelector('td:nth-child(1) input').value;
-        const amount = qty * rate;
+    // Updated updateAmount function
+     function updateAmount(input, orderDetailId) {
+         console.log('Updating amount for order detail:', orderDetailId);
+         const row = input.parentElement.parentElement;
+         const qty = parseInt(input.value) || 0;
+         const rateInput = row.querySelector('td:nth-child(4) input');
+         const rate = parseFloat(rateInput.value) || 0;
+         const itemId = row.querySelector('td:nth-child(1) input').value;
+         const orderId = row.querySelector('td:nth-child(1) input').dataset.orderId;
+         const amount = qty * rate;
 
-        if (qty > 0) {
-            fetch(`${apiBaseUrl}api/OrderDetails`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ OrderId: orderId, ItemId: itemId, Quantity: qty, Rate: rate, Amount: amount })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status !== 0 && data.status !== 'Success') {
-                    throw new Error(data.message || 'Failed to update order detail');
-                }
-                console.log('OrderDetail updated:', data.data);
-            })
-            .catch(error => {
-                console.error('Error updating order detail:', error);
-                showError('Failed to update item quantity: ' + error.message);
-            });
-        }
-        updateTotal();
-    }
+         if (qty > 0 && orderDetailId !== '0') { // Only update if orderDetailId is valid
+             fetch(`${apiBaseUrl}api/OrderDetails/${orderDetailId}`, {
+                 method: 'PUT',
+                 headers: { 'Content-Type': 'application/json' },
+                 body: JSON.stringify({ OrderDetailId: orderDetailId, OrderId: orderId, ItemId: itemId, Quantity: qty, Rate: rate, Amount: amount })
+             })
+             .then(response => response.json())
+             .then(data => {
+                 if (data.status !== 0 && data.status !== 'Success') {
+                     throw new Error(data.message || 'Failed to update order detail');
+                 }
+                 console.log('OrderDetail updated:', data.data);
+             })
+             .catch(error => {
+                 console.error('Error updating order detail:', error);
+                 showError('Failed to update item quantity: ' + error.message);
+             });
+         }
+         updateTotal();
+     }
 
-    function removeRow(button, orderId) {
-        console.log('Removing item from order:', orderId);
+
+    function removeRow(button, orderDetailId) {
+        console.log('Removing order detail with ID:', orderDetailId);
         const row = button.parentElement.parentElement;
-        const itemId = row.querySelector('td:nth-child(1) input').value;
 
-        fetch(`${apiBaseUrl}api/OrderDetails/${orderId}/${itemId}`, {
+        fetch(`${apiBaseUrl}api/OrderDetails/${orderDetailId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
-            if (!response.ok) throw new Error('Failed to remove order detail');
-            console.log('OrderDetail removed:', itemId);
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+            }
+            console.log('OrderDetail removed:', orderDetailId);
+            row.remove();
+            updateTotal();
         })
         .catch(error => {
             console.error('Error removing order detail:', error);
             showError('Failed to remove item: ' + error.message);
         });
-
-        row.remove();
-        updateTotal();
     }
 
     function updateTotal() {
@@ -276,41 +285,42 @@
 
                 // Load existing order details if any
                 const orderId = this.dataset.orderId;
-                if (orderId) {
-                    console.log('Loading order details for order:', orderId);
-                    fetch(`${apiBaseUrl}api/OrderDetails/Order/${orderId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === 0 || data.status === 'Success') {
-                                const tbody = document.querySelector('#cartTable tbody');
-                                tbody.innerHTML = '';
-                                data.data.forEach(detail => {
-                                    const newRow = document.createElement('tr');
-                                    newRow.innerHTML = `
-                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemId}" readonly></td>
-                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.item?.itemName || 'Unknown'}" readonly></td>
-                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.quantity}" onchange="updateAmount(this, ${orderId})"></td>
-                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.rate}" readonly></td>
-                                        <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${orderId})">X</button></td>
-                                    `;
-                                    tbody.appendChild(newRow);
-                                    console.log('Loaded order detail:', detail.item?.itemName);
-                                });
-                                updateTotal();
-                            } else {
-                                console.error('Failed to load order details:', data);
-                                showError('Failed to load order details: ' + (data.message || 'Unknown error'));
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error loading order details:', error);
-                            showError('Failed to load order details: ' + error.message);
-                        });
-                } else {
-                    console.log('No existing order for room:', roomName);
-                    document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
-                    document.getElementById('totalAmount').value = '';
-                }
+                
+                         if (orderId) {
+                console.log('Loading order details for order:', orderId);
+                fetch(`${apiBaseUrl}api/OrderDetails/Order/${orderId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 0 || data.status === 'Success') {
+                            const tbody = document.querySelector('#cartTable tbody');
+                            tbody.innerHTML = '';
+                            data.data.forEach(detail => {
+                                const newRow = document.createElement('tr');
+                                newRow.innerHTML = `
+                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemId}" readonly data-order-detail-id="${detail.orderDetailId}" data-order-id="${orderId}"></td>
+                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemName || 'UK'}" readonly></td>
+                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.quantity}" onchange="updateAmount(this, ${detail.orderDetailId})"></td>
+                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.rate}" readonly></td>
+                                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${detail.orderDetailId})">Remove</button></td>
+                                `;
+                                tbody.appendChild(newRow);
+                                console.log('Loaded order detail:', detail.itemName, 'OrderDetailId:', detail.orderDetailId);
+                            });
+                            updateTotal();
+                        } else {
+                            console.error('Failed to load order details:', data);
+                            showError('Failed to load order details: ' + (data.message || 'Unknown error'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading order details:', error);
+                        showError('Failed to load order details: ' + error.message);
+                    });
+            } else {
+                console.log('No existing order for room:', roomName);
+                document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                document.getElementById('totalAmount').value = '';
+            }
             }
         });
     });
@@ -627,7 +637,7 @@
         })
         .catch(error => {
             console.error('Error cancelling order:', error);
-            showError('Failed to cancel order: ' + error.message);
+            showError('Failed to cancel order');
         });
     });
 </script>

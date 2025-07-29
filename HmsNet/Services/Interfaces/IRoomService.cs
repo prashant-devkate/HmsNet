@@ -12,5 +12,6 @@ namespace HmsNet.Services.Interfaces
         Task<ServiceResponse<RoomDto>> UpdateAsync(RoomDto room);
         Task<ServiceResponse<bool>> DeleteAsync(int id);
         Task<ServiceResponse<RoomDto>> UpdateStatusAsync(int id, string status);
+        Task<ServiceResponse<RoomDto>> UpdateOrderIdAsync(int id, int orderId);
     }
 }

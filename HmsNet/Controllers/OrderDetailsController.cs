@@ -38,6 +38,16 @@ namespace HmsNet.Controllers
                 : NotFound(response);
         }
 
+        // GET: api/OrderDetails/Order/5
+        [HttpGet("Order/{orderId}")]
+        public async Task<ActionResult<ServiceResponse<OrderDetailDto>>> GetByOrderId(int orderId)
+        {
+            var response = await _orderService.GetOrderDetailsByOrderIdAsync(orderId, includeDetails:true);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : NotFound(response);
+        }
+
         // POST: api/OrderDetails
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<OrderDetailDto>>> Create(OrderDetailDto orderDto)

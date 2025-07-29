@@ -73,6 +73,17 @@ namespace HmsNet.Services
             return true;
         }
 
+        private bool ValidateOrderId(int orderId, out string errorMessage)
+        {
+            if (orderId <= 0)
+            {
+                errorMessage = "Invalid order id";
+                return false;
+            }
+            errorMessage = null;
+            return true;
+        }
+
         private Room MapToRoom(RoomDto dto)
         {
             return new Room
@@ -81,7 +92,8 @@ namespace HmsNet.Services
                 RoomName = dto.RoomName?.Trim(),
                 RoomType = dto.RoomType?.Trim(),
                 Capacity = dto.Capacity,
-                Status = dto.Status
+                Status = dto.Status,
+                OrderId = dto.OrderId
             };
         }
 
@@ -93,7 +105,8 @@ namespace HmsNet.Services
                 RoomName = room.RoomName,
                 RoomType = room.RoomType,
                 Capacity = room.Capacity,
-                Status = room.Status
+                Status = room.Status,
+                OrderId = room.OrderId
             };
         }
 
@@ -156,9 +169,20 @@ namespace HmsNet.Services
                 var rooms = await query
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
-                    .ToListAsync();
+                    .Select(r => new RoomDto
+                    {
+                        RoomId = r.RoomId,
+                        RoomName = r.RoomName,
+                        RoomType = r.RoomType,
+                        Capacity = r.Capacity,
+                        Status = r.Status,
+                        OrderId = _context.Orders
+                    .Where(o => o.RoomId == r.RoomId && o.Status == "Pending")
+                    .Select(o => (int?)o.OrderId)
+                    .FirstOrDefault()
+                    }).ToListAsync();
 
-                response.Data = rooms.Select(MapToRoomDto).ToList();
+                response.Data = rooms;
                 response.Status = ResponseStatus.Success;
                 return response;
             }
@@ -404,6 +428,67 @@ namespace HmsNet.Services
                 _logger.LogError(ex, "Unexpected error updating status for room with ID {Id}: {Message}", id, ex.Message);
                 response.Status = ResponseStatus.Error;
                 response.Message = $"Unexpected error updating status for room with ID {id}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+        }
+
+        public async Task<ServiceResponse<RoomDto>> UpdateOrderIdAsync(int id, int orderId)
+        {
+            var response = new ServiceResponse<RoomDto>();
+            try
+            {
+                // Validate the order id
+                if (!ValidateOrderId(orderId, out var errorMessage))
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = errorMessage;
+                    return response;
+                }
+
+                // Find the room
+                var room = await _context.Rooms.FindAsync(id);
+                if (room == null)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = $"Room with ID {id} not found";
+                    return response;
+                }
+
+                // Update the order id
+                room.OrderId = orderId;
+
+                // Save changes with transaction
+                await using var transaction = await _context.Database.BeginTransactionAsync();
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                // Return the updated room
+                response.Data = MapToRoomDto(room);
+                response.Status = ResponseStatus.Success;
+                return response;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                _logger.LogError(ex, "Concurrency error updating order id for room with ID {Id}: {Message}", id, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Concurrency error updating order id for room with ID {id}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error updating order id for room with ID {Id}: {Message}", id, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Error updating order id for room with ID {id}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error updating order id for room with ID {Id}: {Message}", id, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Unexpected error updating order id for room with ID {id}: {ex.Message}";
                 response.Data = null;
                 return response;
             }

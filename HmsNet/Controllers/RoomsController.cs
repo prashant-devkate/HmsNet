@@ -104,5 +104,17 @@ namespace HmsNet.Controllers
                     ? NotFound(response)
                     : BadRequest(response);
         }
+
+        // PUT: api/Rooms/5/OrderId
+        [HttpPut("{id}/OrderId")]
+        public async Task<ActionResult<ServiceResponse<RoomDto>>> UpdateRoomOrderId(int id, [FromBody] int orderId)
+        {
+            var response = await _service.UpdateOrderIdAsync(id, orderId);
+            return response.Status == ResponseStatus.Success
+                ? Ok(response)
+                : response.Message.Contains("not found")
+                    ? NotFound(response)
+                    : BadRequest(response);
+        }
     }
 }
