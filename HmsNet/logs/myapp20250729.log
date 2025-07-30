@@ -7654,3 +7654,815 @@ WHERE [OrderDetailId] = @p1;
 2025-07-29 11:35:02.946 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet) in 15.4654ms
 2025-07-29 11:35:02.946 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
 2025-07-29 11:35:02.946 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/43 - 200 null application/json; charset=utf-8 16.3565ms
+2025-07-29 17:58:55.362 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-29 17:58:55.867 +05:30 [INF] Now listening on: http://localhost:5236
+2025-07-29 17:58:56.166 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-29 17:58:56.166 +05:30 [INF] Hosting environment: Development
+2025-07-29 17:58:56.167 +05:30 [INF] Content root path: C:\Users\Admin\source\repos\HmsNet\HmsNet
+2025-07-29 17:58:59.186 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/index.html - null null
+2025-07-29 17:58:59.731 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/index.html - 200 null text/html;charset=utf-8 567.6663ms
+2025-07-29 17:58:59.768 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-29 17:58:59.773 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_framework/aspnetcore-browser-refresh.js - 200 16497 application/javascript; charset=utf-8 5.6014ms
+2025-07-29 17:58:59.788 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/_vs/browserLink - null null
+2025-07-29 17:59:00.203 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/_vs/browserLink - 200 null text/javascript; charset=UTF-8 414.8366ms
+2025-07-29 17:59:00.742 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - null null
+2025-07-29 17:59:00.819 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 77.2177ms
+2025-07-29 17:59:05.216 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items/Active?page=1&pageSize=50 - null null
+2025-07-29 17:59:05.224 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-29 17:59:05.552 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetActiveItems (HmsNet)'
+2025-07-29 17:59:05.616 +05:30 [INF] Route matched with {action = "GetActiveItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetActiveItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-29 17:59:07.598 +05:30 [WRN] No store type was specified for the decimal property 'DiscountAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'FinalAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'TaxAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Bill'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'Item'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'OrderDetail'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'Rate' on entity type 'OrderDetail'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:07.599 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-29 17:59:08.380 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-29 17:59:08.380 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-29 17:59:09.839 +05:30 [INF] Executed DbCommand (190ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 17:59:10.002 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 17:59:10.037 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetActiveItems (HmsNet) in 4416.5793ms
+2025-07-29 17:59:10.038 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetActiveItems (HmsNet)'
+2025-07-29 17:59:10.054 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items/Active?page=1&pageSize=50 - 200 null application/json; charset=utf-8 4839.8857ms
+2025-07-29 17:59:10.056 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=50 - null null
+2025-07-29 17:59:10.062 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 17:59:10.070 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 17:59:10.139 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-29 17:59:10.139 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-29 17:59:10.264 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[RoomName], [r].[RoomType], [r].[Capacity], [r].[Status], (
+    SELECT TOP(1) [o].[OrderId]
+    FROM [Orders] AS [o]
+    WHERE [o].[RoomId] = [r].[RoomId] AND [o].[Status] = N'Pending') AS [OrderId]
+FROM [Rooms] AS [r]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 17:59:10.266 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 17:59:10.273 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 202.5415ms
+2025-07-29 17:59:10.273 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 17:59:10.273 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=50 - 200 null application/json; charset=utf-8 217.2419ms
+2025-07-29 17:59:19.650 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/36 - null null
+2025-07-29 17:59:19.654 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:19.660 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 17:59:19.668 +05:30 [INF] Route matched with {action = "GetByOrderId", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] GetByOrderId(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:20.065 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate], [o0].[OrderId], [o0].[OrderDateTime], [o0].[RoomId], [o0].[Status], [o0].[TotalAmount], [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [OrderDetails] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[OrderId]
+INNER JOIN [Items] AS [i] ON [o].[ItemId] = [i].[ItemId]
+WHERE [o].[OrderId] = @__orderId_0
+2025-07-29 17:59:20.201 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.List`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 17:59:20.212 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet) in 542.7905ms
+2025-07-29 17:59:20.212 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 17:59:20.213 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/36 - 200 null application/json; charset=utf-8 563.7138ms
+2025-07-29 17:59:23.301 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/32 - null null
+2025-07-29 17:59:23.302 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:23.303 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 17:59:23.303 +05:30 [INF] Route matched with {action = "GetByOrderId", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] GetByOrderId(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:23.330 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate], [o0].[OrderId], [o0].[OrderDateTime], [o0].[RoomId], [o0].[Status], [o0].[TotalAmount], [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [OrderDetails] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[OrderId]
+INNER JOIN [Items] AS [i] ON [o].[ItemId] = [i].[ItemId]
+WHERE [o].[OrderId] = @__orderId_0
+2025-07-29 17:59:23.332 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.List`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 17:59:23.333 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet) in 29.757ms
+2025-07-29 17:59:23.333 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 17:59:23.334 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/32 - 200 null application/json; charset=utf-8 32.75ms
+2025-07-29 17:59:27.120 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails - null null
+2025-07-29 17:59:27.121 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:27.124 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails - 204 null null 3.8818ms
+2025-07-29 17:59:27.127 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5236/api/OrderDetails - application/json 65
+2025-07-29 17:59:27.127 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:27.128 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:27.135 +05:30 [INF] Route matched with {action = "Create", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] Create(HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:27.587 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OrderDetails] ([Amount], [ItemId], [OrderId], [Quantity], [Rate])
+OUTPUT INSERTED.[OrderDetailId]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 17:59:27.744 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@__order_OrderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__order_OrderDetailId_0
+2025-07-29 17:59:27.753 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:27.793 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Create (HmsNet) in 657.805ms
+2025-07-29 17:59:27.793 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:27.793 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5236/api/OrderDetails - 201 null application/json; charset=utf-8 666.1797ms
+2025-07-29 17:59:27.924 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/47 - null null
+2025-07-29 17:59:27.925 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:27.925 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/47 - 204 null null 0.7595ms
+2025-07-29 17:59:27.932 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/47 - application/json 86
+2025-07-29 17:59:27.933 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:27.933 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:27.940 +05:30 [INF] Route matched with {action = "UpdateItem", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] UpdateItem(Int32, HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:28.001 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__p_0
+2025-07-29 17:59:28.025 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OrderDetails] SET [Quantity] = @p0
+OUTPUT 1
+WHERE [OrderDetailId] = @p1;
+2025-07-29 17:59:28.029 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:28.030 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet) in 89.3969ms
+2025-07-29 17:59:28.030 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:28.031 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/47 - 200 null application/json; charset=utf-8 98.2331ms
+2025-07-29 17:59:28.448 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/47 - application/json 86
+2025-07-29 17:59:28.449 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:28.449 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:28.450 +05:30 [INF] Route matched with {action = "UpdateItem", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] UpdateItem(Int32, HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:28.467 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__p_0
+2025-07-29 17:59:28.495 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OrderDetails] SET [Quantity] = @p0
+OUTPUT 1
+WHERE [OrderDetailId] = @p1;
+2025-07-29 17:59:28.501 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:28.502 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet) in 51.8798ms
+2025-07-29 17:59:28.502 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:28.502 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/47 - 200 null application/json; charset=utf-8 53.8729ms
+2025-07-29 17:59:28.811 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/47 - application/json 86
+2025-07-29 17:59:28.811 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:28.811 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:28.812 +05:30 [INF] Route matched with {action = "UpdateItem", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] UpdateItem(Int32, HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:28.819 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__p_0
+2025-07-29 17:59:28.829 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OrderDetails] SET [Quantity] = @p0
+OUTPUT 1
+WHERE [OrderDetailId] = @p1;
+2025-07-29 17:59:28.831 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:28.832 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet) in 20.0875ms
+2025-07-29 17:59:28.832 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:28.832 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/47 - 200 null application/json; charset=utf-8 21.9563ms
+2025-07-29 17:59:37.233 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Orders - null null
+2025-07-29 17:59:37.234 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:37.234 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Orders - 204 null null 0.9311ms
+2025-07-29 17:59:37.237 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5236/api/Orders - application/json 93
+2025-07-29 17:59:37.237 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:37.238 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrdersController.Create (HmsNet)'
+2025-07-29 17:59:37.248 +05:30 [INF] Route matched with {action = "Create", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDto]]] Create(HmsNet.Models.DTO.OrderDto) on controller HmsNet.Controllers.OrdersController (HmsNet).
+2025-07-29 17:59:37.334 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Orders] ([OrderDateTime], [RoomId], [Status], [TotalAmount])
+OUTPUT INSERTED.[OrderId]
+VALUES (@p0, @p1, @p2, @p3);
+2025-07-29 17:59:37.355 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__order_OrderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderId], [o].[OrderDateTime], [o].[RoomId], [o].[Status], [o].[TotalAmount]
+FROM [Orders] AS [o]
+WHERE [o].[OrderId] = @__order_OrderId_0
+2025-07-29 17:59:37.357 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:37.365 +05:30 [INF] Executed action HmsNet.Controllers.OrdersController.Create (HmsNet) in 116.5862ms
+2025-07-29 17:59:37.365 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrdersController.Create (HmsNet)'
+2025-07-29 17:59:37.365 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5236/api/Orders - 201 null application/json; charset=utf-8 128.1601ms
+2025-07-29 17:59:37.368 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/26/Status - null null
+2025-07-29 17:59:37.368 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:37.368 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/26/Status - 204 null null 0.5535ms
+2025-07-29 17:59:37.369 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/Rooms/26/Status - application/json 9
+2025-07-29 17:59:37.371 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:37.371 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 17:59:37.377 +05:30 [INF] Route matched with {action = "UpdateRoomStatus", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.RoomDto]]] UpdateRoomStatus(Int32, System.String) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 17:59:37.402 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[RoomId], [r].[Capacity], [r].[OrderId], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[RoomId] = @__p_0
+2025-07-29 17:59:37.452 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Rooms] SET [Status] = @p0
+OUTPUT 1
+WHERE [RoomId] = @p1;
+2025-07-29 17:59:37.456 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:37.458 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet) in 80.7462ms
+2025-07-29 17:59:37.458 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 17:59:37.459 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/Rooms/26/Status - 200 null application/json; charset=utf-8 89.3652ms
+2025-07-29 17:59:37.466 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms - null null
+2025-07-29 17:59:37.467 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:37.467 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 17:59:37.467 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 17:59:37.489 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[RoomName], [r].[RoomType], [r].[Capacity], [r].[Status], (
+    SELECT TOP(1) [o].[OrderId]
+    FROM [Orders] AS [o]
+    WHERE [o].[RoomId] = [r].[RoomId] AND [o].[Status] = N'Pending') AS [OrderId]
+FROM [Rooms] AS [r]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 17:59:37.490 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 17:59:37.492 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 24.875ms
+2025-07-29 17:59:37.492 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 17:59:37.493 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms - 200 null application/json; charset=utf-8 26.5246ms
+2025-07-29 17:59:47.708 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/40 - null null
+2025-07-29 17:59:47.709 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:47.710 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 17:59:47.710 +05:30 [INF] Route matched with {action = "GetByOrderId", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] GetByOrderId(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:47.723 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate], [o0].[OrderId], [o0].[OrderDateTime], [o0].[RoomId], [o0].[Status], [o0].[TotalAmount], [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [OrderDetails] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[OrderId]
+INNER JOIN [Items] AS [i] ON [o].[ItemId] = [i].[ItemId]
+WHERE [o].[OrderId] = @__orderId_0
+2025-07-29 17:59:47.725 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.List`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 17:59:47.726 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet) in 16.3755ms
+2025-07-29 17:59:47.726 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 17:59:47.727 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/40 - 404 null application/json; charset=utf-8 18.7639ms
+2025-07-29 17:59:50.957 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails - null null
+2025-07-29 17:59:50.957 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:50.958 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails - 204 null null 0.7098ms
+2025-07-29 17:59:50.965 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5236/api/OrderDetails - application/json 66
+2025-07-29 17:59:50.966 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:50.967 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:50.967 +05:30 [INF] Route matched with {action = "Create", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] Create(HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:50.992 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OrderDetails] ([Amount], [ItemId], [OrderId], [Quantity], [Rate])
+OUTPUT INSERTED.[OrderDetailId]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 17:59:50.999 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__order_OrderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__order_OrderDetailId_0
+2025-07-29 17:59:50.999 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:51.000 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Create (HmsNet) in 32.9344ms
+2025-07-29 17:59:51.000 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:51.000 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5236/api/OrderDetails - 201 null application/json; charset=utf-8 35.1217ms
+2025-07-29 17:59:51.862 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5236/api/OrderDetails - application/json 64
+2025-07-29 17:59:51.864 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:51.864 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:51.864 +05:30 [INF] Route matched with {action = "Create", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] Create(HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:51.879 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OrderDetails] ([Amount], [ItemId], [OrderId], [Quantity], [Rate])
+OUTPUT INSERTED.[OrderDetailId]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 17:59:51.884 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__order_OrderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__order_OrderDetailId_0
+2025-07-29 17:59:51.884 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:51.885 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Create (HmsNet) in 20.5053ms
+2025-07-29 17:59:51.885 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:51.885 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5236/api/OrderDetails - 201 null application/json; charset=utf-8 24.3825ms
+2025-07-29 17:59:52.752 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/48 - null null
+2025-07-29 17:59:52.752 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:52.752 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/48 - 204 null null 0.4918ms
+2025-07-29 17:59:52.755 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/48 - application/json 87
+2025-07-29 17:59:52.755 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:52.755 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:52.755 +05:30 [INF] Route matched with {action = "UpdateItem", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] UpdateItem(Int32, HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:52.764 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__p_0
+2025-07-29 17:59:52.772 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OrderDetails] SET [Quantity] = @p0
+OUTPUT 1
+WHERE [OrderDetailId] = @p1;
+2025-07-29 17:59:52.774 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:52.774 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet) in 18.9222ms
+2025-07-29 17:59:52.774 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.UpdateItem (HmsNet)'
+2025-07-29 17:59:52.775 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/OrderDetails/48 - 200 null application/json; charset=utf-8 20.242ms
+2025-07-29 17:59:53.845 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5236/api/OrderDetails - application/json 65
+2025-07-29 17:59:53.846 +05:30 [INF] CORS policy execution successful.
+2025-07-29 17:59:53.847 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:53.847 +05:30 [INF] Route matched with {action = "Create", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] Create(HmsNet.Models.DTO.OrderDetailDto) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 17:59:53.866 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OrderDetails] ([Amount], [ItemId], [OrderId], [Quantity], [Rate])
+OUTPUT INSERTED.[OrderDetailId]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 17:59:53.875 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__order_OrderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__order_OrderDetailId_0
+2025-07-29 17:59:53.876 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 17:59:53.876 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Create (HmsNet) in 29.37ms
+2025-07-29 17:59:53.877 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Create (HmsNet)'
+2025-07-29 17:59:53.877 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5236/api/OrderDetails - 201 null application/json; charset=utf-8 31.8929ms
+2025-07-29 18:00:28.598 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Items/Active?page=1&pageSize=50 - null null
+2025-07-29 18:00:28.599 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.ItemsController.GetActiveItems (HmsNet)'
+2025-07-29 18:00:28.599 +05:30 [INF] Route matched with {action = "GetActiveItems", controller = "Items"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.ItemDto]]]] GetActiveItems(Int32, Int32, Boolean) on controller HmsNet.Controllers.ItemsController (HmsNet).
+2025-07-29 18:00:28.615 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [Items] AS [i]
+WHERE [i].[IsActive] = CAST(1 AS bit)
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 18:00:28.616 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.ItemDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:00:28.617 +05:30 [INF] Executed action HmsNet.Controllers.ItemsController.GetActiveItems (HmsNet) in 17.3887ms
+2025-07-29 18:00:28.617 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.ItemsController.GetActiveItems (HmsNet)'
+2025-07-29 18:00:28.617 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Items/Active?page=1&pageSize=50 - 200 null application/json; charset=utf-8 19.0274ms
+2025-07-29 18:00:28.630 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=50 - null null
+2025-07-29 18:00:28.631 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:00:28.631 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:00:28.642 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[RoomName], [r].[RoomType], [r].[Capacity], [r].[Status], (
+    SELECT TOP(1) [o].[OrderId]
+    FROM [Orders] AS [o]
+    WHERE [o].[RoomId] = [r].[RoomId] AND [o].[Status] = N'Pending') AS [OrderId]
+FROM [Rooms] AS [r]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 18:00:28.643 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:00:28.643 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 11.9123ms
+2025-07-29 18:00:28.643 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:00:28.643 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms?page=1&pageSize=50 - 200 null application/json; charset=utf-8 13.3242ms
+2025-07-29 18:01:21.162 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/50 - null null
+2025-07-29 18:01:21.162 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:21.162 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/50 - 204 null null 0.5162ms
+2025-07-29 18:01:21.173 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/50 - application/json null
+2025-07-29 18:01:21.176 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:21.181 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:21.191 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:21.227 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:21.264 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:21.279 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:21.279 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 87.6187ms
+2025-07-29 18:01:21.279 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:21.279 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/50 - 204 null null 111.0373ms
+2025-07-29 18:01:23.677 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/49 - null null
+2025-07-29 18:01:23.677 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:23.677 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/49 - 204 null null 0.5691ms
+2025-07-29 18:01:23.680 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/49 - application/json null
+2025-07-29 18:01:23.680 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:23.681 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:23.681 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:23.696 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:23.703 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:23.705 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:23.705 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 23.9993ms
+2025-07-29 18:01:23.705 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:23.706 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/49 - 204 null null 25.4831ms
+2025-07-29 18:01:25.477 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/40 - null null
+2025-07-29 18:01:25.477 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:25.478 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/40 - 204 null null 0.9658ms
+2025-07-29 18:01:25.480 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/Orders/40 - application/json null
+2025-07-29 18:01:25.480 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:25.480 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:01:25.485 +05:30 [INF] Route matched with {action = "Delete", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrdersController (HmsNet).
+2025-07-29 18:01:25.522 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderId], [o].[OrderDateTime], [o].[RoomId], [o].[Status], [o].[TotalAmount]
+FROM [Orders] AS [o]
+WHERE [o].[OrderId] = @__p_0
+2025-07-29 18:01:25.597 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [OrderDetails] AS [o]
+        WHERE [o].[OrderId] = @__orderId_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2025-07-29 18:01:25.614 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:01:25.616 +05:30 [INF] Executed action HmsNet.Controllers.OrdersController.Delete (HmsNet) in 130.471ms
+2025-07-29 18:01:25.616 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:01:25.616 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/Orders/40 - 400 null application/json; charset=utf-8 136.4949ms
+2025-07-29 18:01:30.791 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/48 - null null
+2025-07-29 18:01:30.791 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:30.791 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/48 - 204 null null 0.8885ms
+2025-07-29 18:01:30.796 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/48 - application/json null
+2025-07-29 18:01:30.796 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:30.796 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:30.797 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:30.815 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:30.822 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:30.824 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:30.824 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 27.1158ms
+2025-07-29 18:01:30.824 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:30.824 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/48 - 204 null null 28.3289ms
+2025-07-29 18:01:33.217 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/40 - null null
+2025-07-29 18:01:33.218 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:33.218 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/40 - 204 null null 0.6458ms
+2025-07-29 18:01:33.221 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/Orders/40 - application/json null
+2025-07-29 18:01:33.222 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:33.222 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:01:33.222 +05:30 [INF] Route matched with {action = "Delete", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrdersController (HmsNet).
+2025-07-29 18:01:33.235 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderId], [o].[OrderDateTime], [o].[RoomId], [o].[Status], [o].[TotalAmount]
+FROM [Orders] AS [o]
+WHERE [o].[OrderId] = @__p_0
+2025-07-29 18:01:33.241 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [OrderDetails] AS [o]
+        WHERE [o].[OrderId] = @__orderId_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2025-07-29 18:01:33.263 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [Orders]
+OUTPUT 1
+WHERE [OrderId] = @p0;
+2025-07-29 18:01:33.265 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:33.265 +05:30 [INF] Executed action HmsNet.Controllers.OrdersController.Delete (HmsNet) in 42.517ms
+2025-07-29 18:01:33.265 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:01:33.265 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/Orders/40 - 204 null null 43.6918ms
+2025-07-29 18:01:33.268 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/26/Status - null null
+2025-07-29 18:01:33.269 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:33.269 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/26/Status - 204 null null 0.4469ms
+2025-07-29 18:01:33.271 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/Rooms/26/Status - application/json 11
+2025-07-29 18:01:33.271 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:33.272 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 18:01:33.272 +05:30 [INF] Route matched with {action = "UpdateRoomStatus", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.RoomDto]]] UpdateRoomStatus(Int32, System.String) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:01:33.300 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[RoomId], [r].[Capacity], [r].[OrderId], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[RoomId] = @__p_0
+2025-07-29 18:01:33.309 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Rooms] SET [Status] = @p0
+OUTPUT 1
+WHERE [RoomId] = @p1;
+2025-07-29 18:01:33.310 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 18:01:33.311 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet) in 38.6006ms
+2025-07-29 18:01:33.311 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 18:01:33.311 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/Rooms/26/Status - 200 null application/json; charset=utf-8 40.2344ms
+2025-07-29 18:01:33.315 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms - null null
+2025-07-29 18:01:33.316 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:33.317 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:01:33.317 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:01:33.331 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[RoomName], [r].[RoomType], [r].[Capacity], [r].[Status], (
+    SELECT TOP(1) [o].[OrderId]
+    FROM [Orders] AS [o]
+    WHERE [o].[RoomId] = [r].[RoomId] AND [o].[Status] = N'Pending') AS [OrderId]
+FROM [Rooms] AS [r]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 18:01:33.332 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:01:33.332 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 15.3892ms
+2025-07-29 18:01:33.332 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:01:33.333 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms - 200 null application/json; charset=utf-8 17.3087ms
+2025-07-29 18:01:36.021 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/32 - null null
+2025-07-29 18:01:36.022 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:36.022 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 18:01:36.022 +05:30 [INF] Route matched with {action = "GetByOrderId", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] GetByOrderId(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:36.033 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate], [o0].[OrderId], [o0].[OrderDateTime], [o0].[RoomId], [o0].[Status], [o0].[TotalAmount], [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [OrderDetails] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[OrderId]
+INNER JOIN [Items] AS [i] ON [o].[ItemId] = [i].[ItemId]
+WHERE [o].[OrderId] = @__orderId_0
+2025-07-29 18:01:36.034 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.List`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:01:36.035 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet) in 12.6477ms
+2025-07-29 18:01:36.035 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 18:01:36.035 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/32 - 200 null application/json; charset=utf-8 14.0959ms
+2025-07-29 18:01:40.434 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/47 - null null
+2025-07-29 18:01:40.435 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:40.435 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/47 - 204 null null 0.7552ms
+2025-07-29 18:01:40.439 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/47 - application/json null
+2025-07-29 18:01:40.439 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:40.439 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:40.439 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:40.449 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:40.456 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:40.457 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:40.457 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 18.0497ms
+2025-07-29 18:01:40.457 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:40.458 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/47 - 204 null null 18.9668ms
+2025-07-29 18:01:41.569 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/42 - null null
+2025-07-29 18:01:41.569 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:41.569 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/42 - 204 null null 0.77ms
+2025-07-29 18:01:41.573 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/42 - application/json null
+2025-07-29 18:01:41.573 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:41.574 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:41.574 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:41.585 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:41.604 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:41.620 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:41.620 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 45.9386ms
+2025-07-29 18:01:41.620 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:41.620 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/42 - 204 null null 47.2706ms
+2025-07-29 18:01:42.946 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/34 - null null
+2025-07-29 18:01:42.946 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:42.946 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/34 - 204 null null 0.3723ms
+2025-07-29 18:01:42.950 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/34 - application/json null
+2025-07-29 18:01:42.950 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:42.951 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:42.951 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:42.982 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:42.990 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:42.992 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:42.992 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 41.0356ms
+2025-07-29 18:01:42.992 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:42.992 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/34 - 204 null null 42.428ms
+2025-07-29 18:01:48.612 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/33 - null null
+2025-07-29 18:01:48.613 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:48.613 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/33 - 204 null null 1.0118ms
+2025-07-29 18:01:48.618 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/33 - application/json null
+2025-07-29 18:01:48.618 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:48.619 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:48.620 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:48.642 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:48.649 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:48.655 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:48.655 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 35.6839ms
+2025-07-29 18:01:48.655 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:48.656 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/33 - 204 null null 38.1611ms
+2025-07-29 18:01:50.086 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/32 - null null
+2025-07-29 18:01:50.087 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:50.087 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/32 - 204 null null 0.6579ms
+2025-07-29 18:01:50.089 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/Orders/32 - application/json null
+2025-07-29 18:01:50.089 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:50.089 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:01:50.089 +05:30 [INF] Route matched with {action = "Delete", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrdersController (HmsNet).
+2025-07-29 18:01:50.096 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderId], [o].[OrderDateTime], [o].[RoomId], [o].[Status], [o].[TotalAmount]
+FROM [Orders] AS [o]
+WHERE [o].[OrderId] = @__p_0
+2025-07-29 18:01:50.100 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [OrderDetails] AS [o]
+        WHERE [o].[OrderId] = @__orderId_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2025-07-29 18:01:50.113 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [Orders]
+OUTPUT 1
+WHERE [OrderId] = @p0;
+2025-07-29 18:01:50.114 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:50.114 +05:30 [INF] Executed action HmsNet.Controllers.OrdersController.Delete (HmsNet) in 25.3317ms
+2025-07-29 18:01:50.115 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:01:50.115 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/Orders/32 - 204 null null 26.2692ms
+2025-07-29 18:01:50.117 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/25/Status - null null
+2025-07-29 18:01:50.117 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:50.118 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/25/Status - 204 null null 0.3381ms
+2025-07-29 18:01:50.119 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/Rooms/25/Status - application/json 11
+2025-07-29 18:01:50.120 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:50.120 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 18:01:50.120 +05:30 [INF] Route matched with {action = "UpdateRoomStatus", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.RoomDto]]] UpdateRoomStatus(Int32, System.String) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:01:50.128 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[RoomId], [r].[Capacity], [r].[OrderId], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[RoomId] = @__p_0
+2025-07-29 18:01:50.138 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Rooms] SET [Status] = @p0
+OUTPUT 1
+WHERE [RoomId] = @p1;
+2025-07-29 18:01:50.139 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 18:01:50.139 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet) in 19.2226ms
+2025-07-29 18:01:50.140 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 18:01:50.140 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/Rooms/25/Status - 200 null application/json; charset=utf-8 20.5353ms
+2025-07-29 18:01:50.147 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms - null null
+2025-07-29 18:01:50.148 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:50.148 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:01:50.149 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:01:50.158 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[RoomName], [r].[RoomType], [r].[Capacity], [r].[Status], (
+    SELECT TOP(1) [o].[OrderId]
+    FROM [Orders] AS [o]
+    WHERE [o].[RoomId] = [r].[RoomId] AND [o].[Status] = N'Pending') AS [OrderId]
+FROM [Rooms] AS [r]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 18:01:50.159 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:01:50.159 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 10.1495ms
+2025-07-29 18:01:50.159 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:01:50.159 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms - 200 null application/json; charset=utf-8 11.932ms
+2025-07-29 18:01:52.061 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/36 - null null
+2025-07-29 18:01:52.061 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:52.062 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 18:01:52.062 +05:30 [INF] Route matched with {action = "GetByOrderId", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] GetByOrderId(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:52.078 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate], [o0].[OrderId], [o0].[OrderDateTime], [o0].[RoomId], [o0].[Status], [o0].[TotalAmount], [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [OrderDetails] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[OrderId]
+INNER JOIN [Items] AS [i] ON [o].[ItemId] = [i].[ItemId]
+WHERE [o].[OrderId] = @__orderId_0
+2025-07-29 18:01:52.079 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.List`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:01:52.079 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet) in 17.255ms
+2025-07-29 18:01:52.080 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 18:01:52.080 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/36 - 200 null application/json; charset=utf-8 19.1082ms
+2025-07-29 18:01:54.511 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/41 - null null
+2025-07-29 18:01:54.511 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:54.511 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/41 - 204 null null 0.3446ms
+2025-07-29 18:01:54.513 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/41 - application/json null
+2025-07-29 18:01:54.513 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:54.513 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:54.513 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:54.521 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:54.528 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:54.534 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:54.534 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 20.9071ms
+2025-07-29 18:01:54.534 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:54.534 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/41 - 204 null null 21.8329ms
+2025-07-29 18:01:55.639 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/43 - null null
+2025-07-29 18:01:55.639 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:55.640 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/43 - 204 null null 0.3029ms
+2025-07-29 18:01:55.642 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/43 - application/json null
+2025-07-29 18:01:55.642 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:55.642 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:55.642 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:55.650 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:55.654 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:55.661 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:55.661 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 18.4213ms
+2025-07-29 18:01:55.661 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:55.661 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/43 - 204 null null 19.3812ms
+2025-07-29 18:01:56.663 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/40 - null null
+2025-07-29 18:01:56.663 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:56.663 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/OrderDetails/40 - 204 null null 0.3246ms
+2025-07-29 18:01:56.665 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/40 - application/json null
+2025-07-29 18:01:56.665 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:01:56.665 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:56.665 +05:30 [INF] Route matched with {action = "Delete", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:01:56.669 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__orderDetailId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate]
+FROM [OrderDetails] AS [o]
+WHERE [o].[OrderDetailId] = @__orderDetailId_0
+2025-07-29 18:01:56.676 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [OrderDetails]
+OUTPUT 1
+WHERE [OrderDetailId] = @p0;
+2025-07-29 18:01:56.682 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:01:56.683 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.Delete (HmsNet) in 17.136ms
+2025-07-29 18:01:56.683 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.Delete (HmsNet)'
+2025-07-29 18:01:56.683 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/OrderDetails/40 - 204 null null 18.0669ms
+2025-07-29 18:02:00.940 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/36 - null null
+2025-07-29 18:02:00.940 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:02:00.940 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 18:02:00.940 +05:30 [INF] Route matched with {action = "GetByOrderId", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.OrderDetailDto]]] GetByOrderId(Int32) on controller HmsNet.Controllers.OrderDetailsController (HmsNet).
+2025-07-29 18:02:00.951 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[OrderDetailId], [o].[Amount], [o].[ItemId], [o].[OrderId], [o].[Quantity], [o].[Rate], [o0].[OrderId], [o0].[OrderDateTime], [o0].[RoomId], [o0].[Status], [o0].[TotalAmount], [i].[ItemId], [i].[Category], [i].[IsActive], [i].[ItemName], [i].[Rate]
+FROM [OrderDetails] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[OrderId]
+INNER JOIN [Items] AS [i] ON [o].[ItemId] = [i].[ItemId]
+WHERE [o].[OrderId] = @__orderId_0
+2025-07-29 18:02:00.951 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.List`1[[HmsNet.Models.DTO.OrderDetailDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:02:00.952 +05:30 [INF] Executed action HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet) in 11.0883ms
+2025-07-29 18:02:00.952 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrderDetailsController.GetByOrderId (HmsNet)'
+2025-07-29 18:02:00.952 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/OrderDetails/Order/36 - 404 null application/json; charset=utf-8 12.4745ms
+2025-07-29 18:02:07.258 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/36 - null null
+2025-07-29 18:02:07.258 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:02:07.259 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Orders/36 - 204 null null 1.1549ms
+2025-07-29 18:02:07.261 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5236/api/Orders/36 - application/json null
+2025-07-29 18:02:07.261 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:02:07.261 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:02:07.261 +05:30 [INF] Route matched with {action = "Delete", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Boolean]]] Delete(Int32) on controller HmsNet.Controllers.OrdersController (HmsNet).
+2025-07-29 18:02:07.269 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[OrderId], [o].[OrderDateTime], [o].[RoomId], [o].[Status], [o].[TotalAmount]
+FROM [Orders] AS [o]
+WHERE [o].[OrderId] = @__p_0
+2025-07-29 18:02:07.274 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [OrderDetails] AS [o]
+        WHERE [o].[OrderId] = @__orderId_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2025-07-29 18:02:07.286 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [Orders]
+OUTPUT 1
+WHERE [OrderId] = @p0;
+2025-07-29 18:02:07.288 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-07-29 18:02:07.288 +05:30 [INF] Executed action HmsNet.Controllers.OrdersController.Delete (HmsNet) in 26.7545ms
+2025-07-29 18:02:07.288 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.OrdersController.Delete (HmsNet)'
+2025-07-29 18:02:07.289 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5236/api/Orders/36 - 204 null null 27.9811ms
+2025-07-29 18:02:07.291 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/23/Status - null null
+2025-07-29 18:02:07.291 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:02:07.291 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5236/api/Rooms/23/Status - 204 null null 0.2773ms
+2025-07-29 18:02:07.293 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5236/api/Rooms/23/Status - application/json 11
+2025-07-29 18:02:07.293 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:02:07.293 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 18:02:07.293 +05:30 [INF] Route matched with {action = "UpdateRoomStatus", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[HmsNet.Models.DTO.RoomDto]]] UpdateRoomStatus(Int32, System.String) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:02:07.300 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[RoomId], [r].[Capacity], [r].[OrderId], [r].[RoomName], [r].[RoomType], [r].[Status]
+FROM [Rooms] AS [r]
+WHERE [r].[RoomId] = @__p_0
+2025-07-29 18:02:07.307 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Rooms] SET [Status] = @p0
+OUTPUT 1
+WHERE [RoomId] = @p1;
+2025-07-29 18:02:07.308 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-29 18:02:07.309 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet) in 15.4057ms
+2025-07-29 18:02:07.309 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.UpdateRoomStatus (HmsNet)'
+2025-07-29 18:02:07.309 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5236/api/Rooms/23/Status - 200 null application/json; charset=utf-8 16.2818ms
+2025-07-29 18:02:07.312 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5236/api/Rooms - null null
+2025-07-29 18:02:07.312 +05:30 [INF] CORS policy execution successful.
+2025-07-29 18:02:07.313 +05:30 [INF] Executing endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:02:07.313 +05:30 [INF] Route matched with {action = "GetRooms", controller = "Rooms"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HmsNet.Models.DTO.ServiceResponse`1[System.Collections.Generic.IEnumerable`1[HmsNet.Models.DTO.RoomDto]]]] GetRooms(Int32, Int32, Boolean) on controller HmsNet.Controllers.RoomsController (HmsNet).
+2025-07-29 18:02:07.324 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoomId], [r].[RoomName], [r].[RoomType], [r].[Capacity], [r].[Status], (
+    SELECT TOP(1) [o].[OrderId]
+    FROM [Orders] AS [o]
+    WHERE [o].[RoomId] = [r].[RoomId] AND [o].[Status] = N'Pending') AS [OrderId]
+FROM [Rooms] AS [r]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-07-29 18:02:07.324 +05:30 [INF] Executing OkObjectResult, writing value of type 'HmsNet.Models.DTO.ServiceResponse`1[[System.Collections.Generic.IEnumerable`1[[HmsNet.Models.DTO.RoomDto, HmsNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-29 18:02:07.324 +05:30 [INF] Executed action HmsNet.Controllers.RoomsController.GetRooms (HmsNet) in 11.4996ms
+2025-07-29 18:02:07.324 +05:30 [INF] Executed endpoint 'HmsNet.Controllers.RoomsController.GetRooms (HmsNet)'
+2025-07-29 18:02:07.325 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5236/api/Rooms - 200 null application/json; charset=utf-8 12.6593ms

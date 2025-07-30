@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\HmsNet\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\sales\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\sales\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\services\\orderdetailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|solutionrelative:hmsnet\\services\\orderdetailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\models\\dto\\orderdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|solutionrelative:hmsnet\\models\\dto\\orderdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\sales\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\sales\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,11 +38,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "OrderDetailDto.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Models\\DTO\\OrderDetailDto.cs",
               "RelativeDocumentMoniker": "HmsNet\\Models\\DTO\\OrderDetailDto.cs",
@@ -50,21 +50,19 @@
               "RelativeToolTip": "HmsNet\\Models\\DTO\\OrderDetailDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T04:37:49.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T04:37:49.982Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "OrderDetailService.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Services\\OrderDetailService.cs",
               "RelativeDocumentMoniker": "HmsNet\\Services\\OrderDetailService.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Services\\OrderDetailService.cs",
               "RelativeToolTip": "HmsNet\\Services\\OrderDetailService.cs",
-              "ViewState": "AgIAAHUAAAAAlpmZmRkjwH8AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAOUAAAAAbmZmZuYTwPAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T03:59:55.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T03:59:55.46Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "HmsNet.UI\\Models\\RoomDto.cs",
               "ViewState": "AgIAAAYAAAAALDMzMzPjvxcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T03:43:25.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T03:43:25.118Z"
             },
             {
               "$type": "Document",
@@ -89,8 +86,7 @@
               "RelativeToolTip": "HmsNet\\Controllers\\RoomsController.cs",
               "ViewState": "AgIAAF4AAAAAnJmZmZkJwG8AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T03:38:19.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T03:38:19.179Z"
             },
             {
               "$type": "Document",
@@ -102,8 +98,7 @@
               "RelativeToolTip": "HmsNet\\Services\\RoomService.cs",
               "ViewState": "AgIAAEEBAAAAhJmZmRkZwLgAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T03:34:17.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T03:34:17.944Z"
             },
             {
               "$type": "Document",
@@ -119,13 +114,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Sales\\Index.cshtml",
               "RelativeDocumentMoniker": "HmsNet.UI\\Views\\Sales\\Index.cshtml",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Sales\\Index.cshtml",
               "RelativeToolTip": "HmsNet.UI\\Views\\Sales\\Index.cshtml",
-              "ViewState": "AgIAAAoBAAAAAwAAAAAnwBoBAABHAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAAAnwDMAAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-28T06:57:38.132Z",
               "EditorCaption": ""
