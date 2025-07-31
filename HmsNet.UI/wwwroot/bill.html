@@ -1,0 +1,101 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bill</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .bill-details {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .btn {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bill-details">
+        <h2>Bill #<span id="billId">N/A</span></h2>
+        <p>Order ID: <span id="orderId">N/A</span></p>
+        <p>Table: <span id="roomName">N/A</span></p>
+        <p>Total Amount: <span id="totalAmount">0.00</span></p>
+        <p>Discount: <span id="discountAmount">0.00</span></p>
+        <p>Tax (10%): <span id="taxAmount">0.00</span></p>
+        <p><strong>Final Amount: <span id="finalAmount">0.00</strong></p>
+        <button class="btn btn-primary" onclick="window.print()">Print Bill</button>
+        <button class="btn btn-success" onclick="recordPayment()">Record Payment</button>
+    </div>
+    <script>
+        function populateBillDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const fields = {
+                billId: params.get('billId') || 'N/A',
+                orderId: params.get('orderId') || 'N/A',
+                roomName: params.get('roomName') || 'N/A',
+                totalAmount: params.get('totalAmount') || '0.00',
+                discountAmount: params.get('discountAmount') || '0.00',
+                taxAmount: params.get('taxAmount') || '0.00',
+                finalAmount: params.get('finalAmount') || '0.00'
+            };
+            for (const [key, value] of Object.entries(fields)) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
+                } else {
+                    console.error(`Element with ID ${key} not found`);
+                }
+            }
+        }
+
+        function recordPayment() {
+            const billId = document.getElementById('billId').textContent;
+            const roomId = new URLSearchParams(window.location.search).get('roomId');
+            const apiBaseUrl = new URLSearchParams(window.location.search).get('apiBaseUrl') || 'http://localhost:5236/';
+
+            if (billId === 'N/A' || !roomId) {
+                alert('Invalid bill or room information');
+                return;
+            }
+
+            const confirmed = confirm('Confirm payment for bill #' + billId + '?');
+            if (!confirmed) return;
+
+            fetch(`${apiBaseUrl}api/Rooms/${roomId}/Status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify('Available')
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.message || `Failed to update room status: ${response.statusText}`);
+                        }).catch(() => {
+                            throw new Error(`Failed to update room status: ${response.statusText}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 0 || data.status === 'Success') {
+                        alert('Payment recorded successfully. Room status updated to Available.');
+                        window.close();
+                    } else {
+                        throw new Error(data.message || 'Failed to update room status');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating room status:', error);
+                    alert('Error: ' + error.message);
+                });
+        }
+
+        // Populate details when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', populateBillDetails);
+    </script>
+</body>
+</html>

@@ -11,6 +11,5 @@
         public decimal FinalAmount { get; set; }
         public string PaymentStatus { get; set; }
         public Order? Order { get; set; }
-        public ICollection<Transaction>? Transactions { get; set; }
     }
 }

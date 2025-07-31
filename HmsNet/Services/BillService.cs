@@ -187,6 +187,15 @@ namespace HmsNet.Services
                     return response;
                 }
 
+                var duplicateBillCheck = await _context.Bills.AnyAsync(r => r.OrderId == billDto.OrderId);
+
+                if (duplicateBillCheck)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = $"Bill for this order already exists.";
+                    return response;
+                }
+
                 var bill = MapToBill(billDto);
                 bill.PaymentStatus = "Pending"; // Ensure new bills are pending
 

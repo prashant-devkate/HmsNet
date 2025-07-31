@@ -14,7 +14,6 @@ namespace HmsNet.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Bill> Bills { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

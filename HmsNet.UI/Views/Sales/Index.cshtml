@@ -53,8 +53,8 @@
                             <a class="dropdown-item" href="#" data-status="Pending">Pending</a>
                         </div>
                     </div>
-                    <button style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">CL</button>
-                    <button id="printBillBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">PR</button>
+                    <button id="printBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">PRNT</button>
+                    <button id="printBillBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">RP</button>
                     <button id="cancelBtn" style="background-color: #ff4500; color: white; padding: 5px 10px;">Cancel</button>
                 </div>
                 <div style="margin-top: 10px;">
@@ -98,6 +98,36 @@
         </div>
     </div>
 </div>
+
+<!-- Bill Template -->
+<template id="billTemplate">
+    <div class="bill-container" style="font-family: Arial, sans-serif; padding: 20px; background-color: #f0f0f0; max-width: 600px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #ffa500;">Restaurant Bill</h2>
+        <div style="margin-bottom: 20px;">
+            <p><strong>Order ID:</strong> <span id="billOrderId">N/A</span></p>
+            <p><strong>Table:</strong> <span id="billRoomName">N/A</span></p>
+            <p><strong>Date:</strong> <span id="billDateTime">N/A</span></p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; background-color: #fff;">
+            <thead>
+                <tr style="background-color: #ffa500; color: white;">
+                    <th style="padding: 8px; border: 1px solid #ddd;">Code</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Item</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Qty</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Rate</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="billItems"></tbody>
+        </table>
+        <div style="margin-top: 20px; text-align: right;">
+            <p><strong>Total Amount:</strong> $<span id="billTotalAmount">0.00</span></p>
+            <p><strong>Discount:</strong> $<span id="billDiscountAmount">0.00</span></p>
+            <p><strong>Tax (0%):</strong> $<span id="billTaxAmount">0.00</span></p>
+            <p><strong>Final Amount:</strong> $<span id="billFinalAmount">0.00</span></p>
+        </div>
+    </div>
+</template>
 
 <script>
     const apiBaseUrl = '@ViewBag.ApiBaseUrl' || 'http://localhost:5236/';
@@ -186,37 +216,36 @@
     });
 
     // Updated updateAmount function
-     function updateAmount(input, orderDetailId) {
-         console.log('Updating amount for order detail:', orderDetailId);
-         const row = input.parentElement.parentElement;
-         const qty = parseInt(input.value) || 0;
-         const rateInput = row.querySelector('td:nth-child(4) input');
-         const rate = parseFloat(rateInput.value) || 0;
-         const itemId = row.querySelector('td:nth-child(1) input').value;
-         const orderId = row.querySelector('td:nth-child(1) input').dataset.orderId;
-         const amount = qty * rate;
+    function updateAmount(input, orderDetailId) {
+        console.log('Updating amount for order detail:', orderDetailId);
+        const row = input.parentElement.parentElement;
+        const qty = parseInt(input.value) || 0;
+        const rateInput = row.querySelector('td:nth-child(4) input');
+        const rate = parseFloat(rateInput.value) || 0;
+        const itemId = row.querySelector('td:nth-child(1) input').value;
+        const orderId = row.querySelector('td:nth-child(1) input').dataset.orderId;
+        const amount = qty * rate;
 
-         if (qty > 0 && orderDetailId !== '0') { // Only update if orderDetailId is valid
-             fetch(`${apiBaseUrl}api/OrderDetails/${orderDetailId}`, {
-                 method: 'PUT',
-                 headers: { 'Content-Type': 'application/json' },
-                 body: JSON.stringify({ OrderDetailId: orderDetailId, OrderId: orderId, ItemId: itemId, Quantity: qty, Rate: rate, Amount: amount })
-             })
-             .then(response => response.json())
-             .then(data => {
-                 if (data.status !== 0 && data.status !== 'Success') {
-                     throw new Error(data.message || 'Failed to update order detail');
-                 }
-                 console.log('OrderDetail updated:', data.data);
-             })
-             .catch(error => {
-                 console.error('Error updating order detail:', error);
-                 showError('Failed to update item quantity: ' + error.message);
-             });
-         }
-         updateTotal();
-     }
-
+        if (qty > 0 && orderDetailId !== '0') { // Only update if orderDetailId is valid
+            fetch(`${apiBaseUrl}api/OrderDetails/${orderDetailId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ OrderDetailId: orderDetailId, OrderId: orderId, ItemId: itemId, Quantity: qty, Rate: rate, Amount: amount })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status !== 0 && data.status !== 'Success') {
+                    throw new Error(data.message || 'Failed to update order detail');
+                }
+                console.log('OrderDetail updated:', data.data);
+            })
+            .catch(error => {
+                console.error('Error updating order detail:', error);
+                showError('Failed to update item quantity: ' + error.message);
+            });
+        }
+        updateTotal();
+    }
 
     function removeRow(button, orderDetailId) {
         console.log('Removing order detail with ID:', orderDetailId);
@@ -228,7 +257,11 @@
         })
         .then(response => {
             if (!response.ok) {
-                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+                return response.json().then(data => {
+                    throw new Error(data.message || `Failed to remove order detail (status: ${response.status})`);
+                }).catch(() => {
+                    throw new Error(`Failed to remove order detail (status: ${response.status})`);
+                });
             }
             console.log('OrderDetail removed:', orderDetailId);
             row.remove();
@@ -285,42 +318,42 @@
 
                 // Load existing order details if any
                 const orderId = this.dataset.orderId;
-                
-                         if (orderId) {
-                console.log('Loading order details for order:', orderId);
-                fetch(`${apiBaseUrl}api/OrderDetails/Order/${orderId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 0 || data.status === 'Success') {
-                            const tbody = document.querySelector('#cartTable tbody');
-                            tbody.innerHTML = '';
-                            data.data.forEach(detail => {
-                                const newRow = document.createElement('tr');
-                                newRow.innerHTML = `
-                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemId}" readonly data-order-detail-id="${detail.orderDetailId}" data-order-id="${orderId}"></td>
-                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemName || 'UK'}" readonly></td>
-                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.quantity}" onchange="updateAmount(this, ${detail.orderDetailId})"></td>
-                                    <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.rate}" readonly></td>
-                                    <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${detail.orderDetailId})">Remove</button></td>
-                                `;
-                                tbody.appendChild(newRow);
-                                console.log('Loaded order detail:', detail.itemName, 'OrderDetailId:', detail.orderDetailId);
-                            });
-                            updateTotal();
-                        } else {
-                            console.error('Failed to load order details:', data);
-                            showError('Failed to load order details: ' + (data.message || 'Unknown error'));
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error loading order details:', error);
-                        showError('Failed to load order details: ' + error.message);
-                    });
-            } else {
-                console.log('No existing order for room:', roomName);
-                document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
-                document.getElementById('totalAmount').value = '';
-            }
+
+                if (orderId) {
+                    console.log('Loading order details for order:', orderId);
+                    fetch(`${apiBaseUrl}api/OrderDetails/Order/${orderId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 0 || data.status === 'Success') {
+                                const tbody = document.querySelector('#cartTable tbody');
+                                tbody.innerHTML = '';
+                                data.data.forEach(detail => {
+                                    const newRow = document.createElement('tr');
+                                    newRow.innerHTML = `
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemId}" readonly data-order-detail-id="${detail.orderDetailId}" data-order-id="${orderId}"></td>
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.itemName || 'UK'}" readonly></td>
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.quantity}" onchange="updateAmount(this, ${detail.orderDetailId})"></td>
+                                        <td style="border: 1px solid #ddd;"><input type="text" style="width: 100%; padding: 5px;" value="${detail.rate}" readonly></td>
+                                        <td style="border: 1px solid #ddd;"><button style="background-color: #ff4500; color: white; padding: 5px;" onclick="removeRow(this, ${detail.orderDetailId})">Remove</button></td>
+                                    `;
+                                    tbody.appendChild(newRow);
+                                    console.log('Loaded order detail:', detail.itemName, 'OrderDetailId:', detail.orderDetailId);
+                                });
+                                updateTotal();
+                            } else {
+                                console.error('Failed to load order details:', data);
+                                showError('Failed to load order details: ' + (data.message || 'Unknown error'));
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading order details:', error);
+                            showError('Failed to load order details: ' + error.message);
+                        });
+                } else {
+                    console.log('No existing order for room:', roomName);
+                    document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                    document.getElementById('totalAmount').value = '';
+                }
             }
         });
     });
@@ -397,7 +430,11 @@
         })
         .then(response => {
             if (!response.ok) {
-                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+                return response.json().then(data => {
+                    throw new Error(data.message || `Failed to update room status (status: ${response.status})`);
+                }).catch(() => {
+                    throw new Error(`Failed to update room status (status: ${response.status})`);
+                });
             }
             return response.json().then(data => ({ response, data }));
         })
@@ -448,22 +485,25 @@
         });
     }
 
-    @* Commented out Print Bill logic to resolve RZ1034 error
     // Print Bill logic
     document.getElementById('printBillBtn').addEventListener('click', function () {
-        console.log('Print Bill button clicked');
+        console.log('Record Payment button clicked');
         const selectedButton = document.querySelector('.room-btn.selected');
         if (!selectedButton || !selectedButton.dataset.orderId) {
             showError('No active order. Please select a room and set it to Pending.');
             return;
         }
         const orderId = selectedButton.dataset.orderId;
+        const roomId = selectedButton.getAttribute('data-room-id');
         const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
         const discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
-        const taxAmount = totalAmount * 0.1; // 10% tax
+        const taxAmount = totalAmount * 0; // 0% tax
         const finalAmount = totalAmount - discountAmount + taxAmount;
 
         console.log('Generating bill for order:', orderId, 'Total:', totalAmount, 'Discount:', discountAmount, 'Tax:', taxAmount);
+
+        const confirmed = confirm('Confirm payment for order #' + orderId + '?');
+        if (!confirmed) return;
 
         fetch(`${apiBaseUrl}api/Bills`, {
             method: 'POST',
@@ -475,108 +515,179 @@
                 DiscountAmount: discountAmount,
                 TaxAmount: taxAmount,
                 FinalAmount: finalAmount,
-                PaymentStatus: 'Pending'
+                PaymentStatus: 'Completed'
             })
         })
         .then(response => {
             if (!response.ok) {
-                return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, body: ${text}`); });
+                return response.json().then(data => {
+                    throw new Error(data.message || `Failed to record bill: ${response.statusText}`);
+                }).catch(() => {
+                    throw new Error(`Failed to record bill: ${response.statusText}`);
+                });
             }
             return response.json();
         })
         .then(data => {
             if (data.status === 0 || data.status === 'Success') {
-                console.log('Bill generated:', data.data);
-                const billWindow = window.open('', '_blank');
-                // Use a well-formed HTML string with proper tag closure
-                const billHtml = `
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Bill #${data.data.billId}</title>
-                        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-                        <style>
-                            body { padding: 20px; }
-                            .bill-details { max-width: 600px; margin: auto; }
-                            .btn { margin: 10px; }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="bill-details">
-                            <h2>Bill #${data.data.billId}</h2>
-                            <p>Order ID: ${orderId}</p>
-                            <p>Table: ${selectedButton.getAttribute('data-room-name').replace(/'/g, "\\'")}</p>
-                            <p>Total Amount: ${totalAmount.toFixed(2)}</p>
-                            <p>Discount: ${discountAmount.toFixed(2)}</p>
-                            <p>Tax (10%): ${taxAmount.toFixed(2)}</p>
-                            <p><strong>Final Amount: ${finalAmount.toFixed(2)}</strong></p>
-                            <button class="btn btn-primary" onclick="window.print()">Print Bill</button>
-                            <button class="btn btn-success" onclick="recordPayment(${data.data.billId}, ${finalAmount}, ${selectedButton.getAttribute('data-room-id')})">Record Payment</button>
-                        </div>
-                        <script>
-                            function recordPayment(billId, amount, roomId) {
-                                const paymentMethod = prompt('Enter payment method (e.g., Cash, Card):');
-                                if (!paymentMethod) return;
-                                fetch('${apiBaseUrl}api/Transactions', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({
-                                        BillId: billId,
-                                        TransactionDateTime: new Date().toISOString(),
-                                        Amount: amount,
-                                        PaymentMethod: paymentMethod,
-                                        TransactionStatus: 'Completed'
-                                    })
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('Failed to record payment');
-                                    }
-                                    return response.json();
-                                })
-                                .then(data => {
-                                    if (data.status === 0 || data.status === 'Success') {
-                                        alert('Payment recorded successfully');
-                                        fetch('${apiBaseUrl}api/Rooms/' + roomId + '/Status', {
-                                            method: 'PUT',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            body: JSON.stringify('Available')
-                                        })
-                                        .then(response => {
-                                            if (response.ok) {
-                                                window.close();
-                                            } else {
-                                                alert('Failed to update room status');
-                                            }
-                                        })
-                                        .catch(error => {
-                                            alert('Error updating room status: ' + error.message);
-                                        });
-                                    } else {
-                                        alert('Failed to record payment: ' + (data.message || 'Unknown error'));
-                                    }
-                                })
-                                .catch(error => {
-                                    alert('Error recording payment: ' + error.message);
-                                });
-                            }
-                        </script>
-                    </body>
-                    </html>
-                `;
-                billWindow.document.write(billHtml);
-                billWindow.document.close();
+                console.log('Bill recorded:', data.data);
+                return fetch(`${apiBaseUrl}api/Rooms/${roomId}/Status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify('Available')
+                });
             } else {
-                throw new Error(data.message || 'Failed to generate bill');
+                throw new Error(data.message || 'Failed to record bill');
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.message || `Failed to update room status: ${response.statusText}`);
+                }).catch(() => {
+                    throw new Error(`Failed to update room status: ${response.statusText}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 0 || data.status === 'Success') {
+                console.log('Room status set to Available:', roomId);
+                selectedButton.style.backgroundColor = '#32cd32';
+                selectedButton.removeAttribute('data-order-id');
+                document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
+                document.getElementById('totalAmount').value = '';
+                document.getElementById('discountAmount').value = '0';
+                document.getElementById('selectedRoom').style.display = 'none';
+                document.getElementById('selectedRoom').textContent = '';
+                document.getElementById('statusDropdown').disabled = true;
+                selectedButton.classList.remove('selected');
+                selectedButton.style.border = 'none';
+                fetch(`${apiBaseUrl}api/Rooms`)
+                    .then(response => response.json())
+                    .then(roomData => {
+                        if (roomData && (roomData.status === 0 || roomData.status === 'Success')) {
+                            const rooms = Array.isArray(roomData.data) ? roomData.data : [];
+                            const runningTables = rooms.filter(room => room.status === 'Pending').length;
+                            document.getElementById('runningTables').textContent = `Running Tables: ${runningTables}`;
+                            document.querySelectorAll('.room-btn').forEach(btn => {
+                                const btnRoomId = btn.getAttribute('data-room-id');
+                                const room = rooms.find(r => r.roomId == btnRoomId);
+                                if (room) {
+                                    btn.style.backgroundColor = room.status === 'Available' ? '#32cd32' : '#ff4500';
+                                }
+                            });
+                            console.log('Rooms refreshed:', rooms);
+                        } else {
+                            console.error('Invalid room data format or status:', roomData);
+                            showError('Invalid room data format or status');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error refreshing room data:', error);
+                        showError('Failed to refresh room data: ' + error.message);
+                    });
+                showError('Payment recorded successfully.');
+            } else {
+                throw new Error(data.message || 'Failed to update room status');
             }
         })
         .catch(error => {
-            console.error('Error generating bill:', error);
-            showError('Failed to generate bill: ' + error.message);
+            console.error('Error recording payment:', error);
+            showError('Error recording payment: ' + error.message);
         });
     });
-    *@
+
+    // Print button logic
+    document.getElementById('printBtn').addEventListener('click', function () {
+        console.log('Print button clicked');
+        const selectedButton = document.querySelector('.room-btn.selected');
+        if (!selectedButton || !selectedButton.dataset.orderId) {
+            showError('No active order. Please select a room and set it to Pending.');
+            return;
+        }
+        const orderId = selectedButton.dataset.orderId;
+        const roomName = selectedButton.getAttribute('data-room-name');
+        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+        const discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
+        const taxAmount = totalAmount * 0; // 0% tax
+        const finalAmount = totalAmount - discountAmount + taxAmount;
+
+        console.log('Fetching order details for printing:', orderId);
+
+        fetch(`${apiBaseUrl}api/OrderDetails/Order/${orderId}`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.message || `Failed to fetch order details: ${response.statusText}`);
+                    }).catch(() => {
+                        throw new Error(`Failed to fetch order details: ${response.statusText}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 0 || data.status === 'Success') {
+                    console.log('Order details fetched:', data.data);
+                    const template = document.getElementById('billTemplate').content.cloneNode(true);
+                    const billContainer = template.querySelector('.bill-container');
+
+                    // Populate bill header
+                    template.querySelector('#billOrderId').textContent = orderId;
+                    template.querySelector('#billRoomName').textContent = roomName;
+                    template.querySelector('#billDateTime').textContent = new Date().toLocaleString();
+
+                    // Populate bill items
+                    const billItemsTbody = template.querySelector('#billItems');
+                    billItemsTbody.innerHTML = '';
+                    data.data.forEach(detail => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td style="padding: 8px; border: 1px solid #ddd;">${detail.itemId}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${detail.itemName || 'Unknown'}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${detail.quantity}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">$${detail.rate.toFixed(2)}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">$${(detail.quantity * detail.rate).toFixed(2)}</td>
+                        `;
+                        billItemsTbody.appendChild(row);
+                    });
+
+                    // Populate bill summary
+                    template.querySelector('#billTotalAmount').textContent = totalAmount.toFixed(2);
+                    template.querySelector('#billDiscountAmount').textContent = discountAmount.toFixed(2);
+                    template.querySelector('#billTaxAmount').textContent = taxAmount.toFixed(2);
+                    template.querySelector('#billFinalAmount').textContent = finalAmount.toFixed(2);
+
+                    // Create a temporary container for printing
+                    const printContainer = document.createElement('div');
+                    printContainer.id = 'printContainer';
+                    printContainer.style.position = 'absolute';
+                    printContainer.style.top = '0';
+                    printContainer.style.left = '0';
+                    printContainer.style.width = '100%';
+                    printContainer.style.backgroundColor = '#f0f0f0';
+                    printContainer.appendChild(billContainer);
+                    document.body.appendChild(printContainer);
+
+                    // Hide main content
+                    const mainContent = document.querySelector('.container-fluid');
+                    mainContent.style.display = 'none';
+
+                    // Trigger print
+                    window.print();
+
+                    // Restore UI
+                    document.body.removeChild(printContainer);
+                    mainContent.style.display = '';
+                } else {
+                    throw new Error(data.message || 'Failed to fetch order details');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching order details for print:', error);
+                showError('Failed to print bill: ' + error.message);
+            });
+    });
 
     // Cancel order logic
     document.getElementById('cancelBtn').addEventListener('click', function () {
@@ -594,7 +705,13 @@
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
-            if (!response.ok) throw new Error('Failed to cancel order');
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.message || `Failed to cancel order (status: ${response.status})`);
+                }).catch(() => {
+                    throw new Error(`Order contain items`);
+                });
+            }
             console.log('Order deleted:', orderId);
             return fetch(`${apiBaseUrl}api/Rooms/${roomId}/Status`, {
                 method: 'PUT',
@@ -602,7 +719,16 @@
                 body: JSON.stringify('Available')
             });
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.message || `Failed to update room status (status: ${response.status})`);
+                }).catch(() => {
+                    throw new Error(`Failed to update room status (status: ${response.status})`);
+                });
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.status === 0 || data.status === 'Success') {
                 selectedButton.style.backgroundColor = '#32cd32';
@@ -637,7 +763,7 @@
         })
         .catch(error => {
             console.error('Error cancelling order:', error);
-            showError('Failed to cancel order');
+            showError('Failed to cancel order: ' + error.message);
         });
     });
 </script>
@@ -674,5 +800,25 @@
 
     #selectedRoom {
         min-height: 40px; /* Ensure visibility even when empty */
+    }
+
+    @@media print {
+        body *
+
+    {
+        visibility: hidden;
+    }
+
+    #printContainer, #printContainer * {
+        visibility: visible;
+    }
+
+    #printContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
     }
 </style>
