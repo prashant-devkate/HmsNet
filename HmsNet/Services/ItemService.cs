@@ -86,27 +86,15 @@ namespace HmsNet.Services
             };
         }
 
-        public async Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllAsync(int page = 1, int pageSize = 10, bool includeOrderDetails = false)
+        public async Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllAsync()
         {
             var response = new ServiceResponse<IEnumerable<ItemDto>>();
             try
             {
-                if (page < 1 || pageSize < 1)
-                {
-                    response.Status = ResponseStatus.Error;
-                    response.Message = "Invalid page or pageSize";
-                    return response;
-                }
-
                 var query = _context.Items.AsQueryable();
-                if (includeOrderDetails)
-                {
-                    query = query.Include(i => i.OrderDetails);
-                }
-
+               
                 var items = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
+                    .Include(i => i.OrderDetails)
                     .ToListAsync();
 
                 response.Data = items.Select(MapToItemDto).ToList();
@@ -123,28 +111,18 @@ namespace HmsNet.Services
             }
         }
 
-        public async Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllActiveAsync(int page = 1, int pageSize = 10, bool includeOrderDetails = false)
+        public async Task<ServiceResponse<IEnumerable<ItemDto>>> GetAllActiveAsync()
         {
             var response = new ServiceResponse<IEnumerable<ItemDto>>();
             try
             {
-                if (page < 1 || pageSize < 1)
-                {
-                    response.Status = ResponseStatus.Error;
-                    response.Message = "Invalid page or pageSize";
-                    return response;
-                }
-
+                
                 var query = _context.Items.AsQueryable();
-                if (includeOrderDetails)
-                {
-                    query = query.Include(i => i.OrderDetails);
-                }
+               
                 query = query.Where(i => i.IsActive);
 
                 var items = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
+                    .Include(i => i.OrderDetails)
                     .ToListAsync();
 
                 response.Data = items.Select(MapToItemDto).ToList();
@@ -162,18 +140,14 @@ namespace HmsNet.Services
         }
 
 
-        public async Task<ServiceResponse<ItemDto>> GetByIdAsync(int id, bool includeOrderDetails = false)
+        public async Task<ServiceResponse<ItemDto>> GetByIdAsync(int id)
         {
             var response = new ServiceResponse<ItemDto>();
             try
             {
                 var query = _context.Items.AsQueryable();
-                if (includeOrderDetails)
-                {
-                    query = query.Include(i => i.OrderDetails);
-                }
-
-                var item = await query.FirstOrDefaultAsync(i => i.ItemId == id);
+                
+                var item = await query.Include(i => i.OrderDetails).FirstOrDefaultAsync(i => i.ItemId == id);
                 if (item == null)
                 {
                     response.Status = ResponseStatus.Error;

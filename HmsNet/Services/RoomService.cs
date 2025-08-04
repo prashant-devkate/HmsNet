@@ -12,13 +12,11 @@ using System.Threading.Tasks;
 
 namespace HmsNet.Services
 {
-
     public class RoomService : IRoomService
     {
         private readonly AppDbContext _context;
         private readonly ILogger<RoomService> _logger;
         private const int MaxNameLength = 100;
-        private const int MaxCategoryLength = 50;
 
         public RoomService(AppDbContext context, ILogger<RoomService> logger)
         {
@@ -110,29 +108,16 @@ namespace HmsNet.Services
             };
         }
 
-        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllActiveAsync(int page = 1, int pageSize = 10, bool includeOrders = false)
+        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllActiveAsync()
         {
             var response = new ServiceResponse<IEnumerable<RoomDto>>();
             try
             {
-                if (page < 1 || pageSize < 1)
-                {
-                    response.Status = ResponseStatus.Error;
-                    response.Message = "Invalid page or pageSize";
-                    return response;
-                }
-
                 var query = _context.Rooms.AsQueryable();
-                if (includeOrders)
-                {
-                    query = query.Include(i => i.Orders);
-                }
-                query = query.Where(i => i.Status == "Available" ); 
+                
+                query = query.Where(i => i.Status == "Available");
 
-                var rooms = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToListAsync();
+                var rooms = await query.Include(i => i.Orders).ToListAsync();
 
                 response.Data = rooms.Select(MapToRoomDto).ToList();
                 response.Status = ResponseStatus.Success;
@@ -140,35 +125,22 @@ namespace HmsNet.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error retrieving rooms: {Message}", ex.Message);
+                _logger.LogError(ex, "Error retrieving active rooms: {Message}", ex.Message);
                 response.Status = ResponseStatus.Error;
-                response.Message = $"Error retrieving rooms: {ex.Message}";
+                response.Message = $"Error retrieving active rooms: {ex.Message}";
                 response.Data = null;
                 return response;
             }
         }
 
-        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllAsync(int page = 1, int pageSize = 10, bool includeOrders = false)
+        public async Task<ServiceResponse<IEnumerable<RoomDto>>> GetAllAsync()
         {
             var response = new ServiceResponse<IEnumerable<RoomDto>>();
             try
             {
-                if (page < 1 || pageSize < 1)
-                {
-                    response.Status = ResponseStatus.Error;
-                    response.Message = "Invalid page or pageSize";
-                    return response;
-                }
-
                 var query = _context.Rooms.AsQueryable();
-                if (includeOrders)
-                {
-                    query = query.Include(i => i.Orders);
-                }
-
-                var rooms = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
+                
+                var rooms = await query.Include(i => i.Orders)
                     .Select(r => new RoomDto
                     {
                         RoomId = r.RoomId,
@@ -177,9 +149,9 @@ namespace HmsNet.Services
                         Capacity = r.Capacity,
                         Status = r.Status,
                         OrderId = _context.Orders
-                    .Where(o => o.RoomId == r.RoomId && o.Status == "Pending")
-                    .Select(o => (int?)o.OrderId)
-                    .FirstOrDefault()
+                            .Where(o => o.RoomId == r.RoomId && o.Status == "Pending")
+                            .Select(o => (int?)o.OrderId)
+                            .FirstOrDefault()
                     }).ToListAsync();
 
                 response.Data = rooms;
@@ -196,19 +168,14 @@ namespace HmsNet.Services
             }
         }
 
-
-        public async Task<ServiceResponse<RoomDto>> GetByIdAsync(int id, bool includeOrders = false)
+        public async Task<ServiceResponse<RoomDto>> GetByIdAsync(int id)
         {
             var response = new ServiceResponse<RoomDto>();
             try
             {
                 var query = _context.Rooms.AsQueryable();
-                if (includeOrders)
-                {
-                    query = query.Include(i => i.Orders);
-                }
-
-                var room = await query.FirstOrDefaultAsync(i => i.RoomId == id);
+               
+                var room = await query.Include(i => i.Orders).FirstOrDefaultAsync(i => i.RoomId == id);
                 if (room == null)
                 {
                     response.Status = ResponseStatus.Error;
@@ -343,7 +310,7 @@ namespace HmsNet.Services
                     return response;
                 }
 
-                if (await _context.Orders.AnyAsync(o => o.RoomId == id))
+                if (await _context.Orders.AnyAsync(o => o.RoomId == id && o.Status == "Pending"))
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = "Cannot delete room with active orders";
@@ -352,9 +319,7 @@ namespace HmsNet.Services
                 }
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
-               
                 _context.Rooms.Remove(room);
-
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -385,13 +350,31 @@ namespace HmsNet.Services
                     return response;
                 }
 
-                // Find the room
-                var room = await _context.Rooms.FindAsync(id);
+                // Find the room with its associated order
+                var room = await _context.Rooms
+                    .Include(r => r.Orders)
+                    .FirstOrDefaultAsync(r => r.RoomId == id);
                 if (room == null)
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Room with ID {id} not found";
                     return response;
+                }
+
+                // If setting to Available, ensure no active order and clear OrderId
+                if (status == "Available")
+                {
+                    if (room.OrderId.HasValue)
+                    {
+                        var order = await _context.Orders.FindAsync(room.OrderId.Value);
+                        if (order != null && order.Status == "Pending")
+                        {
+                            response.Status = ResponseStatus.Error;
+                            response.Message = "Cannot set room to Available while an active order exists";
+                            return response;
+                        }
+                        room.OrderId = null;
+                    }
                 }
 
                 // Update the status
@@ -452,6 +435,21 @@ namespace HmsNet.Services
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Room with ID {id} not found";
+                    return response;
+                }
+
+                // Validate the order exists and is Pending
+                var order = await _context.Orders.FindAsync(orderId);
+                if (order == null)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = $"Order with ID {orderId} not found";
+                    return response;
+                }
+                if (order.Status != "Pending")
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = "Order must be in Pending status";
                     return response;
                 }
 

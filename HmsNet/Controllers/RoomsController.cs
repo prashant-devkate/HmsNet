@@ -20,9 +20,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<RoomDto>>>> GetRooms(int page = 1, int pageSize = 10, bool includeOrders = false)
+        public async Task<ActionResult<ServiceResponse<IEnumerable<RoomDto>>>> GetRooms()
         {
-            var response = await _service.GetAllAsync(page, pageSize, includeOrders);
+            var response = await _service.GetAllAsync();
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : StatusCode(StatusCodes.Status500InternalServerError, response);
@@ -30,9 +30,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Rooms/Available
         [HttpGet("Available")]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<RoomDto>>>> GetActiveRooms(int page = 1, int pageSize = 10, bool includeOrders = false)
+        public async Task<ActionResult<ServiceResponse<IEnumerable<RoomDto>>>> GetActiveRooms()
         {
-            var response = await _service.GetAllActiveAsync(page, pageSize, includeOrders);
+            var response = await _service.GetAllActiveAsync();
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : StatusCode(StatusCodes.Status500InternalServerError, response);
@@ -40,9 +40,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<RoomDto>>> GetRoom(int id, bool includeOrders = false)
+        public async Task<ActionResult<ServiceResponse<RoomDto>>> GetRoom(int id)
         {
-            var response = await _service.GetByIdAsync(id, includeOrders);
+            var response = await _service.GetByIdAsync(id);
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : NotFound(response);

@@ -44,17 +44,9 @@
                     <tbody></tbody>
                 </table>
                 <div style="margin-top: 10px;">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="statusDropdown" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;" disabled>
-                            ST
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="statusDropdown">
-                            <a class="dropdown-item" href="#" data-status="Available">Available</a>
-                            <a class="dropdown-item" href="#" data-status="Pending">Pending</a>
-                        </div>
-                    </div>
+                    <button id="statusBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">ST</button>
                     <button id="printBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">PRNT</button>
-                    <button id="printBillBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">RP</button>
+                    <button id="printBillBtn" style="background-color: #ffa500; color: white; padding: 5px 10px; margin-right: 5px;">RCD PMNT</button>
                     <button id="cancelBtn" style="background-color: #ff4500; color: white; padding: 5px 10px;">Cancel</button>
                 </div>
                 <div style="margin-top: 10px;">
@@ -98,36 +90,6 @@
         </div>
     </div>
 </div>
-
-<!-- Bill Template -->
-<template id="billTemplate">
-    <div class="bill-container" style="font-family: Arial, sans-serif; padding: 20px; background-color: #f0f0f0; max-width: 600px; margin: 0 auto;">
-        <h2 style="text-align: center; color: #ffa500;">Restaurant Bill</h2>
-        <div style="margin-bottom: 20px;">
-            <p><strong>Order ID:</strong> <span id="billOrderId">N/A</span></p>
-            <p><strong>Table:</strong> <span id="billRoomName">N/A</span></p>
-            <p><strong>Date:</strong> <span id="billDateTime">N/A</span></p>
-        </div>
-        <table style="width: 100%; border-collapse: collapse; background-color: #fff;">
-            <thead>
-                <tr style="background-color: #ffa500; color: white;">
-                    <th style="padding: 8px; border: 1px solid #ddd;">Code</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Item</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Qty</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Rate</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Amount</th>
-                </tr>
-            </thead>
-            <tbody id="billItems"></tbody>
-        </table>
-        <div style="margin-top: 20px; text-align: right;">
-            <p><strong>Total Amount:</strong> $<span id="billTotalAmount">0.00</span></p>
-            <p><strong>Discount:</strong> $<span id="billDiscountAmount">0.00</span></p>
-            <p><strong>Tax (0%):</strong> $<span id="billTaxAmount">0.00</span></p>
-            <p><strong>Final Amount:</strong> $<span id="billFinalAmount">0.00</span></p>
-        </div>
-    </div>
-</template>
 
 <script>
     const apiBaseUrl = '@ViewBag.ApiBaseUrl' || 'http://localhost:5236/';
@@ -300,7 +262,7 @@
                 this.style.border = 'none';
                 selectedRoomDiv.style.display = 'none';
                 selectedRoomDiv.textContent = '';
-                document.getElementById('statusDropdown').disabled = true;
+                document.getElementById('statusBtn').disabled = true;
                 document.getElementById('cartTable').querySelector('tbody').innerHTML = '';
                 document.getElementById('totalAmount').value = '';
                 document.getElementById('discountAmount').value = '0';
@@ -314,7 +276,7 @@
                 this.style.border = '2px solid #000';
                 selectedRoomDiv.style.display = 'block';
                 selectedRoomDiv.textContent = `Selected Table: ${roomName}`;
-                document.getElementById('statusDropdown').disabled = false;
+                document.getElementById('statusBtn').disabled = false;
 
                 // Load existing order details if any
                 const orderId = this.dataset.orderId;
@@ -342,7 +304,6 @@
                                 updateTotal();
                             } else {
                                 console.error('Failed to load order details:', data);
-                                showError('Failed to load order details: ' + (data.message || 'Unknown error'));
                             }
                         })
                         .catch(error => {
@@ -358,69 +319,46 @@
         });
     });
 
-    // Toggle dropdown menu on button click
-    document.getElementById('statusDropdown').addEventListener('click', function (e) {
-        e.preventDefault();
-        console.log('Status dropdown clicked');
-        const dropdownMenu = this.nextElementSibling;
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    });
+    // Status change logic for status button
+    document.getElementById('statusBtn').addEventListener('click', function () {
+        console.log('Status button clicked');
+        const selectedButton = document.querySelector('.room-btn.selected');
+        if (!selectedButton) {
+            showError('Please select a room first.');
+            return;
+        }
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function (e) {
-        const dropdown = document.querySelector('.dropdown');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
-        if (!dropdown.contains(e.target)) {
-            dropdownMenu.style.display = 'none';
+        const roomId = selectedButton.getAttribute('data-room-id');
+        const newStatus = 'Pending';
+        const statusChangeApiUrl = `${apiBaseUrl}api/Rooms/${roomId}/Status`;
+
+        if (newStatus === 'Pending' && !selectedButton.dataset.orderId) {
+            console.log('Creating new order for room:', roomId);
+            fetch(`${apiBaseUrl}api/Orders`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ RoomId: roomId, OrderDateTime: new Date().toISOString(), Status: 'Pending', TotalAmount: 0 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 0 || data.status === 'Success') {
+                    selectedButton.dataset.orderId = data.data.orderId;
+                    console.log('Order created with ID:', data.data.orderId);
+                    updateRoomStatus(roomId, newStatus, selectedButton);
+                } else {
+                    throw new Error(data.message || 'Failed to create order');
+                }
+            })
+            .catch(error => {
+                console.error('Error creating order:', error);
+                showError('Failed to create order: ' + error.message);
+            });
+        } else {
+            updateRoomStatus(roomId, newStatus, selectedButton);
         }
     });
 
-    // Status change logic for dropdown
-    document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener('click', function (e) {
-            e.preventDefault();
-            console.log('Status dropdown item clicked:', this.getAttribute('data-status'));
-            const dropdownMenu = this.closest('.dropdown-menu');
-            const selectedButton = document.querySelector('.room-btn.selected');
-            if (!selectedButton) {
-                showError('Please select a room first.');
-                dropdownMenu.style.display = 'none';
-                return;
-            }
-
-            const roomId = selectedButton.getAttribute('data-room-id');
-            const newStatus = this.getAttribute('data-status');
-            const statusChangeApiUrl = `${apiBaseUrl}api/Rooms/${roomId}/Status`;
-
-            if (newStatus === 'Pending' && !selectedButton.dataset.orderId) {
-                console.log('Creating new order for room:', roomId);
-                fetch(`${apiBaseUrl}api/Orders`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ RoomId: roomId, OrderDateTime: new Date().toISOString(), Status: 'Pending', TotalAmount: 0 })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 0 || data.status === 'Success') {
-                        selectedButton.dataset.orderId = data.data.orderId;
-                        console.log('Order created with ID:', data.data.orderId);
-                        updateRoomStatus(roomId, newStatus, selectedButton, dropdownMenu);
-                    } else {
-                        throw new Error(data.message || 'Failed to create order');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error creating order:', error);
-                    showError('Failed to create order: ' + error.message);
-                    dropdownMenu.style.display = 'none';
-                });
-            } else {
-                updateRoomStatus(roomId, newStatus, selectedButton, dropdownMenu);
-            }
-        });
-    });
-
-    function updateRoomStatus(roomId, newStatus, selectedButton, dropdownMenu) {
+    function updateRoomStatus(roomId, newStatus, selectedButton) {
         console.log('Updating room status:', roomId, newStatus);
         const statusChangeApiUrl = `${apiBaseUrl}api/Rooms/${roomId}/Status`;
         fetch(statusChangeApiUrl, {
@@ -476,12 +414,10 @@
                 console.error('Error from server:', data ? data.message : 'No data or unexpected format');
                 showError('Failed to update room status: ' + (data ? data.message : 'Unexpected response format'));
             }
-            dropdownMenu.style.display = 'none';
         })
         .catch(error => {
             console.error('Error updating room status:', error);
             showError('Failed to update room status: ' + error.message);
-            dropdownMenu.style.display = 'none';
         });
     }
 
@@ -501,9 +437,6 @@
         const finalAmount = totalAmount - discountAmount + taxAmount;
 
         console.log('Generating bill for order:', orderId, 'Total:', totalAmount, 'Discount:', discountAmount, 'Tax:', taxAmount);
-
-        const confirmed = confirm('Confirm payment for order #' + orderId + '?');
-        if (!confirmed) return;
 
         fetch(`${apiBaseUrl}api/Bills`, {
             method: 'POST',
@@ -560,7 +493,7 @@
                 document.getElementById('discountAmount').value = '0';
                 document.getElementById('selectedRoom').style.display = 'none';
                 document.getElementById('selectedRoom').textContent = '';
-                document.getElementById('statusDropdown').disabled = true;
+                document.getElementById('statusBtn').disabled = true;
                 selectedButton.classList.remove('selected');
                 selectedButton.style.border = 'none';
                 fetch(`${apiBaseUrl}api/Rooms`)
@@ -587,7 +520,6 @@
                         console.error('Error refreshing room data:', error);
                         showError('Failed to refresh room data: ' + error.message);
                     });
-                showError('Payment recorded successfully.');
             } else {
                 throw new Error(data.message || 'Failed to update room status');
             }
@@ -629,56 +561,74 @@
             .then(data => {
                 if (data.status === 0 || data.status === 'Success') {
                     console.log('Order details fetched:', data.data);
-                    const template = document.getElementById('billTemplate').content.cloneNode(true);
-                    const billContainer = template.querySelector('.bill-container');
+                    // Fetch the bill template from bill.html
+                    fetch('/template/bill.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const template = doc.querySelector('template#billTemplate').content.cloneNode(true);
+                            const billContainer = template.querySelector('.bill-container');
 
-                    // Populate bill header
-                    template.querySelector('#billOrderId').textContent = orderId;
-                    template.querySelector('#billRoomName').textContent = roomName;
-                    template.querySelector('#billDateTime').textContent = new Date().toLocaleString();
+                            // Populate bill header
+                            template.querySelector('#billOrderId').textContent = orderId;
+                            template.querySelector('#billRoomName').textContent = roomName;
+                            template.querySelector('#billDateTime').textContent = new Date().toLocaleString();
 
-                    // Populate bill items
-                    const billItemsTbody = template.querySelector('#billItems');
-                    billItemsTbody.innerHTML = '';
-                    data.data.forEach(detail => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td style="padding: 8px; border: 1px solid #ddd;">${detail.itemId}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${detail.itemName || 'Unknown'}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${detail.quantity}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">$${detail.rate.toFixed(2)}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">$${(detail.quantity * detail.rate).toFixed(2)}</td>
-                        `;
-                        billItemsTbody.appendChild(row);
-                    });
+                            // Populate bill items (limit to 10 items if too many)
+                            const billItemsTbody = template.querySelector('#billItems');
+                            billItemsTbody.innerHTML = '';
+                            const maxItems = 10; // Adjust this limit as needed
+                            data.data.slice(0, maxItems).forEach(detail => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td style="padding: 2px; border: 1px solid #ddd;">${detail.itemId}</td>
+                                    <td style="padding: 2px; border: 1px solid #ddd;">${detail.itemName || 'Unknown'}</td>
+                                    <td style="padding: 2px; border: 1px solid #ddd;">${detail.quantity}</td>
+                                    <td style="padding: 2px; border: 1px solid #ddd;">${detail.rate.toFixed(2)}</td>
+                                    <td style="padding: 2px; border: 1px solid #ddd;">${(detail.quantity * detail.rate).toFixed(2)}</td>
+                                `;
+                                billItemsTbody.appendChild(row);
+                            });
+                            if (data.data.length > maxItems) {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `<td colspan="5" style="padding: 2px; border: 1px solid #ddd; text-align: center;">+ ${data.data.length - maxItems} more items (summary only)</td>`;
+                                billItemsTbody.appendChild(row);
+                            }
 
-                    // Populate bill summary
-                    template.querySelector('#billTotalAmount').textContent = totalAmount.toFixed(2);
-                    template.querySelector('#billDiscountAmount').textContent = discountAmount.toFixed(2);
-                    template.querySelector('#billTaxAmount').textContent = taxAmount.toFixed(2);
-                    template.querySelector('#billFinalAmount').textContent = finalAmount.toFixed(2);
+                            // Populate bill summary
+                            template.querySelector('#billTotalAmount').textContent = totalAmount.toFixed(2);
+                            template.querySelector('#billDiscountAmount').textContent = discountAmount.toFixed(2);
+                            template.querySelector('#billTaxAmount').textContent = taxAmount.toFixed(2);
+                            template.querySelector('#billFinalAmount').textContent = finalAmount.toFixed(2);
 
-                    // Create a temporary container for printing
-                    const printContainer = document.createElement('div');
-                    printContainer.id = 'printContainer';
-                    printContainer.style.position = 'absolute';
-                    printContainer.style.top = '0';
-                    printContainer.style.left = '0';
-                    printContainer.style.width = '100%';
-                    printContainer.style.backgroundColor = '#f0f0f0';
-                    printContainer.appendChild(billContainer);
-                    document.body.appendChild(printContainer);
+                            // Create a temporary container for printing
+                            const printContainer = document.createElement('div');
+                            printContainer.id = 'printContainer';
+                            printContainer.style.position = 'absolute';
+                            printContainer.style.top = '0';
+                            printContainer.style.left = '0';
+                            printContainer.style.width = '100%';
+                            printContainer.style.margin = '0';
+                            printContainer.style.padding = '0';
+                            printContainer.appendChild(billContainer);
+                            document.body.appendChild(printContainer);
 
-                    // Hide main content
-                    const mainContent = document.querySelector('.container-fluid');
-                    mainContent.style.display = 'none';
+                            // Hide main content
+                            const mainContent = document.querySelector('.container-fluid');
+                            mainContent.style.display = 'none';
 
-                    // Trigger print
-                    window.print();
+                            // Trigger print
+                            window.print();
 
-                    // Restore UI
-                    document.body.removeChild(printContainer);
-                    mainContent.style.display = '';
+                            // Restore UI
+                            document.body.removeChild(printContainer);
+                            mainContent.style.display = '';
+                        })
+                        .catch(error => {
+                            console.error('Error loading bill template:', error);
+                            showError('Failed to load bill template: ' + error.message);
+                        });
                 } else {
                     throw new Error(data.message || 'Failed to fetch order details');
                 }
@@ -738,7 +688,7 @@
                 document.getElementById('discountAmount').value = '0';
                 document.getElementById('selectedRoom').style.display = 'none';
                 document.getElementById('selectedRoom').textContent = '';
-                document.getElementById('statusDropdown').disabled = true;
+                document.getElementById('statusBtn').disabled = true;
                 selectedButton.classList.remove('selected');
                 selectedButton.style.border = 'none';
                 console.log('Room status set to Available:', roomId);
@@ -803,22 +753,19 @@
     }
 
     @@media print {
-        body *
+        body * {
+            visibility: hidden;
+        }
 
-    {
-        visibility: hidden;
-    }
+        #printContainer, #printContainer * {
+            visibility: visible;
+        }
 
-    #printContainer, #printContainer * {
-        visibility: visible;
-    }
-
-    #printContainer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
+        #printContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
     }
 </style>

@@ -1,0 +1,72 @@
+﻿
+<template id="billTemplate">
+    <div class="bill-container" style="font-family: Arial, sans-serif; padding: 5px; background-color: #f0f0f0; max-width: 550px; margin: 0 auto; font-size: 10px;">
+        <h2 style="text-align: center; color: #ffa500; margin: 2px 0; font-size: 14px;">Restaurant Bill</h2>
+        <div style="margin-bottom: 5px;">
+            <p><strong>Order ID:</strong> <span id="billOrderId">N/A</span></p>
+            <p><strong>Table:</strong> <span id="billRoomName">N/A</span></p>
+            <p><strong>Date:</strong> <span id="billDateTime">N/A</span></p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; background-color: #fff; font-size: 10px;">
+            <thead>
+                <tr style="background-color: #ffa500; color: white;">
+                    <th style="padding: 2px; border: 1px solid #ddd;">Code</th>
+                    <th style="padding: 2px; border: 1px solid #ddd;">Item</th>
+                    <th style="padding: 2px; border: 1px solid #ddd;">Qty</th>
+                    <th style="padding: 2px; border: 1px solid #ddd;">Rate</th>
+                    <th style="padding: 2px; border: 1px solid #ddd;">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="billItems"></tbody>
+        </table>
+        <div style="margin-top: 5px; text-align: right;">
+            <p><strong>Total Amount:</strong> <span id="billTotalAmount">0.00</span></p>
+            <p><strong>Discount:</strong> <span id="billDiscountAmount">0.00</span></p>
+            <p><strong>Tax (0%):</strong> <span id="billTaxAmount">0.00</span></p>
+            <p><strong>Final Amount:</strong> <span id="billFinalAmount">0.00</span></p>
+        </div>
+    </div>
+</template>
+
+<style>
+    @@media print {
+        .bill-container {
+            page-break-inside: avoid;
+            max-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            page-break-inside: auto;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tbody {
+            display: table-row-group;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #printContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    }
+</style>

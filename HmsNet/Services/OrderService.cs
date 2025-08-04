@@ -46,6 +46,11 @@ namespace HmsNet.Services
                 errorMessage = $"Status cannot exceed {MaxStatusLength} characters";
                 return false;
             }
+            if (order.Status != "Pending" && order.Status != "Completed")
+            {
+                errorMessage = "Status must be either 'Pending' or 'Completed'";
+                return false;
+            }
             errorMessage = null;
             return true;
         }
@@ -160,13 +165,40 @@ namespace HmsNet.Services
                     return response;
                 }
 
+                // Validate room exists and has no active order
+                var room = await _context.Rooms.FirstOrDefaultAsync(r => r.RoomId == orderDto.RoomId);
+                if (room == null)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = $"Room with ID {orderDto.RoomId} not found";
+                    return response;
+                }
+                if (room.OrderId.HasValue)
+                {
+                    var existingOrder = await _context.Orders.FindAsync(room.OrderId.Value);
+                    if (existingOrder != null && existingOrder.Status == "Pending")
+                    {
+                        response.Status = ResponseStatus.Error;
+                        response.Message = $"Room with ID {orderDto.RoomId} already has an active order";
+                        return response;
+                    }
+                }
+
                 var order = MapToOrder(orderDto);
                 order.OrderDateTime = DateTime.Now;
-                order.Status = orderDto.Status ?? "Pending";
+                order.Status = "Pending"; // Force Pending status for new orders
                 order.TotalAmount = 0;
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
+
+                // Add the order
                 _context.Orders.Add(order);
+                await _context.SaveChangesAsync(); // Save to generate OrderId
+
+                // Update room with OrderId and status
+                room.OrderId = order.OrderId;
+                room.Status = "Pending";
+
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -193,6 +225,14 @@ namespace HmsNet.Services
                 response.Data = null;
                 return response;
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error creating order: {Message}", ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Unexpected error creating order: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
         }
 
         public async Task<ServiceResponse<OrderDto>> UpdateOrderAsync(OrderDto orderDto)
@@ -207,12 +247,47 @@ namespace HmsNet.Services
                     return response;
                 }
 
-                var existingOrder = await _context.Orders.FindAsync(orderDto.OrderId);
+                var existingOrder = await _context.Orders
+                    .Include(o => o.Room)
+                    .FirstOrDefaultAsync(o => o.OrderId == orderDto.OrderId);
                 if (existingOrder == null)
                 {
                     response.Status = ResponseStatus.Error;
                     response.Message = $"Order with ID {orderDto.OrderId} not found";
                     return response;
+                }
+
+                // If changing RoomId, update the new room's OrderId and status
+                if (existingOrder.RoomId != orderDto.RoomId)
+                {
+                    var newRoom = await _context.Rooms.FirstOrDefaultAsync(r => r.RoomId == orderDto.RoomId);
+                    if (newRoom == null)
+                    {
+                        response.Status = ResponseStatus.Error;
+                        response.Message = $"Room with ID {orderDto.RoomId} not found";
+                        return response;
+                    }
+                    if (newRoom.OrderId.HasValue)
+                    {
+                        var otherOrder = await _context.Orders.FindAsync(newRoom.OrderId.Value);
+                        if (otherOrder != null && otherOrder.Status == "Pending")
+                        {
+                            response.Status = ResponseStatus.Error;
+                            response.Message = $"Room with ID {orderDto.RoomId} already has an active order";
+                            return response;
+                        }
+                    }
+
+                    // Clear OrderId from old room
+                    if (existingOrder.Room != null)
+                    {
+                        existingOrder.Room.OrderId = null;
+                        existingOrder.Room.Status = "Available";
+                    }
+
+                    // Update new room
+                    newRoom.OrderId = orderDto.OrderId;
+                    newRoom.Status = "Pending";
                 }
 
                 existingOrder.RoomId = orderDto.RoomId;
@@ -243,6 +318,14 @@ namespace HmsNet.Services
                 response.Data = null;
                 return response;
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error updating order with ID {Id}: {Message}", orderDto.OrderId, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Unexpected error updating order with ID {orderDto.OrderId}: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
         }
 
         public async Task<ServiceResponse<bool>> DeleteOrderAsync(int orderId)
@@ -250,7 +333,9 @@ namespace HmsNet.Services
             var response = new ServiceResponse<bool>();
             try
             {
-                var order = await _context.Orders.FindAsync(orderId);
+                var order = await _context.Orders
+                    .Include(o => o.Room)
+                    .FirstOrDefaultAsync(o => o.OrderId == orderId);
                 if (order == null)
                 {
                     response.Status = ResponseStatus.Error;
@@ -267,6 +352,13 @@ namespace HmsNet.Services
                     return response;
                 }
 
+                // Clear OrderId and set room status to Available
+                if (order.Room != null)
+                {
+                    order.Room.OrderId = null;
+                    order.Room.Status = "Available";
+                }
+
                 await using var transaction = await _context.Database.BeginTransactionAsync();
                 _context.Orders.Remove(order);
                 await _context.SaveChangesAsync();
@@ -281,6 +373,14 @@ namespace HmsNet.Services
                 _logger.LogError(ex, "Error deleting order with ID {Id}: {Message}", orderId, ex.Message);
                 response.Status = ResponseStatus.Error;
                 response.Message = $"Error deleting order with ID {orderId}: {ex.Message}";
+                response.Data = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error deleting order with ID {Id}: {Message}", orderId, ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Unexpected error deleting order with ID {orderId}: {ex.Message}";
                 response.Data = false;
                 return response;
             }

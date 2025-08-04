@@ -6,13 +6,11 @@ using HmsNet.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HmsNet.Services
 {
-
     public class BillService : IBillService
     {
         private readonly AppDbContext _context;
@@ -37,9 +35,9 @@ namespace HmsNet.Services
                 errorMessage = "OrderId must be greater than zero";
                 return false;
             }
-            if (bill.TotalAmount <= 0 )
+            if (bill.TotalAmount <= 0)
             {
-                errorMessage = $"Total amount cannot be zero";
+                errorMessage = "Total amount cannot be zero";
                 return false;
             }
             errorMessage = null;
@@ -116,9 +114,7 @@ namespace HmsNet.Services
                 }
 
                 var query = _context.Bills.AsQueryable();
-
-
-                var bill = await query
+                var bills = await query
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
                     .Select(r => new BillDto
@@ -133,7 +129,7 @@ namespace HmsNet.Services
                         PaymentStatus = r.PaymentStatus
                     }).ToListAsync();
 
-                response.Data = bill;
+                response.Data = bills;
                 response.Status = ResponseStatus.Success;
                 return response;
             }
@@ -146,13 +142,13 @@ namespace HmsNet.Services
                 return response;
             }
         }
+
         public async Task<ServiceResponse<BillDto>> GetByIdAsync(int id)
         {
             var response = new ServiceResponse<BillDto>();
             try
             {
                 var query = _context.Bills.AsQueryable();
-               
                 var bill = await query.FirstOrDefaultAsync(i => i.BillId == id);
                 if (bill == null)
                 {
@@ -187,19 +183,53 @@ namespace HmsNet.Services
                     return response;
                 }
 
+                // Check for duplicate bill
                 var duplicateBillCheck = await _context.Bills.AnyAsync(r => r.OrderId == billDto.OrderId);
-
                 if (duplicateBillCheck)
                 {
                     response.Status = ResponseStatus.Error;
-                    response.Message = $"Bill for this order already exists.";
+                    response.Message = "Bill for this order already exists.";
                     return response;
                 }
 
+                // Validate order exists and is not completed
+                var order = await _context.Orders
+                    .Include(o => o.Room)
+                    .FirstOrDefaultAsync(o => o.OrderId == billDto.OrderId);
+                if (order == null)
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = "Order not found";
+                    return response;
+                }
+                if (order.Status == "Completed")
+                {
+                    response.Status = ResponseStatus.Error;
+                    response.Message = "Order is already completed";
+                    return response;
+                }
+
+                // Create the bill
                 var bill = MapToBill(billDto);
-                bill.PaymentStatus = "Pending"; // Ensure new bills are pending
+                bill.PaymentStatus = billDto.PaymentStatus; // Use provided PaymentStatus (e.g., "Completed")
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
+
+                // Mark order as completed
+                order.Status = "Completed";
+
+                // Clear OrderId from room and set status to Available
+                if (order.Room != null)
+                {
+                    order.Room.OrderId = null;
+                    order.Room.Status = "Available";
+                }
+
+                // Optionally, delete OrderDetails
+                var orderDetails = _context.OrderDetails.Where(od => od.OrderId == billDto.OrderId);
+                _context.OrderDetails.RemoveRange(orderDetails);
+
+                // Add the bill
                 _context.Bills.Add(bill);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
@@ -213,6 +243,14 @@ namespace HmsNet.Services
                 _logger.LogError(ex, "Error creating bill: {Message}", ex.Message);
                 response.Status = ResponseStatus.Error;
                 response.Message = $"Error creating bill: {ex.Message}";
+                response.Data = null;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error creating bill: {Message}", ex.Message);
+                response.Status = ResponseStatus.Error;
+                response.Message = $"Unexpected error creating bill: {ex.Message}";
                 response.Data = null;
                 return response;
             }
@@ -287,9 +325,7 @@ namespace HmsNet.Services
                 }
 
                 await using var transaction = await _context.Database.BeginTransactionAsync();
-
                 _context.Bills.Remove(bill);
-
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 

@@ -19,9 +19,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<ItemDto>>>> GetItems(int page = 1, int pageSize = 10, bool includeOrderDetails = false)
+        public async Task<ActionResult<ServiceResponse<IEnumerable<ItemDto>>>> GetItems()
         {
-            var response = await _service.GetAllAsync(page, pageSize, includeOrderDetails);
+            var response = await _service.GetAllAsync();
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : StatusCode(StatusCodes.Status500InternalServerError, response);
@@ -29,9 +29,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Items/Active
         [HttpGet("Active")]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<ItemDto>>>> GetActiveItems(int page = 1, int pageSize = 10, bool includeOrderDetails = false)
+        public async Task<ActionResult<ServiceResponse<IEnumerable<ItemDto>>>> GetActiveItems()
         {
-            var response = await _service.GetAllActiveAsync(page, pageSize, includeOrderDetails);
+            var response = await _service.GetAllActiveAsync();
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : StatusCode(StatusCodes.Status500InternalServerError, response);
@@ -39,9 +39,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Items/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<ItemDto>>> GetItem(int id, bool includeOrderDetails = false)
+        public async Task<ActionResult<ServiceResponse<ItemDto>>> GetItem(int id)
         {
-            var response = await _service.GetByIdAsync(id, includeOrderDetails);
+            var response = await _service.GetByIdAsync(id);
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : NotFound(response);
