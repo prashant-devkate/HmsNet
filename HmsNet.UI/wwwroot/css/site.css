@@ -1,22 +1,120 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* General body styling for a clean, minimal look */
 body {
-  margin-bottom: 60px;
+    background-color: #f8fafc;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1f2937;
+}
+
+/* Enhanced Navbar Styling */
+.navbar {
+    background: linear-gradient(90deg, #ffffff 0%, #e2e8f0 100%);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    padding: 0.75rem 1rem;
+}
+
+    .navbar.scrolled {
+        background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(0);
+    }
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #1e40af !important;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+    .navbar-brand:hover {
+        color: #2563eb !important;
+        transform: scale(1.05);
+    }
+
+.nav-link {
+    font-weight: 500;
+    color: #1f2937 !important;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+    .nav-link:hover {
+        color: #2563eb !important;
+        transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+        color: #2563eb !important;
+        font-weight: 600;
+        /* Removed ::after to eliminate underline */
+    }
+
+/* Navbar toggler enhancements */
+.navbar-toggler {
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+    .navbar-toggler:hover {
+        transform: scale(1.1);
+    }
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(37, 99, 235, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Animation for content (unchanged from previous) */
+main {
+    scroll-behavior: smooth;
+}
+
+    main .container {
+        animation: fadeIn 0.5s ease-in;
+    }
+
+/* Footer styling (unchanged from previous) */
+.footer {
+    background-color: #ffffff;
+    padding: 1.5rem 0;
+    font-size: 0.875rem;
+}
+
+    .footer a {
+        color: #2563eb;
+        transition: color 0.3s ease;
+    }
+
+        .footer a:hover {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+
+/* Animation for content (unchanged from previous) */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ensure responsiveness for smaller screens (updated for navbar) */
+@media (max-width: 576px) {
+    .navbar-nav {
+        padding: 1rem;
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .nav-link {
+        padding: 0.75rem 0;
+    }
 }
