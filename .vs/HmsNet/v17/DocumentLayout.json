@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\HmsNet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\views\\transactions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\views\\transactions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\models\\dto\\billdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|solutionrelative:hmsnet\\models\\dto\\billdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet\\services\\billservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E88933B8-88BA-4B19-B8A9-E8BD8C182572}|HmsNet\\HmsNet.csproj|solutionrelative:hmsnet\\services\\billservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|c:\\users\\admin\\source\\repos\\hmsnet\\hmsnet.ui\\controllers\\itemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4374CF10-C0C9-471D-8E11-5A89FA623FC2}|HmsNet.UI\\HmsNet.UI.csproj|solutionrelative:hmsnet.ui\\controllers\\itemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BillDto.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Models\\DTO\\BillDto.cs",
+              "RelativeDocumentMoniker": "HmsNet\\Models\\DTO\\BillDto.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Models\\DTO\\BillDto.cs",
+              "RelativeToolTip": "HmsNet\\Models\\DTO\\BillDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T07:19:36.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BillService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Services\\BillService.cs",
+              "RelativeDocumentMoniker": "HmsNet\\Services\\BillService.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet\\Services\\BillService.cs",
+              "RelativeToolTip": "HmsNet\\Services\\BillService.cs",
+              "ViewState": "AgIAAGYAAAAAq5mZmdkmwHsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T07:19:07.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Home\\Privacy.cshtml",
-              "RelativeDocumentMoniker": "HmsNet.UI\\Views\\Home\\Privacy.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Home\\Privacy.cshtml",
-              "RelativeToolTip": "HmsNet.UI\\Views\\Home\\Privacy.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA6AAAAAAAAAA==",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Transactions\\Index.cshtml",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Views\\Transactions\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Views\\Transactions\\Index.cshtml",
+              "RelativeToolTip": "HmsNet.UI\\Views\\Transactions\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-05T16:20:52.03Z",
+              "WhenOpened": "2025-08-08T07:14:38.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransactionsController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\TransactionsController.cs",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Controllers\\TransactionsController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\TransactionsController.cs",
+              "RelativeToolTip": "HmsNet.UI\\Controllers\\TransactionsController.cs",
+              "ViewState": "AgIAABAAAABALDMzMzMXwBoAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T07:06:18.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ItemsController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\ItemsController.cs",
+              "RelativeDocumentMoniker": "HmsNet.UI\\Controllers\\ItemsController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\HmsNet\\HmsNet.UI\\Controllers\\ItemsController.cs",
+              "RelativeToolTip": "HmsNet.UI\\Controllers\\ItemsController.cs",
+              "ViewState": "AgIAABoAAAAAwszMzMwUwEAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T07:06:16.86Z",
               "EditorCaption": ""
             }
           ]

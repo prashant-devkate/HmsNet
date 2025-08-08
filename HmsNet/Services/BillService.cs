@@ -101,32 +101,27 @@ namespace HmsNet.Services
             };
         }
 
-        public async Task<ServiceResponse<IEnumerable<BillDto>>> GetAllAsync(int page = 1, int pageSize = 10)
+        public async Task<ServiceResponse<IEnumerable<BillDto>>> GetAllAsync()
         {
             var response = new ServiceResponse<IEnumerable<BillDto>>();
             try
             {
-                if (page < 1 || pageSize < 1)
-                {
-                    response.Status = ResponseStatus.Error;
-                    response.Message = "Invalid page or pageSize";
-                    return response;
-                }
-
-                var query = _context.Bills.AsQueryable();
-                var bills = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .Select(r => new BillDto
-                    {
-                        BillId = r.BillId,
-                        OrderId = r.OrderId,
-                        BillDateTime = r.BillDateTime,
-                        TotalAmount = r.TotalAmount,
-                        DiscountAmount = r.DiscountAmount,
-                        TaxAmount = r.TaxAmount,
-                        FinalAmount = r.FinalAmount,
-                        PaymentStatus = r.PaymentStatus
+                var bills = await _context.Bills
+                    .Join(
+                    _context.Orders,
+                    bill => bill.OrderId,
+                    order => order.OrderId,
+                    (bill, order) => new BillDto
+                    { 
+                        BillId = bill.BillId,
+                        OrderId = bill.OrderId,
+                        TableId = order.RoomId,
+                        BillDateTime = bill.BillDateTime,
+                        TotalAmount = bill.TotalAmount,
+                        DiscountAmount = bill.DiscountAmount,
+                        TaxAmount = bill.TaxAmount,
+                        FinalAmount = bill.FinalAmount,
+                        PaymentStatus = bill.PaymentStatus
                     }).ToListAsync();
 
                 response.Data = bills;

@@ -21,19 +21,16 @@ namespace HmsNet.UI.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> Index()
         {
             var viewModel = new ItemListViewModel
             {
-                Items = new List<ItemDto>(),
-                CurrentPage = page,
-                PageSize = pageSize
+                Items = new List<ItemDto>()
             };
 
             try
             {
-                var query = $"?page={page}&pageSize={pageSize}";
-                var response = await _httpClient.GetAsync($"api/Items{query}");
+                var response = await _httpClient.GetAsync($"api/Items");
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();

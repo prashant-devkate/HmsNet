@@ -17,21 +17,18 @@ namespace HmsNet.UI.Controllers
             _httpClient = httpClientFactory.CreateClient("ApiClient");
         }
 
-        public async Task<IActionResult> Index(int page = 1, int pageSize = 50)
+        public async Task<IActionResult> Index()
         {
             ViewBag.ApiBaseUrl = _httpClient.BaseAddress?.ToString() ?? "https://localhost:7165/";
 
             var viewModel = new ItemListViewModel
             {
                 Items = new List<ItemDto>(),
-                RoomsByType = new Dictionary<string, List<RoomDto>>(),
-                CurrentPage = page,
-                PageSize = pageSize
+                RoomsByType = new Dictionary<string, List<RoomDto>>()
             };
 
-            var query = $"?page={page}&pageSize={pageSize}";
-            var response = await _httpClient.GetAsync($"api/Items/Active{query}");
-            var roomResponse = await _httpClient.GetAsync($"api/Rooms{query}");
+            var response = await _httpClient.GetAsync($"api/Items/Active");
+            var roomResponse = await _httpClient.GetAsync($"api/Rooms");
 
             response.EnsureSuccessStatusCode();
             roomResponse.EnsureSuccessStatusCode();

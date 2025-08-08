@@ -20,9 +20,9 @@ namespace HmsNet.Controllers
 
         // GET: api/Bills
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<BillDto>>>> GetBills(int page = 1, int pageSize = 10)
+        public async Task<ActionResult<ServiceResponse<IEnumerable<BillDto>>>> GetBills()
         {
-            var response = await _service.GetAllAsync(page, pageSize);
+            var response = await _service.GetAllAsync();
             return response.Status == ResponseStatus.Success
                 ? Ok(response)
                 : StatusCode(StatusCodes.Status500InternalServerError, response);
