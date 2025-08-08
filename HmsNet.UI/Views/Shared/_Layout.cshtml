@@ -85,5 +85,29 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+       
+        // Sales Chart
+        const salesChart = new Chart(document.getElementById('salesChart'), {
+            type: 'line',
+            data: { labels: [], datasets: [{ label: 'Sales', data: [], borderColor: 'blue' }] }
+        });
+
+        // Category Chart
+        const categoryChart = new Chart(document.getElementById('categoryChart'), {
+            type: 'doughnut',
+            data: { labels: [], datasets: [{ data: [], backgroundColor: ['red', 'green', 'blue'] }] }
+        });
+
+        // Refresh every 5 seconds
+        setInterval(loadDashboardData, 5000);
+        loadDashboardData();
+    </script>
+
+
 </body>
 </html>

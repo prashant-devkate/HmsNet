@@ -111,17 +111,24 @@ namespace HmsNet.Services
                     _context.Orders,
                     bill => bill.OrderId,
                     order => order.OrderId,
-                    (bill, order) => new BillDto
+                    (bill, order) => new {bill, order}
+                    )
+                    .Join(
+                    _context.Rooms,
+                    bo => bo.order.RoomId,
+                    room => room.RoomId,
+                    (bo, room) => new BillDto
                     { 
-                        BillId = bill.BillId,
-                        OrderId = bill.OrderId,
-                        TableId = order.RoomId,
-                        BillDateTime = bill.BillDateTime,
-                        TotalAmount = bill.TotalAmount,
-                        DiscountAmount = bill.DiscountAmount,
-                        TaxAmount = bill.TaxAmount,
-                        FinalAmount = bill.FinalAmount,
-                        PaymentStatus = bill.PaymentStatus
+                        BillId = bo.bill.BillId,
+                        OrderId = bo.bill.OrderId,
+                        TableId = bo.order.RoomId,
+                        TableName = room.RoomName,
+                        BillDateTime = bo.bill.BillDateTime,
+                        TotalAmount = bo.bill.TotalAmount,
+                        DiscountAmount = bo.bill.DiscountAmount,
+                        TaxAmount = bo.bill.TaxAmount,
+                        FinalAmount = bo.bill.FinalAmount,
+                        PaymentStatus = bo.bill.PaymentStatus
                     }).ToListAsync();
 
                 response.Data = bills;

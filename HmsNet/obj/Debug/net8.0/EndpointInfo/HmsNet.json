@@ -1707,6 +1707,15 @@
             "type": "integer",
             "format": "int32"
           },
+          "tableId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tableName": {
+            "type": "string",
+            "nullable": true
+          },
           "billDateTime": {
             "type": "string",
             "format": "date-time"

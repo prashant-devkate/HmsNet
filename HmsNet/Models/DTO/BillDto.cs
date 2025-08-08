@@ -5,6 +5,7 @@
         public int BillId { get; set; }
         public int OrderId { get; set; }
         public int? TableId { get; set; }
+        public string? TableName { get; set; }
         public DateTime BillDateTime { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal DiscountAmount { get; set; }

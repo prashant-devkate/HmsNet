@@ -8,8 +8,11 @@
             <th>Bill ID</th>
             <th>Order ID</th>
             <th>Table Id</th>
+            <th>Table Name</th>
             <th>Bill Date</th>
             <th>Total Amount</th>
+            <th>Discount Amt</th>
+            <th>Tax Amt</th>
             <th>Final Amount</th>
             <th>Payment Status</th>
         </tr>
@@ -21,8 +24,11 @@
                 <td>@bill.BillId</td>
                 <td>@bill.OrderId</td>
                 <td>@bill.TableId</td>
+                <td>@bill.TableName</td>
                 <td>@bill.BillDateTime.ToString("g")</td>
                 <td>@bill.TotalAmount</td>
+                <td>@bill.DiscountAmount</td>
+                <td>@bill.TaxAmount</td>
                 <td>@bill.FinalAmount</td>
                 <td>@bill.PaymentStatus</td>
             </tr>
